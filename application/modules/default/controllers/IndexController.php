@@ -10,12 +10,11 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        //$this->_redirect('products/list');
-
-        //$allGetValues = $this->params()->fromQuery();
-        var_dump($id);
+        // action body
     }
 
 
 }
+
+
 

@@ -1,0 +1,18 @@
+<center>
+	<?php
+	    if(isset($this->errorMessage)){
+			echo $this->errorMessage;
+	    }
+	?>
+	<div>
+		<br>
+		<h4>Вхід</h4>
+		<br>
+		<?php
+		    echo $this->form;
+
+		?>
+
+		    <a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'signup'));?>">Зареєструватись</a>
+	</div>
+</center>

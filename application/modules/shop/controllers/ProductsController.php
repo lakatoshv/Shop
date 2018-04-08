@@ -1,6 +1,6 @@
 <?php
 
-class ProductsController extends Zend_Controller_Action
+class Shop_ProductsController extends Zend_Controller_Action
 {
 
     public function init()
@@ -15,12 +15,13 @@ class ProductsController extends Zend_Controller_Action
 
     public function listAction()
     {
-        $productsTBl = new Model_DbTable_Products();
+        $productsTBl = new Shop_Model_DbTable_Products();
         $this->view->products = $productsTBl->fetchAll();
     }
     public function productAction()
     {
     }
+
 
 }
 

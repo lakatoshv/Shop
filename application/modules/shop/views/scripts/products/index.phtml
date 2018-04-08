@@ -1,0 +1,52 @@
+Пример:<br>
+git clone <span class="pl-c1">https:</span><span class="pl-sr"><span class="pl-pds">//</span></span>github.com<span class="pl-k">/</span>this<span class="pl-k">-</span>is<span class="pl-k">-</span>you<span class="pl-k">/</span>first<span class="pl-k">-</span>contributions.git<br>
+1<br>
+	
+git clone <span class="pl-c1">https:</span><span class="pl-sr"><span class="pl-pds">//</span></span>github.com<span class="pl-k">/</span>this<span class="pl-k">-</span>is<span class="pl-k">-</span>you<span class="pl-k">/</span>first<span class="pl-k">-</span>contributions.git<br>
+
+‘this-is-you’ это ваш логин на github. Таким образом вы скопируете репозиторий вашего первого вклада на пк.<br>
+ 3. Создаем ветку<br>
+
+Переходим в директорию репозитория на пк.<br>
+cd first<span class="pl-k">-</span>contributions<br>
+1<br>
+	
+cd first<span class="pl-k">-</span>contributions<br>
+
+Создаем ветку, с помощью команды:<br>
+git checkout <span class="pl-k">-</span>b <span class="pl-k">&lt;</span>add<span class="pl-k">-</span>your<span class="pl-k">-</span>name<span class="pl-k">&gt;</span><br>
+1<br>
+	
+git checkout <span class="pl-k">-</span>b <span class="pl-k">&lt;</span>add<span class="pl-k">-</span>your<span class="pl-k">-</span>name<span class="pl-k">&gt;</span><br>
+
+Пример:<br>
+git checkout <span class="pl-k">-</span>b add<span class="pl-k">-</span>alonzo<span class="pl-k">-</span>church<br>
+1<br>
+	
+git checkout <span class="pl-k">-</span>b add<span class="pl-k">-</span>alonzo<span class="pl-k">-</span>church<br>
+ 4. Вносим изменения и создаем коммит<br>
+
+Открываем файл Contributors.md в текстовом редакторе, вписываем имя и сохраняем файл. Команда git status покажет вам изменения. Добавим эти изменения применив команду git add.<br>
+git add <span class="pl-c1">Contributors</span>.md<br>
+1<br>
+	
+git add <span class="pl-c1">Contributors</span>.md<br>
+
+Теперь закоммитим данные изменения применив команду git commit.<br>
+git commit <span class="pl-k">-</span>m <span class="pl-s"><span class="pl-pds">"</span>Add &lt;your-name&gt; to Contributors list<span class="pl-pds">"</span></span><br>
+1<br>
+	
+git commit <span class="pl-k">-</span>m <span class="pl-s"><span class="pl-pds">"</span>Add &lt;your-name&gt; to Contributors list<span class="pl-pds">"</span></span><br>
+
+Теперь вам нужно изменить <your-name> на ваше имя<br>
+ 5. Запушим изменения на github<br>
+
+Запушим изменения с помощью команды git push<br>
+git push origin <span class="pl-k">&lt;</span>add<span class="pl-k">-</span>your<span class="pl-k">-</span>name<span class="pl-k">&gt;</span><br>
+1<br>
+	
+git push origin <span class="pl-k">&lt;</span>add<span class="pl-k">-</span>your<span class="pl-k">-</span>name<span class="pl-k">&gt;</span><br>
+
+Изменим <add-your-name> на имя ветки, которое мы создали ранее.<br>
+ 6. Подтвердим изменения для ревью<br>
+Если мы зайдем в свой репозиторий, мы увидим кнопку Compare & pull request, на, которую нужно нажать.<br>

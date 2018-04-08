@@ -1,0 +1,22 @@
+<center>
+	<?php
+
+	if(isset($this->errorMessage)){
+		echo $this->errorMessage;
+	}
+	?>
+	<br>
+	<h4>Зміна даних</h4>
+	<br>
+	<?php
+	$user = $this->user;
+	echo $this->form;
+	?>
+	<?php 
+	if(isset($this->datatrue)){
+	?>
+	<center><b>Дані були змінені, для того щоб вони обновились <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'login')) ?>">перезайдіть</a></b></center>
+	<?php
+	}
+	?>
+</center>

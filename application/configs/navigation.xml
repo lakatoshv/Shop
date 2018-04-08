@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+	<nav>
+		
+				<logout>
+					<label>Вихід</label>
+					<module>default</module>
+					<controller>customer</controller>
+					<action>logout</action>
+					<resource>default:customer</resource>
+					<previlege>logout</previlege>
+				</logout>
+
+				<login>
+					<label>Вхід</label>
+					<module>default</module>
+					<controller>customer</controller>
+					<action>login</action>
+					<resource>default:customer</resource>
+					<previlege>login</previlege>
+				</login>
+
+				<signup>
+					<label>Реєстрація</label>
+					<module>default</module>
+					<controller>customer</controller>
+					<action>signup</action>
+					<resource>default:customer</resource>
+					<previlege>signup</previlege>
+				</signup>
+
+				<index>
+					<label>Панель користувача</label>
+					<module>default</module>
+					<controller>customer</controller>
+					<action>index</action>
+					<resource>default:customer</resource>
+					<previlege>index</previlege>
+				</index>
+
+				<home>
+					<label>Особисті дані</label>
+					<module>default</module>
+					<controller>customer</controller>
+					<action>home</action>
+					<resource>default:customer</resource>
+					<previlege>home</previlege>
+				</home>
+		
+		<products>
+			<uri>#</uri>
+			<resource>shop:products</resource>
+			<previlege>index</previlege>
+			<pages>
+				<list>
+					<label>Книги</label>
+					<module>shop</module>
+					<controller>products</controller>
+					<action>list</action>
+				</list>
+			</pages>
+		</products>
+
+		<book>
+			<label>Книга</label>
+			<uri>#</uri>
+			<resource>admin:book</resource>
+			<previlege>index</previlege>
+			<pages>
+				<add>
+					<label>Додати</label>
+					<module>admin</module>
+					<controller>book</controller>
+					<action>add</action>
+				</add>
+				<edit>
+					<label>Редагувати</label>
+					<module>admin</module>
+					<controller>book</controller>
+					<action>edit</action>
+				</edit>
+				<delete>
+					<label>Видалити</label>
+					<module>admin</module>
+					<controller>book</controller>
+					<action>delete</action>
+				</delete>
+			</pages>
+		</book>
+	</nav>
+</config>
