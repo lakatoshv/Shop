@@ -1,3 +1,5 @@
+<script src="<?php echo $this->baseUrl(); ?>/js/mixitup.min.js"></script>
+<script src="<?php echo $this->baseUrl(); ?>/js/jquery.hideseek.min.js"></script>
 <div class="back">
   <div class="text-center">
     <h1 class="col-md-6 col-md-offset-3">Товари</h1>
@@ -10,39 +12,155 @@
       <li>Сортувати по: </li>
       <li>
         <select id="sort" name="sort">
-          <option selected  value ="name">Назві</option>
+          <option selected  value ="title">Назві</option>
           <option  value="price">Ціні</option>
         </select>
       </li>
       <li>За: </li>
       <li>
         <select id="type_sort" name="type_sort">
-          <option selected  value="asc">Зростанням</option>
-          <option  value="desc">Спаданням</option>
+          <option selected value="asc">Зростанням</option>
+          <option value="desc">Спаданням</option>
         </select>
       </li>
+      <li>
+        <div class="range-slider">
+          <label class="range-slider-label">Min</label>
+          <input name="minSize" class="range-slider-input" type="range" min="0" max="10" value="0" list="sizeLegend"/>
+        </div>
+        <div class="range-slider">
+          <label class="range-slider-label">Max</label>
+          <input name="maxSize" class="range-slider-input" type="range" min="0" max="10" value="10" list="sizeLegend"/>
+        </div>
+      </li>
       <li><a id="sorting" class="btn btn-default button-background" href="">Сортувати</a></li>
+      <li>
+        <div>
+          <form method="POST" name="search-form"> 
+            <input type="text" name="search" class="search-txt" placeholder="Пошук" data-ref="input-search" data-list=".row" autocomplete="off"/>
+          </form>
+        </div>
+      </li>
     </ul>
   </div>
 </div>
 <div class="container">
-  <div class="row">
-    <?php
-		foreach ($this->products as $key => $value) {
-	?>
-     <div class="col-lg-3">
-        <div class="box">
+  <div class="row" data-ref="container">
+    <div class="col-lg-2">
+      <h2 class="my-4">Категорії:</h2>
+
+      <div class="panel-group" id="accordion">
+        <!-- 1 панель -->
+        <div class="panel panel-default">
+          <!-- Заголовок 1 панели -->
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#mobile">
+                <label><input type="checkbox" value=""><?= "Мобільні телефони"; ?></label>
+              </div>
+            </h4>
+          </div>
+          <div id="mobile" class="panel-collapse collapse">
+            <!-- Содержимое 1 панели -->
+            <div class="panel-body">
+              <div class="list-group">
+                <?php
+                  foreach ($this->mobile as $key => $value) {
+                ?>
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                  </div>
+                </li>
+                <?php
+                  }
+                ?>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 2 панель -->
+        <div class="panel panel-default">
+          <!-- Заголовок 1 панели -->
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#notepad">
+                <label><input type="checkbox" value=""><?= "Планшети"; ?></label>
+              </div>
+            </h4>
+          </div>
+          <div id="notepad" class="panel-collapse collapse">
+            <!-- Содержимое 1 панели -->
+            <div class="panel-body">
+              <div class="list-group">
+                <?php
+                  foreach ($this->notepad as $key => $value) {
+                ?>
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                  </div>
+                </li>
+                <?php
+                  }
+                ?>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 3 панель -->
+        <div class="panel panel-default">
+          <!-- Заголовок 1 панели -->
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <div class="checkbox">
+                <label><input type="checkbox" value=""><a data-toggle="collapse" data-parent="#accordion" href="#notebook"><?= "Ноутбуки"; ?></a></label>
+              </div>
+            </h4>
+          </div>
+          <div id="notebook" class="panel-collapse collapse">
+            <!-- Содержимое 1 панели -->
+            <div class="panel-body">
+              <div class="list-group">
+                <?php
+                  foreach ($this->notebook as $key => $value) {
+                ?>
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                  </div>
+                </li>
+                <?php
+                  }
+                ?>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+    <div class="col-lg-8">
+      <?php
+        foreach ($this->products as $key => $value) {
+      ?>
+      <div class="col-lg-4" id="<?= $value->id; ?>" data-price="<?= $value->price; ?>" data-title="<?= $value->name ?>">
+        <div class="box product-<?= $value->id; ?>">
           <div class="box-gray aligncenter">
-            <h3><a class="product" id="product"  product_id="<?= $value->id; ?>" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')) ?>"><?= $value->name ?></a></h3>
+            <h3><a class="product"  product_id="<?= $value->id; ?>" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')) ?>"><?= $value->name ?></a></h3>
             <div class="icon">
               <i class="fa fa-desktop fa-3x"></i>
             </div>
             <div class="product-item">
-              	<?php
-              		$url = $this->baseUrl();
-    				$img = $url."/".$value->image;
-    			?>
-    		  <img src="<?= $img ?>" class="img-thumbnail">
+                <?php
+                  $url = $this->baseUrl();
+            $img = $url."/".$value->image;
+          ?>
+          <img src="<?= $img ?>" class="img-thumbnail">
               <div class="product-buttons">
                 <p>
                   <br><?= $value->minidescription ?><br><br><br>
@@ -53,15 +171,40 @@
             <div class="buttons-bottom">
               <h3><?= $value->price." грн" ?></h3>
               <a href="" class="btn btn-default btn-block button-background">В корзину</a>
+            </div>
           </div>
         </div>
       </div>
+      <?php
+        }
+      ?>
     </div>
-  	<?php
-  		}
-	?>
-</div>
+    <div class="col-lg-2">
+      <h1 class="my-4">Новини</h1>
+      <center><span id="news-up" class="glyphicon glyphicon-chevron-up"></span></center>
+      <div id="newsticker">
+        <ul class="list-group">
+          <?php
+            foreach ($this->news as $key => $value) {
+          ?>
+          <li class="list-group-item">
+            <div class="checkbox">
+              <h4 class="list-group-item-heading"><?= $value->date; ?></h4>
+              <h4 class="list-group-item-footer"><?= $value->title; ?></h4>
+              <p class="list-group-item-text"><?= $value->text; ?></p>
+
+            </div>
+          </li>
+          <?php
+            }
+          ?>
+        </ul>
+      </div>
+      <center><span id="news-down" class="glyphicon glyphicon-chevron-down"></span></center>
+    </div>
+  </div>
 <script type="text/javascript">
+
   function cheked(select) {
     // берём значение из select и что-то с ним делаем
     return select.val();
@@ -85,3 +228,136 @@
     });
   });
 </script>
+<?php
+  if(isset($_Post)){
+    var_dump($_Post);
+  }
+?>
+<script type="text/javascript">
+
+    var divs = document.getElementsByClassName( 'col-lg-3' );
+  //alert(divs.length);
+  for( var i = 0; i < divs.length; i++ ) {
+      if (divs[i].className!= "") {
+          //alert(divs[i].innerHTML);
+
+      }
+  }
+
+
+</script>
+
+        <script>
+            // In this example, we must bind 'change' event handlers to
+            // our <select> elements, then interact with the mixer via
+            // its .filter() and .sort() API methods.
+
+            var containerEl = document.querySelector('[data-ref~="container"]');
+            //var selectFilter = document.querySelector('.select-filter');
+            var sort = document.querySelector('#sort');
+            var typeSort = document.querySelector('#type_sort');
+            /*
+            selectFilter.addEventListener('change', function() {
+                var selector = selectFilter.value;
+
+                mixer.filter(selector);
+            });
+            */
+            sort.addEventListener('change', function() {
+                var mixer = mixitup(containerEl, {
+                  selectors: {
+                      target: '[data-' + sort.value +']'
+                  }
+                });
+                var order = sort.value + ":" + typeSort.value;
+                //mixer.selectors("title");
+                mixer.sort(order);
+            });
+            typeSort.addEventListener('change', function() {
+                var mixer = mixitup(containerEl, {
+                  selectors: {
+                      target: '[data-' + sort.value +']'
+                  }
+                });
+                var order = sort.value + ":" + typeSort.value;
+                //mixer.selectors("title");
+                mixer.sort(order);
+            });
+
+            var inputSearch = document.querySelector('[data-ref="input-search"]');
+            var keyupTimeout;
+
+
+            // Set up a handler to listen for "keyup" events from the search input
+
+            inputSearch.addEventListener('keyup', function() {
+                var searchValue;
+
+                if (inputSearch.value.length < 3) {
+                    // If the input value is less than 3 characters, don't send
+
+                    searchValue = '';
+                } else {
+                    searchValue = inputSearch.value./*toLowerCase().*/trim();
+                    var mixer = mixitup(containerEl, {
+             
+                animation: {
+                    duration: 350
+                },
+                callbacks: {
+                    onMixClick: function() {
+                        // Reset the search if a filter is clicked
+
+                        if (this.matches('[data-filter]')) {
+                            inputSearch.value = '';
+                        }
+                    }
+                }
+            });
+                }
+
+                // Very basic throttling to prevent mixer thrashing. Only search
+                // once 350ms has passed since the last keyup event
+
+                clearTimeout(keyupTimeout);
+
+                keyupTimeout = setTimeout(function() {
+                    filterByString(searchValue);
+                }, 350);
+            });
+
+            /**
+             * Filters the mixer using a provided search string, which is matched against
+             * the contents of each target's "class" attribute. Any custom data-attribute(s)
+             * could also be used.
+             *
+             * @param  {string} searchValue
+             * @return {void}
+             */
+
+            function filterByString(searchValue) {
+                if (searchValue) {
+                    // Use an attribute wildcard selector to check for matches
+
+                    mixer.filter('[data-title="' + searchValue + '"]');
+                } else {
+                    // If no searchValue, treat as filter('all')
+                    mixer.filter('all');
+                }
+            }
+        </script>
+        <script type="text/javascript">
+              $('#newsticker').jCarouselLite({
+                  vertical: true,
+                  hoverPause: true,
+                  btnUp: "#news-up",
+                  btnDown: "#news-down",
+                  visible: 2,
+                  scroll: 1,
+                  auto: 800,
+                  speed: 600,
+                  mouseWheel: true
+              });
+            
+        </script>
+

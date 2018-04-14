@@ -561,11 +561,11 @@ section.callaction {
 }
 
 /* --- box --- */
-.col-lg-3{
+.col-lg-4{
 	min-height: 200px;
 	height: auto;
 }
-.col-lg-3 .box-auth {
+.col-lg-4 .box-auth {
 	min-height: 215px;
 	height: 100%;
 	width: 100%;
@@ -573,14 +573,14 @@ section.callaction {
 	border: 1px solid silver;
 	margin-bottom: 10px;
 }
-.col-lg-3 .box-zhanres {
+.col-lg-4 .box-zhanres {
 	height: 100px;
 	width: 100%;
 	background: #f8f8f8;
 	border: 1px solid silver;
 	margin-bottom: 10px;
 }
-.col-lg-3 .box {
+.col-lg-4 .box {
 	min-height: 100px;
 	height: auto;
 	width: 100%;
@@ -2213,4 +2213,40 @@ article img.pull-right, article .align-right{
 }
 #footer a{
 	color: #333;
+}
+
+.search-txt {
+    width: 0px;
+    box-sizing: border-box;
+    background: #ededed url('images/search.png') no-repeat 9px center;
+    padding: 9px 10px 9px 32px;
+    border: 2px solid #ccc;
+    -webkit-border-radius: 10em;
+    -moz-border-radius: 10em;
+    border-radius: 10em;
+    
+    -webkit-transition: width 0.5s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    
+    -webkit-appearance: textfield;
+	-webkit-box-sizing: content-box;
+    
+	font-family: inherit;
+	font-size: 100%;
+    color: transperent;
+    cursor: pointer;
+}
+
+.search-txt:focus {
+    width: 100%;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #6dcff6;
+    -webkit-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+    -moz-box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+    box-shadow: 0 0 5px rgba(109, 207, 246, .5);
+}
+.search-txt::-webkit-search-decoration,
+.search-txt::-webkit-search-cancel-button {
+	display: none;
 }
