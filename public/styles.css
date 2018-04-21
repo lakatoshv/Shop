@@ -2250,3 +2250,7 @@ article img.pull-right, article .align-right{
 .search-txt::-webkit-search-cancel-button {
 	display: none;
 }
+.active-page a{
+	color: #fff!important;
+	background-color: #4d94ff!important;
+}

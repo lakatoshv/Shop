@@ -1,0 +1,24 @@
+<?php
+$currentPage = $this->current;
+if(isset($this->previous)){
+	echo "<li><a href='".$this->url(array("page" => $this->first))."'>На початок</a></li>";
+}
+else{}
+if(isset($this->previous)){
+	if($currentPage != $this->first)
+	echo "<li><a href='".$this->url(array("page" => $this->previous))."'>&larr; Назад</a></li>";
+}
+foreach ($this->pagesInRange as $page) {
+	echo "<li ";
+	if($page == $currentPage) echo "class='active-page disabled'";
+	echo "><a href='".$this->url(array("page" => $page))."'>$page</a></li>";
+}
+if(isset($this->next)){
+	if($currentPage != $this->last)
+	echo "<li><a href='".$this->url(array("page" => $this->next))."'>Вперед &rarr;</a></li>";
+}
+if(isset($this->next)){
+	echo "<li><a href='".$this->url(array("page" => $this->last))."'>В кінець</a></li>";
+}
+else{}
+/*<li class="<?php if($this->page >= $pages->last) echo "disabled"; ?>"><a href="<?= $next; ?>"></a></li>*/

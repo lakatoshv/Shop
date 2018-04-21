@@ -15,8 +15,22 @@ class Shop_ProductsController extends Zend_Controller_Action
 
     public function listAction()
     {
+        /*
         $productsTbl = new Shop_Model_DbTable_Products();
         $this->view->products = $productsTbl->fetchAll();
+        */
+        $productsTbl = new Shop_Model_ListProducts();
+        $productsList = $productsTbl->listProducts();
+
+        $show = Zend_Controller_Request_Http::getCookie("show", 5);
+        $page = $this->_getParam("page", 1);
+
+        $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($productsList));
+        $paginator->setItemCountPerPage($show)->setCurrentPageNumber($page);
+        $this->view->products = $paginator;
+        $this->view->page = $page;
+        $this->view->show = $show;
+
         $categoriesTbl = new Shop_Model_DbTable_Categories();
         //$this->view->categories = 
         //$categoriesTbl->fetchAll();
