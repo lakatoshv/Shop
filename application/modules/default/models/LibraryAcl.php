@@ -59,7 +59,7 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("guests", "default:customer", "login");
 		$this->allow("guests", "default:customer", "signup");
 		$this->allow("guests", "default:index", "index");
-		$this->allow("guests", "shop:products", array("index", "list"));
+		$this->allow("guests", "shop:products", array("index", "list", "show"));
 
 		
 		$this->deny("users", "default:error", "login");

@@ -151,7 +151,7 @@
       <div class="col-lg-4" id="<?= $value["id"]; ?>" data-price="<?= $value["price"]; ?>" data-title="<?= $value["name"] ?>">
         <div class="box product-<?= $value["id"]; ?>">
           <div class="box-gray aligncenter">
-            <h3><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'index')) ?>"><?= $value["name"] ?></a></h3>
+            <h3><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value["name"] ?></a></h3>
             <div class="icon">
               <i class="fa fa-desktop fa-3x"></i>
             </div>
@@ -183,10 +183,12 @@
         <li>Показати товарів: 
           <select id="show_el" name="show" style="color: black;">
             <option <?php if($this->show == 3) echo "selected"; ?> value ="3">3</option>
+            <option <?php if($this->show == 5) echo "selected"; ?> value ="5">5</option>
             <option <?php if($this->show == 6) echo "selected"; ?> value="6">6</option>
-            <option <?php if($this->show == 24) echo "selected"; ?> value="24">24</option>
-            <option <?php if($this->show == 51) echo "selected"; ?> value="51">51</option>
-            <option <?php if($this->show == 99) echo "selected"; ?> value="99">99</option>
+            <option <?php if($this->show == 10) echo "selected"; ?> value ="10">10</option>
+            <option <?php if($this->show == 25) echo "selected"; ?> value="25">25</option>
+            <option <?php if($this->show == 50) echo "selected"; ?> value="50">50</option>
+            <option <?php if($this->show == 100) echo "selected"; ?> value="100">100</option>
           </select>
         </li>
         
@@ -198,26 +200,36 @@
     </div>
     <div class="col-lg-2">
       <h1 class="my-4">Новини</h1>
-      <center><span id="news-up" class="glyphicon glyphicon-chevron-up"></span></center>
-      <div id="newsticker">
-        <ul class="list-group">
-          <?php
-            foreach ($this->news as $key => $value) {
-          ?>
-          <li class="list-group-item">
-            <div class="checkbox">
-              <h4 class="list-group-item-heading"><?= $value->date; ?></h4>
-              <h4 class="list-group-item-footer"><?= $value->title; ?></h4>
-              <p class="list-group-item-text"><?= $value->text; ?></p>
-
+      <div id="carousel-pager" class="carousel slide " data-ride="carousel" data-interval="2000">
+                <!-- Carousel items -->
+                <div class="carousel-inner vertical list-group">
+                     <?php
+                      $lich = 0;
+                      foreach ($this->news as $key => $value) {
+                    ?>
+                      <div class="item <?php if($lich == 0) echo "active"; ?>">
+                        <div>
+                          <h4 class="list-group-item-heading" style="padding-top: 10px;"><?= $value->date; ?></h4>
+                          <h4 class="list-group-item-footer"><?= $value->title; ?></h4>
+                          <h5 class="list-group-item-text"><?= $value->text; ?></h5>
+                        </div>
+                      </div>
+                    <?php
+                        $lich++;
+                      }
+                    ?>
+                </div>
+                
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-pager" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-pager" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
-          </li>
-          <?php
-            }
-          ?>
-        </ul>
-      </div>
-      <center><span id="news-down" class="glyphicon glyphicon-chevron-down"></span></center>
     </div>
   </div>
 <script type="text/javascript">
@@ -354,17 +366,22 @@
     }
   }
 </script>
-<script type="text/javascript">
-  $('#newsticker').jCarouselLite({
-    vertical: true,
-    hoverPause: true,
-    btnUp: "#news-up",
-    btnDown: "#news-down",
-    visible: 2,
-    scroll: 1,
-    auto: 800,
-    speed: 600,
-    mouseWheel: true
-  });          
-</script>
 
+<script type="text/javascript">
+$('.carousel .vertical .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  for (var i=1;i<2;i++) {
+    next=next.next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    
+    next.children(':first-child').clone().appendTo($(this));
+  }
+});
+</script>

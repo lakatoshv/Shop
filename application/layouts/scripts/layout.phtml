@@ -11,8 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="<?php echo $this->baseUrl(); ?>/js.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jcarousel/jcarousellite.js"></script>
-    <script type="text/javascript" src="<?php echo $this->baseUrl(); ?>/js/jcarousel/jquery.mousewheel.min.js"></script>
   </head>
 <div class="navbar-fixed-top text-center navbar-inverse" >
   <span id="show">Показати меню</span>
@@ -29,7 +27,8 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><img src="<?php echo $this->baseUrl(); ?>/images/logo.png"
+          <li><img src="<?php echo $this->baseUrl(); ?>/images/logo.png"/></li>
+          <li>
             <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
           </li>
         </ul>
@@ -68,7 +67,7 @@
   </nav>
 <br>
 <?php echo $this->layout()->content; ?>
-<footer class="text-center navbar navbar-fixed-bottom">
+<footer class="text-center navbar navbar-bottom">
   <p class="pull-right"><a class="vidstupi" href="#" id="up"><span class="glyphicon glyphicon-arrow-up vidstupi"></span>Наверх</a></p>
   <p>&copy; 2018 Lakatosh Vitaliy. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
 </footer>

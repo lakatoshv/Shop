@@ -49,6 +49,10 @@ class Shop_ProductsController extends Zend_Controller_Action
     public function productAction()
     {
     }
+    public function showAction(){
+        $product_id = $this->_getParam("product", null);
+        $this->view->product = $product_id;
+    }
 
 
 }
