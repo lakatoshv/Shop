@@ -187,8 +187,8 @@
               </div>
             </div>
             <div class="buttons-bottom">
-              <h3><?= $value["price"]." грн" ?></h3>
-              <a href="" class="btn btn-default btn-block button-background">В корзину</a>
+              <h3><?= $value["price"]." грн." ?></h3>
+              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>"" class="btn btn-default btn-block button-background btn-primary primary"><span class="glyphicon glyphicon-shopping-cart"></span>В корзину</a>
             </div>
           </div>
         </div>
