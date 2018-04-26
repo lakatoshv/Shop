@@ -56,7 +56,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#mobile">
-                <label><input type="checkbox" value=""><?= "Мобільні телефони"; ?></label>
+                <label><?= "Мобільні телефони"; ?></label>
               </div>
             </h4>
           </div>
@@ -64,12 +64,17 @@
             <!-- Содержимое 1 панели -->
             <div class="panel-body">
               <div class="list-group">
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" id="mobile_cat">Всі</label>
+                  </div>
+                </li>
                 <?php
                   foreach ($this->mobile as $key => $value) {
                 ?>
                 <li class="list-group-item">
                   <div class="checkbox">
-                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                    <label><input type="checkbox" class="mobile_cat" value=""><?= $value["brand"]; ?></label>
                   </div>
                 </li>
                 <?php
@@ -86,7 +91,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#notepad">
-                <label><input type="checkbox" value=""><?= "Планшети"; ?></label>
+                <label><?= "Планшети"; ?></label>
               </div>
             </h4>
           </div>
@@ -94,12 +99,17 @@
             <!-- Содержимое 1 панели -->
             <div class="panel-body">
               <div class="list-group">
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" id="notepad_cat">Всі</label>
+                  </div>
+                </li>
                 <?php
                   foreach ($this->notepad as $key => $value) {
                 ?>
                 <li class="list-group-item">
                   <div class="checkbox">
-                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                    <label><input type="checkbox" class="notepad_cat" value=""><?= $value["brand"]; ?></label>
                   </div>
                 </li>
                 <?php
@@ -115,8 +125,8 @@
           <!-- Заголовок 1 панели -->
           <div class="panel-heading">
             <h4 class="panel-title">
-              <div class="checkbox">
-                <label><input type="checkbox" value=""><a data-toggle="collapse" data-parent="#accordion" href="#notebook"><?= "Ноутбуки"; ?></a></label>
+              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#notebook">
+                <label><?= "Ноутбуки"; ?></label>
               </div>
             </h4>
           </div>
@@ -124,12 +134,17 @@
             <!-- Содержимое 1 панели -->
             <div class="panel-body">
               <div class="list-group">
+                <li class="list-group-item">
+                  <div class="checkbox">
+                    <label><input type="checkbox" id="notebook_cat">Всі</label>
+                  </div>
+                </li>
                 <?php
                   foreach ($this->notebook as $key => $value) {
                 ?>
                 <li class="list-group-item">
                   <div class="checkbox">
-                    <label><input type="checkbox" value=""><?= $value["brand"]; ?></label>
+                    <label><input type="checkbox" class="notebook_cat" value=""><?= $value["brand"]; ?></label>
                   </div>
                 </li>
                 <?php
@@ -158,13 +173,16 @@
             <div class="product-item">
                 <?php
                   $url = $this->baseUrl();
-            $img = $url."/".$value["image"];
-          ?>
-          <img src="<?= $img ?>" class="img-thumbnail">
+                  $img = $url."/".$value["image"];
+                ?>
+              <img src="<?= $img ?>" class="img-thumbnail"/>
               <div class="product-buttons">
                 <p>
                   <br><?= $value["minidescription"] ?><br><br><br>
-                  <a href="#"><span style="font: 20px;" class="glyphicon glyphicon-zoom-in"></span></a>
+                  <a class="image-popup-vertical-fit"  href="<?= $img ?>" title="<?= $value["name"] ?>">
+                    <img src="<?= $img ?>" class="img-thumbnail" style="display: none;"/>
+                    <span style="font: 20px;" class="glyphicon glyphicon-zoom-in"></span>
+                  </a>
                 </p>
               </div>
             </div>
@@ -209,7 +227,7 @@
                     ?>
                       <div class="item <?php if($lich == 0) echo "active"; ?>">
                         <div>
-                          <h4 class="list-group-item-heading" style="padding-top: 10px;"><?= $value->date; ?></h4>
+                          <h4 class="list-group-item-heading" style="padding-top: 10px; color: orange;"><?= $value->date; ?></h4>
                           <h4 class="list-group-item-footer"><?= $value->title; ?></h4>
                           <h5 class="list-group-item-text"><?= $value->text; ?></h5>
                         </div>
@@ -233,6 +251,78 @@
     </div>
   </div>
 <script type="text/javascript">
+//збільшення картинки
+$(document).ready(function() {
+
+  $('.image-popup-vertical-fit').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+      verticalFit: true
+    }
+    
+  });
+
+  $('.image-popup-fit-width').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    image: {
+      verticalFit: false
+    }
+  });
+
+  $('.image-popup-no-margins').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    fixedContentPos: true,
+    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+    image: {
+      verticalFit: true
+    },
+    zoom: {
+      enabled: true,
+      duration: 300 // don't foget to change the duration also in CSS
+    }
+  });
+
+});
+/* вибрати всі checkbox-и */
+$(document).on("change", "input[type=checkbox]", function() { // По изменению checkbox'а
+    if ($(this).attr('class')) {
+        var CBgroupID = $(this).attr('class');
+    }
+    if (($(this).attr('id')) && ($('input[type="checkbox"].' + $(this).attr('id')).length)) { 
+        var CBgroupID = $(this).attr('id');
+        if (this.checked) {
+            $('input[type="checkbox"].' + CBgroupID).attr('checked', 'checked');
+            $('input[type="button"][class*="' + CBgroupID + '"]').removeAttr('disabled');
+        } else {
+            $('input[type="checkbox"].' + CBgroupID).removeAttr('checked');
+            $('input[type="button"][class*="' + CBgroupID+'"]').attr('disabled', 'disabled');
+        }
+    }
+    if (!CBgroupID) {
+        return;
+    }
+    if ($('input[type="checkbox"].' + CBgroupID + ':not(:checked)').length) {
+        $('input[type="checkbox"]#' + CBgroupID).removeAttr('checked');
+    } else {
+        $('input[type="checkbox"]#' + CBgroupID).attr('checked', 'checked');
+    }
+    if ($('input[type="checkbox"].' + CBgroupID+':checked').length) {
+        $('input[type="button"][class*="' + CBgroupID + '"]').removeAttr('disabled');
+    } else {
+        $('input[type="button"][class*="' + CBgroupID + '"]').attr('disabled', 'disabled');
+    }
+    if ($('input[type="checkbox"].' + CBgroupID + ':checked').length === 1) {
+        $('.jToEdit').removeAttr('disabled');
+    } else {
+        $('.jToEdit').attr('disabled', 'disabled');
+    }
+    delete CBgroupID;
+});
 
   function cheked(select) {
     // берём значение из select и что-то с ним делаем
@@ -291,6 +381,7 @@
     mixer.filter(selector);
   });
   */
+  /* сортування */
   sort.addEventListener('change', function() {
     var mixer = mixitup(containerEl, {
       selectors: {
@@ -368,6 +459,7 @@
 </script>
 
 <script type="text/javascript">
+/* карусель */
 $('.carousel .vertical .item').each(function(){
   var next = $(this).next();
   if (!next.length) {

@@ -1,4 +1,208 @@
 <br /><br />
 <div id="view-content">
 </div>
-<?= $this->product; ?>
+<?php $product = $this->product[0];
+?>
+<div class="site-content">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+				  <li><a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a></li>
+				  <?php
+				  	$type = "";
+				  	switch ($product["type"]) {
+				  		case 'mobile':
+				  			$type = "Мобільні телефони";
+				  			break;
+				  		case 'notebook':
+				  			$type = "Ноутбуки";
+				  			break;
+				  		case 'notepad':
+				  			$type = "Планшети";
+				  			break;
+				  	}
+				  ?>
+				  <li><a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list', 'type' => $product["type"])) ?>"><?= $type; ?></a></li>
+				  <li class="active">Data</li>
+				</ol>
+				<div class="row">
+				    <div class="col-md-3 product_img">
+				    	<?php
+				            $url = $this->baseUrl();
+				            $img = $url."/".$product["image"];
+				        ?>
+				        <div class="popup-gallery">
+				        	<a href="<?= $img ?>" title="<?= $product["name"] ?>">
+								<img src="<?= $img ?>" class="img-responsive" width="200" height="360">
+							</a>
+							<a href="<?= $img ?>" title="<?= $product["name"] ?>">
+								<img src="<?= $img ?>" class="img-responsive" height="85" width="65">
+							</a>
+						</div>
+				    </div>
+				    <div class="col-md-9 product_content">
+				        <h3><?= $product["name"] ?></h3>
+				        <div class="rating">
+				        	<span class="glyphicon glyphicon-star"></span>
+				            <span class="glyphicon glyphicon-star"></span>
+				            <span class="glyphicon glyphicon-star"></span>
+				            <span class="glyphicon glyphicon-star"></span>
+				            <span class="glyphicon glyphicon-star"></span>
+				            (10 reviews)
+				        </div>
+				       	<p><h4>Короткий опис:</h4><?= $product["minidescription"] ?></p>
+				       	<p><h4>Короткі характеристики:</h4><?= $product["minicharacteristic"] ?></p>
+				        <h3 class="cost"><?= $product["price"] ?> грн.</h3>
+				        <div class="row">
+				            <div class="col-md-4 col-sm-6 col-xs-12">
+				              	<select class="form-control" name="select">
+				                    <option value="" selected="">Color</option>
+				                    <option value="black">Black</option>
+				                    <option value="white">White</option>
+				                    <option value="gold">Gold</option>
+				                	<option value="rose gold">Rose Gold</option>
+				                </select>
+				            </div>
+				            <!-- end col -->
+				            <div class="col-md-4 col-sm-6 col-xs-12">
+				                <select class="form-control" name="select">
+				                    <option value="">Capacity</option>
+				                    <option value="">16GB</option>
+				                   	<option value="">32GB</option>
+				                    <option value="">64GB</option>
+				                    <option value="">128GB</option>
+				                </select>
+				            </div>
+				            <!-- end col -->
+				        </div>
+				        <div class="clear"></div>
+				        <div class="space-ten"></div>
+				        <div class="btn-ground">
+				       		<button type="button" class="btn btn-primary primary"><span class="glyphicon glyphicon-shopping-cart"></span>Додати в корзину</button>
+				            <button type="button" class="btn btn-primary primary"><span class="glyphicon glyphicon-heart"></span>Додати в список бажань</button>
+				        </div>
+				        <div class="clear"></div>
+				        <ul class="nav nav-tabs">
+						  <li class="active"><a data-toggle="tab" href="#description">Опис</a></li>
+						  <li><a data-toggle="tab" href="#characterstic">Характеристики</a></li>
+						  <li><a data-toggle="tab" href="#reviews">Відгуки</a></li>
+						</ul>
+						<div class="tab-content">
+						  	<div id="description" class="tab-pane fade in active">
+						    	<p><?= $product["description"] ?></p>
+						  	</div>
+						  	<div id="characterstic" class="tab-pane fade">
+						    	<p><?= $product["characterstic"] ?></p>
+						  	</div>
+						  	<div id="reviews" class="tab-pane fade">
+								<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content wc-tab" id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
+									<div id="reviews" class="woocommerce-Reviews">
+										<div id="comments">
+											<h2 class="woocommerce-Reviews-title">Reviews</h2>
+											<p class="woocommerce-noreviews">There are no reviews yet.</p>
+										</div>
+										<div id="review_form_wrapper">
+											<div id="review_form">
+												<div id="respond" class="comment-respond">
+													<span id="reply-title" class="comment-reply-title">
+														Be the first to review &ldquo;Black Top&rdquo; 
+														<small><a rel="nofollow" id="cancel-comment-reply-link" href="/tyche/product/black-top/#respond" style="display:none;">Cancel reply</a></small>
+													</span>			
+													<form action="https://colorlib.com/tyche/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+														<p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
+														<div class="comment-form-rating">
+															<label for="rating">Your rating</label>
+															<select name="rating" id="rating" aria-required="true" required>
+																<option value="">Rate&hellip;</option>
+																<option value="5">Perfect</option>
+																<option value="4">Good</option>
+																<option value="3">Average</option>
+																<option value="2">Not that bad</option>
+																<option value="1">Very poor</option>
+															</select>
+														</div>
+														<p class="comment-form-comment">
+															<label for="comment">Your review <span class="required">*</span></label>
+															<textarea id="comment" name="comment" cols="45" rows="8" aria-required="true" required></textarea>
+														</p>
+														<p class="comment-form-author">
+															<label for="author">Name <span class="required">*</span></label> 
+															<input id="author" name="author" type="text" value="" size="30" aria-required="true" required />
+														</p>
+														<p class="comment-form-email">
+															<label for="email">Email <span class="required">*</span></label> 
+															<input id="email" name="email" type="email" value="" size="30" aria-required="true" required />
+														</p>
+														<p class="form-submit">
+															<input name="submit" type="submit" id="submit" class="submit" value="Submit" /> 
+															<input type='hidden' name='comment_post_ID' value='19' id='comment_post_ID' />
+															<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+														</p>
+														<p style="display: none;">
+															<input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="274310ddfc" />
+														</p>
+														<p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="208"/></p>
+													</form>
+												</div>
+											</div>
+										</div>
+									<div class="clear"></div>
+								</div>
+							</div>
+						  </div>
+						</div>
+				    </div>
+				</div>
+
+	
+<div class="product_meta">
+
+	
+	
+	<span class="posted_in">Categories: <a href="https://colorlib.com/tyche/product-category/tops/" rel="tag">Tops</a>, <a href="https://colorlib.com/tyche/product-category/trends/" rel="tag">Trends</a></span>
+	
+	
+</div>
+
+			</div>
+
+	
+	<div class="woocommerce-tabs wc-tabs-wrapper">
+		<ul class="tabs wc-tabs tyche-wc-tabs" role="tablist">
+							<li class="description_tab" id="tab-title-description"
+					role="tab" aria-controls="tab-description">
+					<a href="#tab-description">Description</a>
+				</li>
+							<li class="reviews_tab" id="tab-title-reviews"
+					role="tab" aria-controls="tab-reviews">
+					<a href="#tab-reviews">Reviews (0)</a>
+				</li>
+					</ul>
+					
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.popup-gallery').magnificPopup({
+		delegate: 'a',
+		type: 'image',
+		tLoading: 'Loading image #%curr%...',
+		mainClass: 'mfp-img-mobile',
+		gallery: {
+			enabled: true,
+			navigateByImgClick: true,
+			preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+		},
+		image: {
+			tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+			titleSrc: function(item) {
+				return item.el.attr('title');
+			}
+		}
+	});
+});
+</script>

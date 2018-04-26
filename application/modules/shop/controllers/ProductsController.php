@@ -19,11 +19,11 @@ class Shop_ProductsController extends Zend_Controller_Action
         $productsTbl = new Shop_Model_DbTable_Products();
         $this->view->products = $productsTbl->fetchAll();
         */
+        $type = $this->_getParam("type", 1);
         $productsTbl = new Shop_Model_ListProducts();
-        $productsList = $productsTbl->listProducts();
-
         $show = Zend_Controller_Request_Http::getCookie("show", 5);
         $page = $this->_getParam("page", 1);
+        $productsList = $productsTbl->listProducts($type);
 
         $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($productsList));
         $paginator->setItemCountPerPage($show)->setCurrentPageNumber($page);
@@ -51,7 +51,8 @@ class Shop_ProductsController extends Zend_Controller_Action
     }
     public function showAction(){
         $product_id = $this->_getParam("product", null);
-        $this->view->product = $product_id;
+        $productsTbl = new Shop_Model_DbTable_Products();
+        $this->view->product = $productsTbl->showProduct($product_id);
     }
 
 

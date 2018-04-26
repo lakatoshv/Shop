@@ -24,9 +24,6 @@ class Shop_Model_DbTable_Categories extends Zend_Db_Table_Abstract
                  ->where('type=?',$type);
                  //->order('type');
                  //->having('count(*)= 1');
-     
-    // Можно использовать константу для указания той же части
-    
 $result = $this->getAdapter()->fetchAll($select);
         if($result){
             return $result;
