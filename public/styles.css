@@ -2477,6 +2477,7 @@ input[type="submit"].primary:focus {
   border-color: #f43818;
   background: #f43818;
 }
+#button.red,
 .button.red,
 button.red:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.red[type="button"],
@@ -2489,6 +2490,7 @@ input[type="submit"].red {
   background: #f66249;
   color: #FFF;
 }
+#button.red:hover,
 .button.red:hover,
 button.red:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.red[type="button"]:hover,
@@ -2518,6 +2520,7 @@ input[type="submit"].red:focus {
   background: #f43818;
   color: #FFF;
 }
+#button.secondary,
 .button.secondary,
 button.secondary:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.secondary[type="button"],
@@ -2539,6 +2542,7 @@ input[type="submit"].beige {
   border-color: #eaab76;
   color: #FFF;
 }
+#button.secondary:hover,
 .button.secondary:hover,
 button.secondary:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.secondary[type="button"]:hover,
@@ -2592,6 +2596,7 @@ input[type="submit"].beige:focus {
   background: #e3904a;
   color: #FFF;
 }
+#button.green,
 .button.green,
 button.green:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.green[type="button"],
@@ -2605,6 +2610,7 @@ input[type="submit"].green {
   border-color: #99ca45;
   color: #FFF;
 }
+#button.green:hover,
 .button.green:hover,
 button.green:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.green[type="button"]:hover,
@@ -2634,6 +2640,7 @@ input[type="submit"].green:focus {
   background: #7eab31;
   color: #FFF;
 }
+#button.blue,
 .button.blue,
 button.blue:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.blue[type="button"],
@@ -2647,6 +2654,7 @@ input[type="submit"].blue {
   border-color: #263585;
   color: #FFF;
 }
+#button.blue:hover,
 .button.blue:hover,
 button.blue:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.blue[type="button"]:hover,
@@ -2676,6 +2684,7 @@ input[type="submit"].blue:focus {
   background: #1b255d;
   color: #FFF;
 }
+#button.black,
 .button.black,
 button.black:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.black[type="button"],
@@ -2689,6 +2698,7 @@ input[type="submit"].black {
   border-color: #252525;
   color: #FFF;
 }
+#button.black:hover,
 .button.black:hover,
 button.black:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.black[type="button"]:hover,
@@ -2718,6 +2728,7 @@ input[type="submit"].black:focus {
   background: #0c0c0c;
   color: #FFF;
 }
+#button.orange,
 .button.orange,
 button.orange:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.orange[type="button"],
@@ -2731,6 +2742,7 @@ input[type="submit"].orange {
   border-color: #ffab1a;
   color: #FFF;
 }
+#button.orange:hover,
 .button.orange:hover,
 button.orange:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.orange[type="button"]:hover,
@@ -2760,6 +2772,7 @@ input[type="submit"].orange:focus {
   background: #ffa201;
   color: #FFF;
 }
+#button.light_blue,
 .button.light_blue,
 button.light_blue:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.light_blue[type="button"],
@@ -2773,6 +2786,7 @@ input[type="submit"].light_blue {
   border-color: #2279d3;
   color: #FFF;
 }
+#button.light_blue:hover,
 .button.light_blue:hover,
 button.light_blue:hover:not(.pswp__button):not(.customize-partial-edit-shortcut-button),
 input.light_blue[type="button"]:hover,

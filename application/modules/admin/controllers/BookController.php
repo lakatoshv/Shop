@@ -25,7 +25,10 @@ class Admin_BookController extends Zend_Controller_Action
 
     public function deleteAction()
     {
-        // action body
+        $productTbl = new Admin_Model_DbTable_Products();
+        $product_id = $this->_getParam("product", null);
+        $productTbl->deleteProduct($product_id);
+        $this->_redirect('shop/products/list');
     }
 
 
