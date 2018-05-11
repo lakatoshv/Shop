@@ -18,6 +18,18 @@ $result = $this->getAdapter()->fetchAll($select);
         }
         return false;
     }
+    function selectAll()
+    {   
+        $select = $this->_db->select()
+                 ->from('category');
+                 //->order('type');
+                 //->having('count(*)= 1');
+$result = $this->getAdapter()->fetchAll($select);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
     function selectDistinct($type)
     {   
         //SELECT DISTINCT type FROM category

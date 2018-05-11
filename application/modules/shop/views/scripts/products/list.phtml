@@ -48,19 +48,31 @@
   <div class="row" data-ref="container">
     <div class="col-lg-2">
       <h2 class="my-4">Категорії:</h2>
-
       <div class="panel-group" id="accordion">
+
+      <?php
+        /* categoriesList
+        
+          if ($image["product_id"] == $value["id"]) {
+            $images[] = $image["image"];
+          }
+        }
+        $img .= $images[0];*/
+        $categoriesDistincts = $this->categoriesDistinct;
+        $categoriesList = $this->categoriesList;
+        foreach ($categoriesDistincts as $categoriesDistinct) {
+      ?>
         <!-- 1 панель -->
         <div class="panel panel-default">
           <!-- Заголовок 1 панели -->
           <div class="panel-heading">
             <h4 class="panel-title">
-              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#mobile">
-                <label><?= "Мобільні телефони"; ?></label>
+              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#<?= $categoriesDistinct["type"] ?>">
+                <label><?= $categoriesDistinct["title"]; ?></label>
               </div>
             </h4>
           </div>
-          <div id="mobile" class="panel-collapse collapse">
+          <div id="<?= $categoriesDistinct["type"] ?>" class="panel-collapse collapse">
             <!-- Содержимое 1 панели -->
             <div class="panel-body">
               <div class="list-group">
@@ -70,7 +82,8 @@
                   </div>
                 </li>
                 <?php
-                  foreach ($this->mobile as $key => $value) {
+                  foreach ($this->categoriesList as $key => $value) {
+                    if($categoriesDistinct["type"] == $value["type"]){
                 ?>
                 <li class="list-group-item">
                   <div class="checkbox">
@@ -78,6 +91,7 @@
                   </div>
                 </li>
                 <?php
+                    }
                   }
                 ?>
                 
@@ -85,80 +99,11 @@
             </div>
           </div>
         </div>
-        <!-- 2 панель -->
-        <div class="panel panel-default">
-          <!-- Заголовок 1 панели -->
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#notepad">
-                <label><?= "Планшети"; ?></label>
-              </div>
-            </h4>
-          </div>
-          <div id="notepad" class="panel-collapse collapse">
-            <!-- Содержимое 1 панели -->
-            <div class="panel-body">
-              <div class="list-group">
-                <li class="list-group-item">
-                  <div class="checkbox">
-                    <label><input type="checkbox" id="notepad_cat">Всі</label>
-                  </div>
-                </li>
-                <?php
-                  foreach ($this->notepad as $key => $value) {
-                ?>
-                <li class="list-group-item">
-                  <div class="checkbox">
-                    <label><input type="checkbox" class="notepad_cat" value=""><?= $value["brand"]; ?></label>
-                  </div>
-                </li>
-                <?php
-                  }
-                ?>
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- 3 панель -->
-        <div class="panel panel-default">
-          <!-- Заголовок 1 панели -->
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <div class="checkbox" data-toggle="collapse" data-parent="#accordion" href="#notebook">
-                <label><?= "Ноутбуки"; ?></label>
-              </div>
-            </h4>
-          </div>
-          <div id="notebook" class="panel-collapse collapse">
-            <!-- Содержимое 1 панели -->
-            <div class="panel-body">
-              <div class="list-group">
-                <li class="list-group-item">
-                  <div class="checkbox">
-                    <label><input type="checkbox" id="notebook_cat">Всі</label>
-                  </div>
-                </li>
-                <?php
-                  foreach ($this->notebook as $key => $value) {
-                ?>
-                <li class="list-group-item">
-                  <div class="checkbox">
-                    <label><input type="checkbox" class="notebook_cat" value=""><?= $value["brand"]; ?></label>
-                  </div>
-                </li>
-                <?php
-                  }
-                ?>
-                
-              </div>
-            </div>
-          </div>
-        </div>
+      <?php
+        }
+      ?>
       </div>
-
-      
-    </div>
+      </div>
     <div class="col-lg-8">
       <div class="alert right">
         <?php

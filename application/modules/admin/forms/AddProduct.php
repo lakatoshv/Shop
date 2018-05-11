@@ -53,13 +53,13 @@ class Admin_Form_AddProduct extends Zend_Form
 
         $type = $this->createElement('select','type');
 
-        $categoriesTbl = new Shop_Model_DbTable_Categories();
+        $categoriesTbl = new Shop_Model_DbTable_Type();
         //SELECT DISTINCT type FROM category
-        $typesList = $categoriesTbl->selectDistinct("type");
+        $typesList = $categoriesTbl->fetchAll();
         $id = 0;
         foreach ($typesList as $key => $value) {
             $type->addMultiOptions(array(
-                $value["type"]."" => $value["type"].""
+                $value["type"]."" => $value["title"].""
             ));
             $id++;
         }

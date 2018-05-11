@@ -31,12 +31,10 @@ class Shop_ProductsController extends Zend_Controller_Action
         $this->view->page = $page;
         $this->view->show = $show;
 
-        $categoriesTbl = new Shop_Model_DbTable_Categories();
+        $categoriesTable = new Shop_Model_DbTable_Categories();
         //$this->view->categories = 
         //$categoriesTbl->fetchAll();
-        $this->view->mobile = $categoriesTbl->getBrand("mobile");
-        $this->view->notebook = $categoriesTbl->getBrand("notebook");
-        $this->view->notepad = $categoriesTbl->getBrand("notepad");
+        $this->view->categoriesList = $categoriesTable->selectAll();
 
         $newsTbl = new Shop_Model_DbTable_News();
         $this->view->news = $newsTbl->fetchAll();
@@ -48,14 +46,18 @@ class Shop_ProductsController extends Zend_Controller_Action
             $search = $this->getRequest ()->getParam ( 'search', null );
             var_dump($search);
         }
+
+        $categoriesTbl = new Shop_Model_DbTable_Type();
+        //SELECT DISTINCT type FROM category
+        $this->view->categoriesDistinct = $categoriesTbl->fetchAll();
     }
     public function productAction()
     {
     }
     public function showAction(){
         $product_id = $this->_getParam("product", null);
-        $productsTbl = new Shop_Model_DbTable_Products();
-        $this->view->product = $productsTbl->showProduct($product_id);
+        $productsTbl = new Shop_Model_DbTable_Categories();
+        $this->view->product = $productsTbl->selectDistinct("type");
     }
 
 
