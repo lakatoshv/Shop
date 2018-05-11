@@ -41,6 +41,9 @@ class Shop_ProductsController extends Zend_Controller_Action
         $newsTbl = new Shop_Model_DbTable_News();
         $this->view->news = $newsTbl->fetchAll();
 
+        $images = new Shop_Model_DbTable_UploadImages();
+        $this->view->images = $images->fetchAll();
+
         if($this->getRequest()->isPost()){
             $search = $this->getRequest ()->getParam ( 'search', null );
             var_dump($search);
