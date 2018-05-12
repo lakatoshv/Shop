@@ -55,9 +55,16 @@ class Shop_ProductsController extends Zend_Controller_Action
     {
     }
     public function showAction(){
-        $product_id = $this->_getParam("product", null);
+        /*$product_id = $this->_getParam("product", null);
         $productsTbl = new Shop_Model_DbTable_Categories();
-        $this->view->product = $productsTbl->selectDistinct("type");
+        $this->view->product = $productsTbl->selectDistinct("type");*/
+        $product_id = $this->_getParam("product", null);
+        $productsTbl = new Shop_Model_DbTable_Products();
+        $this->view->product = $productsTbl->showProduct($product_id);
+
+        $images = new Shop_Model_DbTable_UploadImages();
+        $this->view->images = $images->getImages($product_id);
+
     }
 
 

@@ -29,16 +29,24 @@
 				<div class="row">
 				    <div class="col-md-3 product_img">
 				    	<?php
-				            $url = $this->baseUrl();
-				            $img = $url."/".$product["image"];
-				        ?>
+		                  $url = $this->baseUrl();
+		                  $imagesList = $this->images;
+		                  $img = $url."/";
+		                  $img .= $imagesList[0]["image"];
+		                ?>
 				        <div class="popup-gallery">
 				        	<a href="<?= $img ?>" title="<?= $product["name"] ?>">
 								<img src="<?= $img ?>" class="img-responsive" width="200" height="360">
 							</a>
-							<a href="<?= $img ?>" title="<?= $product["name"] ?>">
-								<img src="<?= $img ?>" class="img-responsive" height="85" width="65">
+							<?php
+								foreach ($imagesList as $image) {
+			                    	?>
+			                <a href="<?= $url."/".$image["image"] ?>" title="<?= $product["name"] ?>">
+								<img src="<?= $url."/".$image["image"] ?>" class="img-responsive" height="85" width="65">
 							</a>
+			                    	<?php
+			                  	}
+			                ?>
 						</div>
 				    </div>
 				    <div class="col-md-9 product_content">

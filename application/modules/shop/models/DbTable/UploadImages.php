@@ -5,7 +5,7 @@
 class Shop_Model_DbTable_UploadImages extends Zend_Db_Table_Abstract
 {
 	protected $_name = "uploads_images";
-	public function getImages(){
+	public function getImages($id){
 		$select = $this->_db->select()
                  ->from('uploads_images')
                  ->where('id=?',$id);

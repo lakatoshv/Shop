@@ -1,4 +1,57 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Book</b> and script/action name <b>edit</b></p>
+
+	<?php
+	if(isset($this->errorMessage)){
+
+	            echo $this->errorMessage;
+
+	}?>
+	<br>
+	<center><h4>Додати товар</h4></center>
+	<br>
+	<?php
+
+	$form = $this->form;
+	$product = $this->product;
+// Remove <dt> from label generation
+foreach ($form->getElements() as $element) {
+    $element->getDecorator('label')->setOption('tag', null);
+    $form->setAttrib('enctype', 'multipart/form-data');
+}
+?>
+<div class="container">
+  <div class="row" data-ref="container">
+    <div class="col-lg-12">
+		<form method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction()?>" enctype='multipart/form-data'>
+		   	<div class="form-group">
+		        <?php echo $form->name->renderLabel() . $form->name->setValue($product[0]["name"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->price->renderLabel() . $form->price->setValue($product[0]["price"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->minidescription->renderLabel() . $form->minidescription->setValue($product[0]["minidescription"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->description->renderLabel() . $form->description->setValue($product[0]["description"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->type->renderLabel() . $form->type->setValue($product[0]["type"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->category->renderLabel() . $form->category->setValue($product[0]["category"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
+	        	<?php /*echo $form->image->renderLabel() . $form->image->renderViewHelper()*/ ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->minicharacteristic->renderLabel() . $form->minicharacteristic->setValue($product[0]["minicharacteristic"])->renderViewHelper() ?>
+		    </div>
+		    <div class="form-group">
+	        	<?php echo $form->characterstic->renderLabel() . $form->characterstic->setValue($product[0]["characterstic"])->renderViewHelper() ?>
+		    </div>
+		    
+		    <?php echo $this->formSubmit('submit', 'Save') ?>
+		</form>
+	</div>
 </div>

@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Form_AddProduct extends Zend_Form
+class Admin_Form_EditProduct extends Zend_Form
 {
     public function init()
     {
