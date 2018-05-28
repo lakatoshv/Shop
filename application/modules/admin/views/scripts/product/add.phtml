@@ -27,6 +27,8 @@ foreach ($form->getElements() as $element) {
 		    <div class="form-group">
 	        	<?php echo $form->price->renderLabel() . $form->price->renderViewHelper() ?>
 		    </div>
+		    <?php echo $form->image ?>
+
 		    <div class="form-group">
 	        	<?php echo $form->minidescription->renderLabel() . $form->minidescription->renderViewHelper() ?>
 		    </div>
@@ -40,17 +42,13 @@ foreach ($form->getElements() as $element) {
 	        	<?php echo $form->category->renderLabel() . $form->category->renderViewHelper() ?>
 		    </div>
 		    <div class="form-group">
-	        	<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-	        	<?php /*echo $form->image->renderLabel() . $form->image->renderViewHelper()*/ ?>
-		    </div>
-		    <div class="form-group">
 	        	<?php echo $form->minicharacteristic->renderLabel() . $form->minicharacteristic->renderViewHelper() ?>
 		    </div>
 		    <div class="form-group">
 	        	<?php echo $form->characterstic->renderLabel() . $form->characterstic->renderViewHelper() ?>
 		    </div>
 		    
-		    <?php echo $this->formSubmit('submit', 'Save') ?>
+		    <?php echo $this->formSubmit('submit', 'Додати') ?>
 		</form>
 	</div>
 </div>

@@ -43,9 +43,33 @@ class Admin_ProductController extends Zend_Controller_Action
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();
-                var_dump($data);
+/*
+                $image = $form->image->getFileName();
+
+                $upload = new Zend_File_Transfer_Adapter_Http();
+                $upload->setDestination("../../../../../public/");
+                //Zend_Debug::dump($upload, "$upload");
+                try {
+                    // upload received file(s)
+                    $upload->receive();
+                } 
+                catch (Zend_File_Transfer_Exception $e) {
+                    $e->getMessage();
+                }
+
+                //$upload->setOption(array('useByteString' => false));
+                $size =  $form->image->getFileSize();
+
+                # Returns the mimetype for the 'doc_path' form element
+                $mimeType =  $form->image->getMimeType();
+                // following lines are just for being sure that we got data
+                print "Name of uploaded file: $image ";
+                print "File Size: $size ";
+                print "File's Mime Type: $mimeType";
+*/
+                unset($data['image']);
                 $productTbl->insert($data);
-                 $this->_redirect('shop/products/list');
+                $this->_redirect('shop/products/list');
             }
         }
     }
