@@ -67,8 +67,31 @@ class Admin_ProductController extends Zend_Controller_Action
                 print "File Size: $size ";
                 print "File's Mime Type: $mimeType";
 */
-                unset($data['image']);
+                $img_name = $data['img_name'];
+                $img_url = $data['img_url'];
+                unset($data['gallery_img']);
+                unset($data['img_name']);
+                unset($data['img_url']);
                 $productTbl->insert($data);
+
+                if(isset($img_url)){
+                    /*
+                    $productsTable = new Shop_Model_DbTable_Products();
+                    $this->view->products = $productsTable->fetchAll();
+                    $this->view->product = count($productsTable +1);
+                    */
+                    $productsTable = new Shop_Model_DbTable_Products();
+                    $product = $productsTable->getProduct("name", $data["name"]);
+                    $productID = $product["0"]["id"];
+                    $img = array("product_id" => $productID, "image" => "$img_url", "image_name" => "$img_name", "upload" => "");
+                    $upload_img = new Admin_Model_DbTable_UploadImages();
+                    $upload_img->insert($img);
+                }
+                else{
+
+                }
+                
+
                 $this->_redirect('shop/products/list');
             }
         }

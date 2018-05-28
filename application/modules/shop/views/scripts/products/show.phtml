@@ -28,11 +28,19 @@
 				</ol>
 				<div class="row">
 				    <div class="col-md-3 product_img">
+
 				    	<?php
 		                  $url = $this->baseUrl();
 		                  $imagesList = $this->images;
-		                  $img = $url."/";
-		                  $img .= $imagesList[0]["image"];
+		                  $img = "";
+			              if($imagesList[0]["upload"] == "local"){
+	                        $img .= $url."/";
+		                  	$img .= $imagesList[0]["image"];
+	                      }
+	                      else{
+	                        $img .= $imagesList[0]["image"];
+	                      }
+
 		                ?>
 				        <div class="popup-gallery">
 				        	<a href="<?= $img ?>" title="<?= $product["name"] ?>">
@@ -40,9 +48,17 @@
 							</a>
 							<?php
 								foreach ($imagesList as $image) {
+									$img = "";
+						            if($image["upload"] == "local"){
+				                  	    $img .= $url."/";
+					                  	$img .= $image["image"];
+				                    }
+				                    else{
+				                        $img .= $image["image"];
+				                    }
 			                    	?>
-			                <a href="<?= $url."/".$image["image"] ?>" title="<?= $product["name"] ?>">
-								<img src="<?= $url."/".$image["image"] ?>" class="img-responsive" height="85" width="65">
+			                <a href="<?= $img ?>" title="<?= $product["name"] ?>">
+								<img src="<?= $img ?>" class="img-responsive" height="85" width="65">
 							</a>
 			                    	<?php
 			                  	}

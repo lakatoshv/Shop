@@ -131,13 +131,19 @@
                   $url = $this->baseUrl();
                   $imagesList = $this->images;
                   $images = [];
-                  $img = $url."/";
+                  $img_path = $url."/";
                   foreach ($imagesList as $image) {
                     if ($image["product_id"] == $value["id"]) {
-                        $images[] = $image["image"];
+                        
+                        if($image["upload"] == "local"){
+                          $images[] = $img_path.$image["image"];
+                        }
+                        else{
+                          $images[] = $image["image"];
+                        }
                     }
                   }
-                  $img .= $images[0];
+                  $img = $images[0];
                 ?>
               <img src="<?= $img ?>" class="img-thumbnail"/>
               <div class="product-buttons">

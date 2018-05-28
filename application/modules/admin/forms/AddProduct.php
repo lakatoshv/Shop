@@ -56,16 +56,23 @@ class Admin_Form_AddProduct extends Zend_Form
         $category->class = "form-control";
         $this->addElement($category);
 
-        $image = $this->createElement('file','image');
+        $gallery_img = $this->createElement('file','gallery_img[]');
         // ensure only 1 file
-        $image->addValidator('Count', false, 1);
+        $gallery_img->addValidator('Count', false, 1);
         // limit to 100K
-        $image->addValidator('Size', false, 10240000);
+        $gallery_img->addValidator('Size', false, 10240000);
         // only JPEG, PNG, and GIFs
-        $image->addValidator('Extension', false, 'jpg,jpeg,png,gif');
-        $image->setLabel('Картинка:');
-        $image->class = "form-control";
-        $this->addElement($image);
+        $gallery_img->addValidator('Extension', false, 'jpg,jpeg,png,gif');
+        $gallery_img->setLabel('Картинка:');
+        $gallery_img->class = "form-control";
+        $this->addElement($gallery_img);
+
+        $this->addElement('text', 'img_name', array(
+            'label' => 'Назва картинки: ', 'class' => "form-control"
+        ));
+        $this->addElement('text', 'img_url', array(
+            'label' => 'URL-адреса: ', 'class' => "form-control"
+        ));
 
 /*
         $image = new Zend_Form_Element_File('image');

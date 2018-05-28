@@ -27,8 +27,38 @@ foreach ($form->getElements() as $element) {
 		    <div class="form-group">
 	        	<?php echo $form->price->renderLabel() . $form->price->renderViewHelper() ?>
 		    </div>
-		    <?php echo $form->image ?>
 
+			<div class="radio">
+			    <label>
+			        <input class="form-check-input" type="radio" name="type" id="upload" value="upload">
+			        <label for="upload">Вибрати файл з комп'ютера</label>
+			    </label>
+			   	<div class="upload" style="display: none;">
+			        <div id="objects">
+				        <div class="form-group" id="add-image1" >
+				            <input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+				            <?php echo $form->gallery_img ?>
+			            </div>
+			        </div>
+				    <p id="add-input" class="btn btn-default">Додати ще одну картинку</p>
+				</div>
+			</div>
+			<div class="radio">
+			    <label>
+			        <input class="form-check-input" type="radio" name="type" id="addurl" value="addurl">
+		            <label for="addurl">Вказати URL-адресу</label>
+		        </label>
+			    <div class="addurl" style="display: none;">  
+			    	 <div class="form-group">
+			        	<?php echo $form->img_name->renderLabel() . $form->img_name->renderViewHelper() ?>
+			        	 <p>Наприклад: Картинка</p>
+				    </div>  
+				     <div class="form-group">
+			        	<?php echo $form->img_url->renderLabel() . $form->img_url->renderViewHelper() ?>
+			        	<p>Наприклад: https://some_image.com/example.jpg</p>
+				    </div>
+			    </div>
+			</div>
 		    <div class="form-group">
 	        	<?php echo $form->minidescription->renderLabel() . $form->minidescription->renderViewHelper() ?>
 		    </div>
@@ -52,3 +82,37 @@ foreach ($form->getElements() as $element) {
 		</form>
 	</div>
 </div>
+
+<script>
+    $("input[name=type]").click(function() {
+        if($('input[name=type]:checked').val() == "upload"){
+            $(".addurl").hide();
+            $(".upload").show();
+        }
+        else if($('input[name=type]:checked').val() == "addurl"){
+            $(".addurl").show();
+            $(".upload").hide();
+        }
+    });
+    $(document).ready(
+    function(){
+        //додавання нової картинки
+        var count_input = 1;
+        $("#add-input").click(function(){
+            count_input++;
+            $("<div id='add-image"+count_input+"' class='form-group'><input type='hidden' name='MAX_FILE_SIZE' value='2000000'/><input type='file' class='form-control' name='gallery_img[]'/><a class='delete-input' rel='"+count_input+"'>Видалити</a></div>").fadeIn(300).appendTo("#objects"); 
+        });
+        //видалення картинки
+        $(document).on("click", ".delete-input", function(){
+            var rel = $(this).attr("rel");
+            $("#add-image"+rel).fadeOut(300, function(){
+                $("#add-image"+rel).remove();
+            });
+        });
+        $("td.delete").click(function() {
+            document.getElementById('delete_id').value = $('div.id').html();
+        });
+        $("[data-toggle=tooltip]").tooltip();
+    }
+);
+</script>
