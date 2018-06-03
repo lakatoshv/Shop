@@ -104,12 +104,23 @@ class Admin_ProductController extends Zend_Controller_Action
         $product_id = $this->_getParam("product", null);
         $productsTable = new Shop_Model_DbTable_Products();
         $this->view->product = $productsTable->showProduct($product_id);
+
+        $images = new Shop_Model_DbTable_UploadImages();
+        $this->view->images = $images->getImages($product_id);
+
         $form = new Admin_Form_EditProduct();
 
         $this->view->form=$form;
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();
+
+                $img_name = $data['img_name'];
+                $img_url = $data['img_url'];
+                unset($data['gallery_img']);
+                unset($data['img_name']);
+                unset($data['img_url']);
+
                 $productTbl->updateProduct($data, $product_id);
                 $this->_redirect('shop/products/list');
             }

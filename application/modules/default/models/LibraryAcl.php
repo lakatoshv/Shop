@@ -50,7 +50,7 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->addRole(new Zend_Acl_Role("users"), "guests");
 		$this->addRole(new Zend_Acl_Role("admins"), "users");
 
-		$this->add(new Zend_Acl_Resource("shop"))->add(new Zend_Acl_Resource("shop:products"), "shop");
+		$this->add(new Zend_Acl_Resource("shop"))->add(new Zend_Acl_Resource("shop:products"), "shop")->add(new Zend_Acl_Resource("shop:basket"), "shop");
 
 		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin");
 
@@ -60,6 +60,7 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("guests", "default:customer", "signup");
 		$this->allow("guests", "default:index", "index");
 		$this->allow("guests", "shop:products", array("index", "list", "show"));
+		$this->allow("guests", "shop:basket", array("add", "show"));
 
 		
 		$this->deny("users", "default:error", "login");

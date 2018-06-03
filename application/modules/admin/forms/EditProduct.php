@@ -53,6 +53,24 @@ class Admin_Form_EditProduct extends Zend_Form
         $category->class = "form-control";
         $this->addElement($category);
 
+        $gallery_img = $this->createElement('file','gallery_img[]');
+        // ensure only 1 file
+        $gallery_img->addValidator('Count', false, 1);
+        // limit to 100K
+        $gallery_img->addValidator('Size', false, 10240000);
+        // only JPEG, PNG, and GIFs
+        $gallery_img->addValidator('Extension', false, 'jpg,jpeg,png,gif');
+        $gallery_img->setLabel('Картинка:');
+        $gallery_img->class = "form-control";
+        $this->addElement($gallery_img);
+
+        $this->addElement('text', 'img_name', array(
+            'label' => 'Назва картинки: ', 'class' => "form-control"
+        ));
+        $this->addElement('text', 'img_url', array(
+            'label' => 'URL-адреса: ', 'class' => "form-control"
+        ));
+
         /*
         $this->setEnctype(Zend_Form::ENCTYPE_MULTIPART);
         $image = new Zend_Form_Element_File('image');
