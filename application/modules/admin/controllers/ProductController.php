@@ -122,6 +122,8 @@ class Admin_ProductController extends Zend_Controller_Action
         $productTbl = new Admin_Model_DbTable_Products();
         $product_id = $this->_getParam("product", null);
         $productTbl->deleteProduct($product_id);
+        $imageTbl = new Admin_Model_DbTable_UploadImages();
+        $imageTbl->deleteUploadImage($product_id);
         $this->_redirect('shop/products/list');
     }
 
