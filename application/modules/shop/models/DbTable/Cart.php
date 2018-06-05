@@ -34,4 +34,12 @@ $result = $this->getAdapter()->fetchAll($select);
         //INSERT INTO table_name(*) VALUES (*);
         $this->_db->insert('cart', $data);
     }
+    public function updateCart($data, $id){
+        //UPDATE table_name SET condition WHERE condition
+        $this->_db->update('cart', $data, 'cart_id = '.$id);
+    }
+    public function deleteCart($id){
+        //DELETE FROM table_name WHERE condition;
+        $this->_db->delete('cart', 'id = '.$id);
+    }
 }

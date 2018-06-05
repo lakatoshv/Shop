@@ -25,18 +25,21 @@ class Shop_BasketController extends Zend_Controller_Action
 
         $tr;
         if($cart != false){
-            $tr = true;
+            $ip = $_SERVER['REMOTE_ADDR'];
+            if($ip == $cart[0]["cart_ip"]){
+                $date = new Zend_Date();
+                $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => ($cart[0]["cart_count"] + 1), "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
+                    $cartsTbl->updateCart($newcart, $cart[0]["cart_id"]);
+                    $this->_redirect('shop/products/list');
+            }
         }
         else {
-            $tr = false;
             $ip = $_SERVER['REMOTE_ADDR'];
             $date = new Zend_Date();
             $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => "1", "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
                     $cartsTbl->insertCart($newcart);
                     $this->_redirect('shop/products/list');
         }
-        $this->view->tr = $tr;
-        $this->view->cart = $cart;
 
         //Shop_Model_DbTable_Cart
         /*
