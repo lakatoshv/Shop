@@ -11,14 +11,14 @@
     <ul class="list-inline">
       <li>Сортувати по: </li>
       <li>
-        <select id="sort" name="sort">
+        <select id="sort" name="sort" class="btn btn-default">
           <option selected  value ="title">Назві</option>
           <option  value="price">Ціні</option>
         </select>
       </li>
       <li>За: </li>
       <li>
-        <select id="type_sort" name="type_sort">
+        <select id="type_sort" name="type_sort" class="btn btn-default">
           <option selected value="asc">Зростанням</option>
           <option value="desc">Спаданням</option>
         </select>
@@ -151,7 +151,7 @@
                   <br><?= $value["minidescription"] ?><br><br><br>
                   <a class="image-popup-vertical-fit"  href="<?= $img ?>" title="<?= $value["name"] ?>">
                     <img src="<?= $img ?>" class="img-thumbnail" style="display: none;"/>
-                    <span style="font: 20px;" class="glyphicon glyphicon-zoom-in"></span>
+                    <span class="glyphicon glyphicon-zoom-in text-center"></span>
                   </a>
                 </p>
               </div>

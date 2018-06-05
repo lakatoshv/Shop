@@ -2873,3 +2873,14 @@ select:focus {
 textarea {
   width: 100%;
 }
+
+
+.glyphicon-zoom-in{
+	border-radius: 50%; 
+	border: 1px solid white; 
+	font-size: 20px; 
+	background-color: white; 
+	font-color: black; 
+	margin: 0 50%!important; 
+    padding: 3px;
+} 
