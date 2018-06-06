@@ -39,12 +39,33 @@
         <ul class="nav navbar-nav navbar-center">
           <li class="text-center center-block"><a style="color: white;" id="hide">Приховати меню</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+              <?php
+              $cartsTbl = new Shop_Model_DbTable_Cart();
+              $carts = $cartsTbl->getCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
+              $count = 0;
+              $sum = 0;
+              if(count($carts) > 1){
+                foreach ($carts as $cart) {
+                  $sum += $cart["cart_price"] * $cart["cart_count"];
+                  $count += $cart["cart_count"];
+                }
+              }
+              else{
+                $sum += $carts[0]["cart_price"] * $carts[0]["cart_count"];
+                $count += $carts[0]["cart_count"];
+              }
+              //echo substr($sum, 0, 1); // 2
+              //echo substr($sum, -1); // 8
+              ?>
+              <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show'));?>"><span class="glyphicon glyphicon-shopping-cart"></span> Корзина [<b><?= $count; ?> товари</b> на суму <b><?= number_format($sum, 2, ',', ' ');; ?> грн.</b>]</a>
+            </li>
           <?php
             $user = Zend_Auth::getInstance();
             if ( $user->hasIdentity()) : $customer = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname; ?>
-        <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+              <a style="color: white;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                 <span class="glyphicon glyphicon-user vidstupi"></span><?php echo $customer ?> <span class="caret"></span>
                 <ul class="dropdown-menu">
                   <li>
@@ -59,8 +80,7 @@
             <li>
               <a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'logout'));?>"><span class="glyphicon glyphicon-log-out vidstupi"></span>Вийти</a>
             </li>
-                <?php else: ?>
-          <ul class="nav navbar-nav navbar-right">  
+                <?php else: ?> 
             <li><a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'signup')) ?>"><span class="glyphicon glyphicon-user vidstupi"></span>Зареєструватись</a></li>
             <li><a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'login')) ?>"><span class="glyphicon glyphicon-log-in vidstupi"></span>Ввійти</a></li>
               <?php endif;?>

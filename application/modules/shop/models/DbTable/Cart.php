@@ -5,11 +5,11 @@
 class Shop_Model_DbTable_Cart extends Zend_Db_Table_Abstract
 {
 	protected $_name = "cart";
-	function getCart($cart_id_products)
+	function getCart($type, $value)
     {   
         $select = $this->_db->select()
                  ->from('cart')
-                 ->where('cart_id_products=?',$cart_id_products);
+                 ->where("$type=?",$value);
                  //->order('type');
                  //->having('count(*)= 1');
 $result = $this->getAdapter()->fetchAll($select);
