@@ -38,8 +38,8 @@ $result = $this->getAdapter()->fetchAll($select);
         //UPDATE table_name SET condition WHERE condition
         $this->_db->update('cart', $data, 'cart_id = '.$id);
     }
-    public function deleteCart($id){
+    public function deleteCart($type, $value){
         //DELETE FROM table_name WHERE condition;
-        $this->_db->delete('cart', 'cart_id = '.$id);
+        $this->_db->delete('cart', "`$type` = '".$value."'");
     }
 }

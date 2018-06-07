@@ -71,9 +71,20 @@ class Shop_BasketController extends Zend_Controller_Action
         $this->view->products = $products;
         $this->view->images = $images;
         $cart_id = $this->_getParam("cart", null);
-        if($this->_getParam("delete", null) !== null && $cart_id >= 0){
-            $cartsTbl->deleteCart($cart_id);
-            $this->_redirect('shop/basket/show');
+        $delete = $this->_getParam("delete", null);
+
+        switch ($delete) {
+            case "1":
+                # code...
+                if($cart_id >= 0){
+                    $cartsTbl->deleteCart("cart_id", "$cart_id");
+                    //$this->_redirect('shop/basket/show');
+                }
+                break;
+            case 'all':
+                $cartsTbl->deleteCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
+                $this->_redirect('shop/basket/show');
+                break;
         }
     }
 
