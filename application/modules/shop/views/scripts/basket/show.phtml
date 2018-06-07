@@ -51,7 +51,7 @@
 				<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
 				<td class="actions" data-th="">
 					<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-					<button class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button>								
+					<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => "{$cart[0]["cart_id"]}"));?>"><i class="glyphicon glyphicon-trash"></i></a></button>								
 				</td>
 			</tr>
 			<?php

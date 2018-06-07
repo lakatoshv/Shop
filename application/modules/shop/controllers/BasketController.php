@@ -70,8 +70,22 @@ class Shop_BasketController extends Zend_Controller_Action
         $this->view->count = $count;
         $this->view->products = $products;
         $this->view->images = $images;
+        $cart_id = $this->_getParam("cart", null);
+        if($this->_getParam("delete", null) !== null && $cart_id >= 0){
+            $cartsTbl->deleteCart($cart_id);
+            $this->_redirect('shop/basket/show');
+        }
     }
 
+    public function deleteAction(){
+        $cartsTbl = new Shop_Model_DbTable_Cart();
+        $cart_id = $this->_getParam("cart", null);
+        $this->view->id =$cart_id;
+        /*
+        $cartsTbl->deleteCart($cart_id);
+        $this->_redirect('shop/basket/show');
+        */
+    }
 
 }
 

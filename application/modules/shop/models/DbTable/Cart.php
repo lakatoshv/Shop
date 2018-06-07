@@ -40,6 +40,6 @@ $result = $this->getAdapter()->fetchAll($select);
     }
     public function deleteCart($id){
         //DELETE FROM table_name WHERE condition;
-        $this->_db->delete('cart', 'id = '.$id);
+        $this->_db->delete('cart', 'cart_id = '.$id);
     }
 }
