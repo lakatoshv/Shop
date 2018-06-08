@@ -24,7 +24,7 @@
 				  	}
 				  ?>
 				  <li><a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list', 'type' => $product["type"])) ?>"><?= $type; ?></a></li>
-				  <li class="active">Data</li>
+				  <li class="active"><?= $product["name"] ?></li>
 				</ol>
 				<div class="row">
 				    <div class="col-md-3 product_img">

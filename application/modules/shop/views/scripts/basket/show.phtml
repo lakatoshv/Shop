@@ -13,50 +13,57 @@
 		</thead>
 		<tbody>
 			<?php
-        		foreach ($this->products as $key => $value) {
-        			$cartsTbl = new Shop_Model_DbTable_Cart();
-              		$cart = $cartsTbl->getCart("cart_id_products", "{$value[0]["id"]}");
-      		?>
-			<tr>
-				<td data-th="Product">
-					<div class="row">
-						<?php
-		                  $url = $this->baseUrl();
-		                  $imagesList = $this->images;
-		                  $images = [];
-		                  $img_path = $url."/";
-		                  foreach ($imagesList as $image) {
-		                    if ($image[0]["product_id"] == $value[0]["id"]) {
-		                        
-		                        if($image[0]["upload"] == "local"){
-		                          $images[] = $img_path.$image[0]["image"];
-		                        }
-		                        else{
-		                          $images[] = $image[0]["image"];
-		                        }
-		                    }
-		                  }
-		                  $img = $images[0]; 
-		                ?>
-						<div class="col-sm-2 hidden-xs"><img src="<?= $img ?>" alt="..." width="100" height="125" class="img-responsive"/></div>
-						<div class="col-sm-10">
-							<h4 class="nomargin"><?= $value[0]["name"] ?></h4>
+
+				if(count($this->products) > 1){
+	        		foreach ($this->products as $key => $value) {
+	        			$cartsTbl = new Shop_Model_DbTable_Cart();
+	              		$cart = $cartsTbl->getCart("cart_id_products", "{$value[0]["id"]}");
+	      		?>
+				<tr>
+					<td data-th="Product">
+						<div class="row">
+							<?php
+			                  $url = $this->baseUrl();
+			                  $imagesList = $this->images;
+			                  $images = [];
+			                  $img_path = $url."/";
+			                  foreach ($imagesList as $image) {
+			                    if ($image[0]["product_id"] == $value[0]["id"]) {
+			                        
+			                        if($image[0]["upload"] == "local"){
+			                          $images[] = $img_path.$image[0]["image"];
+			                        }
+			                        else{
+			                          $images[] = $image[0]["image"];
+			                        }
+			                    }
+			                  }
+			                  $img = $images[0]; 
+			                ?>
+							<div class="col-sm-2 hidden-xs"><img src="<?= $img ?>" alt="..." width="100" height="125" class="img-responsive"/></div>
+							<div class="col-sm-10">
+		                        <div class="media">
+		                            <div class="media-body">
+		                                <h4 class="media-heading"><a href="#"><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value[0]["name"] ?></a></a></h4>
+		                                <h5 class="media-heading">Виробник: <a href="#"><?= $value[0]["category"] ?></a></h5>
+		                            </div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</td>
-				<td data-th="Price"><?= $cart[0]["cart_price"] ?></td>
-				<td data-th="Quantity">
-					<input type="number" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>">
-				</td>
-				<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
-				<td class="actions" data-th="">
-					<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-					<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a></button>								
-				</td>
-			</tr>
-			<?php
-				}
-			?>
+					</td>
+					<td data-th="Price"><?= $cart[0]["cart_price"] ?></td>
+					<td data-th="Quantity">
+						<input type="number" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>">
+					</td>
+					<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
+					<td class="actions" data-th="">
+						<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>								
+					</td>
+				</tr>
+				<?php
+					}
+					?>
 		</tbody>
 		<tfoot>
 			<tr>
@@ -67,14 +74,14 @@
 				<td><a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'basket', 'action' => 'show', 'delete' => "all")) ?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Очистити корзину</a></td>
 			</tr>
 			<tr class="visible-xs">
-				<td class="text-center"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' ');; ?> грн.</b></td>
+				<td class="text-center"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' '); ?> грн.</b></td>
 			</tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td><h3>Загальна вартість</h3></td>
-                <td class="text-right"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' ');; ?> грн.</b></td>
+                <td class="text-right"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' '); ?> грн.</b></td>
             </tr>
             <tr>
                 <td></td>
@@ -90,3 +97,89 @@
 		</tfoot>
 	</table>
 </div>
+					<?php
+				}
+				else if(count($this->products) == 1){
+						$product = $this->products[0];
+	        			$cartsTbl = new Shop_Model_DbTable_Cart();
+	              		$cart = $cartsTbl->getCart("cart_id_products", "{$product[0]["id"]}");
+	      		?>
+				<tr>
+					<td data-th="Product">
+						<div class="row">
+							<?php
+			                  $url = $this->baseUrl();
+			                  $imagesList = $this->images;
+			                  $images = [];
+			                  $img_path = $url."/";
+			                  foreach ($imagesList as $image) {
+			                    if ($image[0]["product_id"] == $product[0]["id"]) {
+			                        
+			                        if($image[0]["upload"] == "local"){
+			                          $images[] = $img_path.$image[0]["image"];
+			                        }
+			                        else{
+			                          $images[] = $image[0]["image"];
+			                        }
+			                    }
+			                  }
+			                  $img = $images[0]; 
+			                ?>
+							<div class="col-sm-2 hidden-xs"><img src="<?= $img ?>" alt="..." width="100" height="125" class="img-responsive"/></div>
+							<div class="col-sm-10">
+		                        <div class="media">
+		                            <div class="media-body">
+		                                <h4 class="media-heading"><a href="#"><a class="product"  product_id="<?= $product["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $product[0]["name"] ?></a></a></h4>
+		                                <h5 class="media-heading">Виробник: <a href="#"><?= $product[0]["category"] ?></a></h5>
+		                            </div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td data-th="Price"><?= $cart[0]["cart_price"] ?></td>
+					<td data-th="Quantity">
+						<input type="number" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>">
+					</td>
+					<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
+					<td class="actions" data-th="">
+						<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>								
+					</td>
+				</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'basket', 'action' => 'show', 'delete' => "all")) ?>" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Очистити корзину</a></td>
+			</tr>
+			<tr class="visible-xs">
+				<td class="text-center"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' '); ?> грн.</b></td>
+			</tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><h3>Загальна вартість</h3></td>
+                <td class="text-right"><b><?= $this->count; ?> товари</b> на суму <b><?= number_format($this->sum, 2, ',', ' '); ?> грн.</b></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                	<a href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>" class="btn btn-warning"><i class="glyphicon glyphicon-chevron-left fa fa-angle-left"></i> Продовжити вибирати товари</a>
+                </td>
+                <td>
+                	<a href="#" class="btn btn-success btn-block">Оформити замовлення <i class="fa fa-angle-right glyphicon glyphicon-chevron-right"></i></a>
+                </td>
+            </tr>
+		</tfoot>
+	</table>
+</div>
+				<?php
+				}
+				else{}
+			?>

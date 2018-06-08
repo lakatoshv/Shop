@@ -64,6 +64,8 @@ class Shop_BasketController extends Zend_Controller_Action
         else{
           $sum += $carts[0]["cart_price"] * $carts[0]["cart_count"];
           $count += $carts[0]["cart_count"];
+          $products[] = $productsTbl->showProduct($carts[0]["cart_id_products"]);
+          $images[] = $imagesTbl->getImages($carts[0]["cart_id_products"]);
         }
         $this->view->carts = $carts;
         $this->view->sum = $sum;

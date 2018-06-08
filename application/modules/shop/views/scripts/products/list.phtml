@@ -159,6 +159,7 @@
             <div class="buttons-bottom">
               <h3><?= $value["price"]." грн." ?></h3>
               <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> В корзину</a><br/>
+              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-heart"></span> В список бажань</a><br/>
             <?php
               $user = Zend_Auth::getInstance();
               if($user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
