@@ -181,5 +181,7 @@
 </div>
 				<?php
 				}
-				else{}
+				else if(count($this->products) == 0){
+					echo "<center><h4>Корзина пуста</h4></center>";
+				}
 			?>

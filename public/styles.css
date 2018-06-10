@@ -2920,3 +2920,8 @@ textarea {
 	table#cart tfoot td .btn{display:block;}
 	
 }
+
+.review-block{
+	font-size: 15px;
+	padding: 10px 25px;
+}

@@ -1117,79 +1117,7 @@ a:hover, a:focus {
   width: 50%;
 }
 
-/* ==========================================================================
-   =Comments Form
-   ========================================================================== */
-/*
- * 1. Clearfix hack
- */
-.comment-respond:after {
-  /* 1 */
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-}
 
-.comment-reply-title {
-  margin-bottom: 0;
-}
-
-.comment-form {
-  margin: 0 -15px 30px;
-}
-
-/*
- * 1. Clearfix hack
- */
-.comment-form:after {
-  /* 1 */
-  visibility: hidden;
-  display: block;
-  font-size: 0;
-  content: " ";
-  clear: both;
-  height: 0;
-}
-
-.comment-form p:not(.comment-notes):not(.logged-in-as) {
-  margin-bottom: 0;
-}
-
-.comment-form .logged-in-as,
-.comment-form .comment-notes,
-.comment-form .comment-form-comment,
-.comment-form .comment-form-author,
-.comment-form .comment-form-email,
-.comment-form .comment-form-url,
-.comment-form .form-submit {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.comment-form-author input,
-.comment-form-email input,
-.comment-form-url input {
-  width: 100%;
-}
-
-.comment-form #submit {
-  margin-top: 15px;
-}
-
-@media (min-width: 768px) {
-  .comment-form-author,
-  .comment-form-email,
-  .comment-form-url {
-    width: 33.33333333%;
-    float: left;
-  }
-}W
 
 /*--------------------------------------------------------------
 # Modules ## Slider

@@ -65,6 +65,9 @@ class Shop_ProductsController extends Zend_Controller_Action
         $images = new Shop_Model_DbTable_UploadImages();
         $this->view->images = $images->getImages($product_id);
 
+        $reviews = new Shop_Model_DbTable_Reviews();
+        $this->view->reviews = $reviews->getReviews("product_id", $product_id);
+
     }
 
 

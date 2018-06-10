@@ -123,14 +123,68 @@
 								<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--reviews panel entry-content wc-tab" id="tab-reviews" role="tabpanel" aria-labelledby="tab-title-reviews">
 									<div id="reviews" class="woocommerce-Reviews">
 										<div id="comments">
-											<h2 class="woocommerce-Reviews-title">Reviews</h2>
-											<p class="woocommerce-noreviews">There are no reviews yet.</p>
+											<h2 class="woocommerce-Reviews-title">Відгуки</h2>
 										</div>
 										<div id="review_form_wrapper">
 											<div id="review_form">
 												<div id="respond" class="comment-respond">
+													<?php
+														if(count($this->reviews) > 1){
+															echo "<ul class='list-group'>";
+															foreach ($this->reviews as $review) {
+																$bad_review = "";
+																$good_review = "";
+																if($review["good_review"] != ""){
+																	$good_review = "<h4><span class='text-success'>+</span> {$review["good_review"]}</h4>";
+																}
+																if($review["bad_review"] != ""){
+																	$bad_review = "<h4><span class='text-danger'>-</span> {$review["bad_review"]}</h4>";
+																}
+									                    	?>
+									                <li class="list-group-item">
+										               	<div class="review-block">
+										               		<?= $review["date"]; ?>
+															<h3><?= $review["author"]; ?></h3>
+															<?= $good_review; ?>
+															<?= $bad_review; ?>
+															<p style="font-size: 20px;"><?= $review["comment"] ?></p>
+														</div>
+													</li>
+									                    	<?php
+									                    	}
+									                    	echo "</ul>";
+									                  	}
+									                  	else if(count($this->reviews) == 1){
+									                  		echo "<ul class='list-group'>";
+									                  			$review = $this->reviews[0];
+																$bad_review = "";
+																$good_review = "";
+																if($review["good_review"] != ""){
+																	$good_review = "<h4><span class='text-success'>+</span> {$review["good_review"]}</h4>";
+																}
+																if($review["bad_review"] != ""){
+																	$bad_review = "<h4><span class='text-danger'>-</span> {$review["bad_review"]}</h4>";
+																}
+									                    	?>
+									                <li class="list-group-item">
+										               	<div class="review-block">
+										               		<?= $review["date"]; ?>
+															<h3><?= $review["author"]; ?></h3>
+															<?= $good_review; ?>
+															<?= $bad_review; ?>
+															<p style="font-size: 20px;"><?= $review["comment"] ?></p>
+														</div>
+													</li>
+									                    	<?php
+									                    	echo "</ul>";
+									                  	}
+									                  	else if(count($this->products) < 1){
+															echo "<center><h4>Відгуків до даного товару поки що немає </h4></center><br>Будьте першим хто напише відгук";
+														}
+									                ?>
+									                <br><br>
 													<span id="reply-title" class="comment-reply-title">
-														Be the first to review &ldquo;Black Top&rdquo; 
+														<h2>Написати відгук</h2>
 														<small><a rel="nofollow" id="cancel-comment-reply-link" href="/tyche/product/black-top/#respond" style="display:none;">Cancel reply</a></small>
 													</span>			
 													<form action="https://colorlib.com/tyche/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
