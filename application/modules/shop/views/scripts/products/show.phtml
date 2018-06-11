@@ -1,3 +1,8 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<style type="text/css">
+	@import 'bootstrap-sprockets';
+@import "bootstrap/variables";
+</style>
 <br /><br />
 <div id="view-content">
 </div>
@@ -209,9 +214,15 @@
 													        <?php echo $form->product_id->setValue($product["id"])->renderViewHelper() ?>
 													    </div>
 														<div class="form-group">
-													        <?php echo $form->author->renderLabel() . $form->author->renderViewHelper() ?>
+															<?php
+													            $user = Zend_Auth::getInstance();
+													            $author = "Incognito";
+													            if ( $user->hasIdentity()) $author = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname; 
+													        ?>
+													        <?php echo $form->author->renderLabel() . $form->author->setValue($author)->renderViewHelper() ?>
 													    </div>
 													    <div class="form-group">
+													    	<div id="star"></div>
 												        	<?php echo $form->mark->renderViewHelper() ?>
 													    </div>
 													    <div class="form-group">
@@ -225,6 +236,23 @@
 													    </div>
 													    <?php echo $this->formSubmit('submit', 'Зберегти'/*, 'class' => "btn btn-primary btn-md"*/) ?>
 													    <?php /*echo $this->formSubmit('reset', 'Очистити'/*, 'class' => "btn btn-default btn-md")*/ ?>
+													    <script type="text/javascript">
+													    		$('#star').raty({
+																  cancel     : true,
+																  target     : '#mark',
+																  targetKeep : true,
+																  targetType : 'number',
+																  half       : true,
+																  precision  : true,
+																  size       : 24,
+																  starHalf   : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-half.png',
+																  starOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-off.png',
+																  starOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-on.png',
+																  cancelOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-off.png',
+																  cancelOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-on.png'
+																  //
+																});
+													    	</script>
 													</form>
 												</div>
 											</div>

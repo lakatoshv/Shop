@@ -14,7 +14,7 @@ class Shop_Form_AddReview extends Zend_Form
         ));
 
         $this->addElement('hidden', 'mark', array(
-            'class' => "form-control"
+            'class' => "form-control", "id" => "mark"
         ));
 
         /*
