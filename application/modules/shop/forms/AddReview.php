@@ -5,16 +5,16 @@ class Shop_Form_AddReview extends Zend_Form
     public function init()
     {
 
-        $this->addElement('text', 'product_id', array(
-            'class' => "form-control", "type" => "hidden"
+        $this->addElement('hidden', 'product_id', array(
+            'class' => "form-control"
         ));
 
         $this->addElement('text', 'author', array(
-            'class' => "form-control", "type" => "hidden"
+            'label' => "Автор:", 'class' => "form-control"
         ));
 
-        $this->addElement('text', 'mark', array(
-            'class' => "form-control", "type" => "hidden"
+        $this->addElement('hidden', 'mark', array(
+            'class' => "form-control"
         ));
 
         /*

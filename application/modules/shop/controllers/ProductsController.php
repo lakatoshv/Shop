@@ -68,6 +68,21 @@ class Shop_ProductsController extends Zend_Controller_Action
         $reviews = new Shop_Model_DbTable_Reviews();
         $this->view->reviews = $reviews->getReviews("product_id", $product_id);
 
+
+        $form = new Shop_Form_AddReview();
+        $this->view->form=$form;
+        if($this->getRequest()->isPost()){
+            if($form->isValid($_POST)){
+                $data = $form->getValues();
+                $date = new Zend_Date();
+                
+                $data["date"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
+                $this->view->data = $data;
+                $reviews->insert($data);
+                //$reviews->_redirect('customer/login');
+            }
+        }
+
     }
 
 

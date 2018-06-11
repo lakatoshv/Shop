@@ -187,7 +187,45 @@
 														<h2>Написати відгук</h2>
 														<small><a rel="nofollow" id="cancel-comment-reply-link" href="/tyche/product/black-top/#respond" style="display:none;">Cancel reply</a></small>
 													</span>	
-													
+													<?php
+														if(isset($this->errorMessage)){
+															echo $this->errorMessage;
+
+														}
+														?>
+														<br>
+														<center><h4>Додати товар</h4></center>
+														<br>
+														<?php
+
+														$form = $this->form;
+														// Remove <dt> from label generation
+														foreach ($form->getElements() as $element) {
+														    $element->getDecorator('label')->setOption('tag', null);
+														}
+													?>		
+													<form method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction()?>">
+														<div class="form-group">
+													        <?php echo $form->product_id->setValue($product["id"])->renderViewHelper() ?>
+													    </div>
+														<div class="form-group">
+													        <?php echo $form->author->renderLabel() . $form->author->renderViewHelper() ?>
+													    </div>
+													    <div class="form-group">
+												        	<?php echo $form->mark->renderViewHelper() ?>
+													    </div>
+													    <div class="form-group">
+												        	<?php echo $form->good_review->renderLabel() . $form->good_review->renderViewHelper() ?>
+													    </div>
+													    <div class="form-group">
+												        	<?php echo $form->bad_review->renderLabel() . $form->bad_review->renderViewHelper() ?>
+													    </div>
+													    <div class="form-group">
+												        	<?php echo $form->comment->renderLabel() . $form->comment->renderViewHelper() ?>
+													    </div>
+													    <?php echo $this->formSubmit('submit', 'Зберегти'/*, 'class' => "btn btn-primary btn-md"*/) ?>
+													    <?php /*echo $this->formSubmit('reset', 'Очистити'/*, 'class' => "btn btn-default btn-md")*/ ?>
+													</form>
 												</div>
 											</div>
 										</div>
@@ -241,3 +279,5 @@ $(document).ready(function() {
 	});
 });
 </script>
+
+<?= var_dump($this->data) ?>
