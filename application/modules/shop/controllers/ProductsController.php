@@ -77,9 +77,8 @@ class Shop_ProductsController extends Zend_Controller_Action
                 $date = new Zend_Date();
                 
                 $data["date"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
-                $this->view->data = $data;
                 $reviews->insert($data);
-                //$reviews->_redirect('customer/login');
+                $reviews->_redirect('products/show/' + $product_id);
             }
         }
 
