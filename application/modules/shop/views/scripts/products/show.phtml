@@ -51,6 +51,7 @@
 				        	<a href="<?= $img ?>" title="<?= $product["name"] ?>">
 								<img src="<?= $img ?>" class="img-responsive" width="200" height="360">
 							</a>
+							<ul class="list-inline">
 							<?php
 								foreach ($imagesList as $image) {
 									$img = "";
@@ -62,12 +63,13 @@
 				                        $img .= $image["image"];
 				                    }
 			                    	?>
-			                <a href="<?= $img ?>" title="<?= $product["name"] ?>">
+			                <li><a href="<?= $img ?>" title="<?= $product["name"] ?>">
 								<img src="<?= $img ?>" class="img-responsive" height="85" width="65">
-							</a>
+							</a></li>
 			                    	<?php
 			                  	}
 			                ?>
+			                </ul>
 						</div>
 				    </div>
 				    <div class="col-md-9 product_content">
@@ -108,8 +110,8 @@
 				        <div class="clear"></div>
 				        <div class="space-ten"></div>
 				        <div class="btn-ground">
-				       		<button type="button" class="btn btn-primary primary"><span class="glyphicon glyphicon-shopping-cart"></span>Додати в корзину</button>
-				            <button type="button" class="btn btn-primary primary"><span class="glyphicon glyphicon-heart"></span>Додати в список бажань</button>
+				            <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$product["id"]."")) ?>" class="btn btn-primary primary"><span class="glyphicon glyphicon-shopping-cart"></span> Додати в корзину</a>
+              				<a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$product["id"]."")) ?>" class="btn btn-primary primary"><span class="glyphicon glyphicon-heart"></span>Додати в список бажань</a>
 				        </div>
 				        <div class="clear"></div>
 				        <ul class="nav nav-tabs">
