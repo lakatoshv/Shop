@@ -74,6 +74,76 @@
 				    </div>
 				    <div class="col-md-9 product_content">
 				        <h3><?= $product["name"] ?></h3>
+				        							<?php
+				        							/*
+				        								<script type="text/javascript">
+																$("#star-<?= $review["id"] ?>").raty({
+																  	readOnly:  true,
+																	half       : true,
+																	size       : 24,
+																	score: <?= $review["mark"] ?>,
+																	starHalf   : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-half.png',
+																	starOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-off.png',
+																	starOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-on.png',
+																	cancelOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-off.png',
+																	cancelOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-on.png'
+																	
+																});
+														    </script>
+														if(count($this->reviews) > 1){
+															echo "<ul class='list-group'>";
+															foreach ($this->reviews as $review) {
+																$bad_review = "";
+																$good_review = "";
+																if($review["good_review"] != ""){
+																	$good_review = "<h4><span class='text-success'>+</span> {$review["good_review"]}</h4>";
+																}
+																if($review["bad_review"] != ""){
+																	$bad_review = "<h4><span class='text-danger'>-</span> {$review["bad_review"]}</h4>";
+																}
+									                    	?>
+									                <li class="list-group-item">
+										               	<div class="review-block">
+										               		<?= $review["date"]; ?>
+															<h3><?= $review["author"]; ?></h3>
+															<?= $good_review; ?>
+															<?= $bad_review; ?>
+															<p style="font-size: 20px;"><?= $review["comment"] ?></p>
+														</div>
+													</li>
+									                    	<?php
+									                    	}
+									                    	echo "</ul>";
+									                  	}
+									                  	else if(count($this->reviews) == 1){
+									                  		echo "<ul class='list-group'>";
+									                  			$review = $this->reviews[0];
+																$bad_review = "";
+																$good_review = "";
+																if($review["good_review"] != ""){
+																	$good_review = "<h4><span class='text-success'>+</span> {$review["good_review"]}</h4>";
+																}
+																if($review["bad_review"] != ""){
+																	$bad_review = "<h4><span class='text-danger'>-</span> {$review["bad_review"]}</h4>";
+																}
+									                    	?>
+									                <li class="list-group-item">
+										               	<div class="review-block">
+										               		<?= $review["date"]; ?>
+															<h3><?= $review["author"]; ?></h3>
+															<?= $good_review; ?>
+															<?= $bad_review; ?>
+															<p style="font-size: 20px;"><?= $review["comment"] ?></p>
+														</div>
+													</li>
+									                    	<?php
+									                    	echo "</ul>";
+									                  	}
+									                  	else if(count($this->products) < 1){
+															echo "<center><h4>Відгуків до даного товару поки що немає </h4></center><br>Будьте першим хто напише відгук";
+														}
+														*/
+														?>
 				        <div class="rating">
 				        	<span class="glyphicon glyphicon-star"></span>
 				            <span class="glyphicon glyphicon-star"></span>
@@ -155,6 +225,22 @@
 															<?= $good_review; ?>
 															<?= $bad_review; ?>
 															<p style="font-size: 20px;"><?= $review["comment"] ?></p>
+															<div id="star-<?= $review["id"] ?>"></div>
+															<div id="fixed"></div>
+															<script type="text/javascript">
+																$("#star-<?= $review["id"] ?>").raty({
+																  	readOnly:  true,
+																	half       : true,
+																	size       : 24,
+																	score: <?= $review["mark"] ?>,
+																	starHalf   : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-half.png',
+																	starOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-off.png',
+																	starOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/star-on.png',
+																	cancelOff    : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-off.png',
+																	cancelOn     : '<?php echo $this->baseUrl(); ?>/plugins/jquery-raty/images/cancel-on.png'
+																	
+																});
+														    </script>
 														</div>
 													</li>
 									                    	<?php
