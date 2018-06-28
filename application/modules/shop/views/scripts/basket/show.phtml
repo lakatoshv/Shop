@@ -53,12 +53,12 @@
 					</td>
 					<td data-th="Price"><?= $cart[0]["cart_price"] ?></td>
 					<td data-th="Quantity">
-						<input type="number" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>">
+						<input type="number" id="<?= $value[0]["id"] ?>" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>" onchange="ajaxQuery(this.id, this.value)">
 					</td>
 					<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
 					<td class="actions" data-th="">
 						<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>								
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>							
 					</td>
 				</tr>
 				<?php
@@ -138,7 +138,7 @@
 					</td>
 					<td data-th="Price"><?= $cart[0]["cart_price"] ?></td>
 					<td data-th="Quantity">
-						<input type="number" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>">
+						<input type="number" id="<?= $product[0]["id"] ?>" class="form-control text-center" value="<?= $cart[0]["cart_count"] ?>" onchange="ajaxQuery(this.id, this.value)">
 					</td>
 					<td data-th="Subtotal" class="text-center"><?= number_format($cart[0]["cart_price"] * $cart[0]["cart_count"], 2, ',', ' '); ?></td>
 					<td class="actions" data-th="">
@@ -185,3 +185,17 @@
 					echo "<center><h4>Корзина пуста</h4></center>";
 				}
 			?>
+
+
+<script type="text/javascript">
+	function ajaxQuery(product_id, value){
+		$.post(
+		  "change/product/" + product_id + "/value/" + value,
+		  onAjaxSuccess
+		);
+	}
+	function onAjaxSuccess(data)
+		{
+		  location.reload();
+		}
+</script>

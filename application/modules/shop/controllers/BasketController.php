@@ -42,6 +42,35 @@ class Shop_BasketController extends Zend_Controller_Action
         }
 
     }
+    public function changeAction(){
+        $product_id = $this->_getParam("product", null);
+        $products_count = $this->_getParam("value", null);
+        $this->view->product = $product_id;
+        $this->view->count = $products_count;
+        $productsTbl = new Shop_Model_DbTable_Products();
+        $product = $productsTbl->showProduct($product_id);
+
+        $cartsTbl = new Shop_Model_DbTable_Cart();
+        $cart = $cartsTbl->getCart("cart_id_products", $product_id);
+
+        $tr;
+        if($cart != false){
+            $ip = $_SERVER['REMOTE_ADDR'];
+            if($ip == $cart[0]["cart_ip"]){
+                $date = new Zend_Date();
+                $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => $products_count, "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
+                    $cartsTbl->updateCart($newcart, $cart[0]["cart_id"]);
+                    $this->_redirect('shop/products/list');
+            }
+        }
+        else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $date = new Zend_Date();
+            $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => "$products_count", "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
+                    $cartsTbl->insertCart($newcart);
+                    $this->_redirect('shop/products/list');
+        }
+    }
     public function showAction(){
         $cartsTbl = new Shop_Model_DbTable_Cart();
         $carts = $cartsTbl->getCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
