@@ -61,31 +61,18 @@
 			</pages>
 		</products>
 
-		<book>
-			<label>Книга</label>
+		<order>
 			<uri>#</uri>
-			<resource>admin:book</resource>
+			<resource>shop:order</resource>
 			<previlege>index</previlege>
 			<pages>
-				<add>
-					<label>Додати</label>
-					<module>admin</module>
-					<controller>book</controller>
-					<action>add</action>
-				</add>
-				<edit>
-					<label>Редагувати</label>
-					<module>admin</module>
-					<controller>book</controller>
-					<action>edit</action>
-				</edit>
-				<delete>
-					<label>Видалити</label>
-					<module>admin</module>
-					<controller>book</controller>
-					<action>delete</action>
-				</delete>
+				<list>
+					<label>Книги</label>
+					<module>shop</module>
+					<controller>contactinfo</controller>
+					<action>list</action>
+				</list>
 			</pages>
-		</book>
+		</order>
 	</nav>
 </config>
