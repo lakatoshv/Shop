@@ -13,24 +13,29 @@ class Shop_Form_AddOrder extends Zend_Form
             'label' => "Електронна пошта:", 'class' => "form-control"
         ));
 
-        $this->addElement('text', 'tel', array(
+        $this->addElement('text', 'phone', array(
             'label' => "Телефон:", 'class' => "form-control"
         ));
 
         $this->addElement('text', 'address', array(
             'label' => "Адреса доставки:", 'class' => "form-control"
         ));
-
-        /*
-        $mark = $this->createElement('select','mark');
-        $mark->addMultiOptions(array(
-            "0" => "0", "1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"
+        $this->addElement('radio', 'delivery_type', array(
+            "class" => "form-check-input",
+            'multiOptions'=>array(
+                'По пошті' => 'По пошті',
+                "Кур'єрська доставка" => "Кур'єрська доставка",
+                'Самовивіз' => 'Самовивіз',
+            ),
         ));
-        $type->setLabel('Тип товару:')
-                ->setRequired(true);
-        $type->class = "form-control";
-        $this->addElement($type);
-        */
+        $this->addElement('radio', 'pay_type', array(
+            "class" => "form-check-input",
+            "label" => "Тип оплати:",
+            'multiOptions'=>array(
+                'Карткою' => 'Карткою',
+                "Готівкою при отриманні" => "Готівкою при отриманні",
+            ),
+        ));
 
 
         $this->addElement('textarea', 'note', array(

@@ -2925,3 +2925,51 @@ textarea {
 	font-size: 15px;
 	padding: 10px 25px;
 }
+
+/* кроки */
+#block-step{
+    height: 70px;
+    border-bottom: 1px solid #E0E0E0;
+}
+#block-step > p{
+    font: 19px sans-serif;
+    color: #646464;
+    margin-top: 8px;
+    margin-left: 15px;
+    position: absolute;
+}
+#block-step > a{
+    position: absolute;
+    border: 1px solid #D98386;
+    font: bold 13px sans-serif;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 5px;
+    margin-left: 700px;
+    text-decoration: none;
+    color: white;
+    background-color: #DA2027;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+}
+#name-step{
+    height: 30px;
+}
+#name-step li{
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+#name-step a{
+    color: #00658B;
+    font: bold 14px sans-serif;
+    text-decoration: none;
+}
+#name-step a.active{
+    color: #EF662B;
+    font: bold 14px sans-serif;
+    border-bottom: 1px dashed #EF662B;
+}
