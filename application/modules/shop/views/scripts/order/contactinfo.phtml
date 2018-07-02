@@ -22,7 +22,7 @@ foreach ($form->getElements() as $element) {
   	<div id="block-step">
 		<div id="name-step">
             <ul class="list-inline">
-	          	<li><a href="">1. Корзина товарів</a></li>
+	          	<li><a href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show'));?>">1. Корзина товарів</a></li>
 	          	<li><span class="glyphicon glyphicon-arrow-right"></span></li>
 	          	<li><a href="" class="active">2. Контактна інформація</a></li>
 	          	<li><span class="glyphicon glyphicon-arrow-right"></span></li>
@@ -34,6 +34,15 @@ foreach ($form->getElements() as $element) {
     <br>
     <div class="col-lg-12">
 		<form method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction()?>" enctype='multipart/form-data'>
+			<?php
+            $user = Zend_Auth::getInstance();
+            if (!$user->hasIdentity()){ ?>
+            <div class="form-group">
+		        <div class="alert alert-warning" role="alert">
+		        	Для того, щоб проглянути Ваші замовлення <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'signup')) ?>">зареєструйтесь</a> або <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'login')) ?>">увійдіть</a>
+		        </div>
+		    </div>
+		    <?php } ?>
 			<div class="form-group">
 		        <h4>Способи доставки:</h4>
 		    </div>
@@ -47,11 +56,32 @@ foreach ($form->getElements() as $element) {
 		        <h4 class="title-h3">Інформація для доставки:</h4>
 		    </div>
 		   	<div class="form-group">
-		        <?php echo $form->pib->renderLabel() . $form->pib->renderViewHelper() ?>
+		        <?php 
+		        	if ($user->hasIdentity()){
+		        		$customer = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname;
+		        		echo $form->pib->renderLabel() . $form->pib->setValue($customer)->renderViewHelper();
+		        	}
+		        	else{
+		        		echo $form->pib->renderLabel() . $form->pib->renderViewHelper();
+		        	}
+		        ?>
 		        <i>Приклад: Іванов Іван Іванович</i>
 		    </div>
+		    <?php
+            if (!$user->hasIdentity()){ ?>
 		    <div class="form-group">
-		        <?php echo $form->email->renderLabel() . $form->email->renderViewHelper() ?>
+		        <div class="alert alert-warning" role="alert">Дане замовлення буде прикріплене до Вашої електронної пошти. Для того, щоб проглянути Ваші замовлення <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'signup')) ?>">зареєструйтесь</a> або <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'login')) ?>">увійдіть</a></div>
+		    </div>
+		    <?php } ?>
+		    <div class="form-group">
+		    	<?php 
+		        	if ($user->hasIdentity()){
+		        		echo $form->email->renderLabel() . $form->email->setValue($user->getIdentity()->email)->renderViewHelper();
+		        	}
+		        	else{
+		        		echo $form->email->renderLabel() . $form->email->renderViewHelper();
+		        	}
+		        ?>
 		        <i>Приклад: ivanov@gmail.com</i>
 		    </div>
 		    <div class="form-group">
@@ -59,7 +89,14 @@ foreach ($form->getElements() as $element) {
 		        <i>Приклад: 380505050505</i>
 		    </div>
 		    <div class="form-group">
-		        <?php echo $form->address->renderLabel() . $form->address->renderViewHelper() ?>
+		    	<?php 
+		        	if ($user->hasIdentity()){
+		        		echo $form->address->renderLabel() . $form->address->setValue($user->getIdentity()->city)->renderViewHelper();
+		        	}
+		        	else{
+		        		echo $form->address->renderLabel() . $form->address->renderViewHelper();
+		        	}
+		        ?>
 		        <i>Приклад: м. Київ, вул. Іванова, буд. 1</i>
 		    </div>
 		    <div class="radio">
@@ -73,7 +110,7 @@ foreach ($form->getElements() as $element) {
 		    	<i>Уточніть інформацію про заказ. Наприклад, зручний час для дзвінка нашого менеджера</i>
 	        	<?= $form->note->renderViewHelper() ?>
 		    </div>
-		    <?php echo $this->formSubmit('submit', 'Далі') ?>
+		    <?php echo $this->formSubmit('submit', 'Далі', array("class" => "btn btn-default")) ?>
 		</form>
 	</div>
 </div>

@@ -109,7 +109,7 @@ foreach ($form->getElements() as $element) {
 	        	<?php echo $form->characterstic->renderLabel() . $form->characterstic->setValue($product[0]["characterstic"])->renderViewHelper() ?>
 		    </div>
 		    
-		    <?php echo $this->formSubmit('submit', 'Save') ?>
+		    <?php echo $this->formSubmit('submit', 'Зберегти', array("class" => "btn btn-default")) ?>
 		</form>
 	</div>
 </div>
