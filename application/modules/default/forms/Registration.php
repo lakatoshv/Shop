@@ -4,43 +4,23 @@ class Form_Registration extends Zend_Form
 {
     public function init()
     {
-        $firstname = $this->createElement('text','firstname');
-        $firstname->setLabel('Імʼя:')
-                    ->setRequired(true);
-                    
-        $lastname = $this->createElement('text','lastname');
-        $lastname->setLabel('Прізвище:')
-                    ->setRequired(false);
-
-        $password = $this->createElement('password','password');
-        $password->setLabel('Пароль: *')
-                ->setRequired(true);
-
-                
-        $confirmPassword = $this->createElement('password','confirmPassword');
-        $confirmPassword->setLabel('Підтвердіть пароль: *')
-                ->setRequired(true);
-
-        $email = $this->createElement('text','email');
-        $email->setLabel('Емайл: *')
-                ->setRequired(true);
-
-        $city = $this->createElement('text','city');
-        $city->setLabel('Місце проживання: *')
-                ->setRequired(false);
-
-        $register = $this->createElement('submit','register');
-        $register->setLabel('Зареєструватись')
-                ->setIgnore(true);
-                
-        $this->addElements(array(
-                        $firstname,
-                        $lastname,
-                        $password,
-                        $confirmPassword,
-                        $email,
-                        $city,
-                        $register
+        $this->addElement('text','firstname', array(
+            'placeholder' => "Імʼя:", 'class' => "form-control"
+        ));
+        $this->addElement('text','lastname', array(
+            'placeholder' => "Прізвище:", 'class' => "form-control"
+        ));
+        $this->addElement('text', 'email', array(
+            'placeholder' => "Електронна пошта:", 'class' => "form-control"
+        ));
+        $this->addElement('password', 'password', array(
+            'placeholder' => "Пароль:", 'class' => "form-control"
+        ));
+        $this->addElement('password','confirmPassword', array(
+            'placeholder' => 'Підтвердіть пароль:', 'class' => "form-control"
+        ));
+        $this->addElement('text','city', array(
+            'placeholder' => 'Місце проживання:', 'class' => "form-control"
         ));
     }
 }
