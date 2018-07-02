@@ -6,13 +6,33 @@
 	?>
 	<div>
 		<br>
-		<h4>Вхід</h4>
+		<br><br>
 		<br>
 		<?php
-		    echo $this->form;
-
+			$form = $this->form;
+// Remove <dt> from label generation
+foreach ($form->getElements() as $element) {
+    $element->getDecorator('label')->setOption('tag', null);
+}
 		?>
+<div class="container">
+  	<div class="row" data-ref="container">
+    	<div class="card card-container">
+    		<h3>Авторизація</h3>
+            <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+            <p id="profile-name" class="profile-name-card"></p>
+            <form method="<?php echo $form->getMethod() ?>" action="<?php echo $form->getAction()?>" class="form-signin">
+                <span id="reauth-email" class="reauth-email"></span>
+                <?= $form->email->renderViewHelper() ?>
+                <?= $form->password->renderViewHelper() ?>
+                <?php echo $this->formSubmit('submit', 'Ввійти', array("class" => "btn btn-lg btn-success btn-block")) ?>
+                <a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'signup'));?>" class="btn btn-lg btn-primary btn-block">Зареєструватись</a>
+            </form><!-- /form -->
+        </div>
+   	</div>
+</div>btn-primary
 
-		    <a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'signup'));?>">Зареєструватись</a>
+		   
 	</div>
 </center>
