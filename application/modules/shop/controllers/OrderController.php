@@ -15,6 +15,10 @@ class Shop_OrderController extends Zend_Controller_Action
 
         $form = new Shop_Form_AddOrder();
         $this->view->form=$form;
+        if(filter_input(INPUT_COOKIE, 'customer_data')){
+            $data = unserialize(filter_input(INPUT_COOKIE, 'customer_data'));
+            $this->view->customer_data = $data;
+        }
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();

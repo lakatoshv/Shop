@@ -48,7 +48,14 @@ foreach ($form->getElements() as $element) {
 		    </div>
 			<div class="radio">
 			    <label>
-			    	<?= $form->delivery_type->renderViewHelper() ?>
+			    	<?php
+			    		if (isset($this->customer_data)){
+			        		echo $form->delivery_type->setValue($this->customer_data["delivery_type"])->renderViewHelper();
+			        	}
+			        	else{
+			        		echo $form->delivery_type->renderViewHelper();
+			        	}
+			    	?>
 			    </label>
 			</div>
 			<br>
@@ -57,9 +64,12 @@ foreach ($form->getElements() as $element) {
 		    </div>
 		   	<div class="form-group">
 		        <?php 
-		        	if ($user->hasIdentity()){
+		        	if ($user->hasIdentity() && !isset($this->customer_data)){
 		        		$customer = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname;
 		        		echo $form->pib->renderLabel() . $form->pib->setValue($customer)->renderViewHelper();
+		        	}
+		        	else if (isset($this->customer_data)){
+		        		echo $form->pib->renderLabel() . $form->pib->setValue($this->customer_data["pib"])->renderViewHelper();
 		        	}
 		        	else{
 		        		echo $form->pib->renderLabel() . $form->pib->renderViewHelper();
@@ -75,8 +85,11 @@ foreach ($form->getElements() as $element) {
 		    <?php } ?>
 		    <div class="form-group">
 		    	<?php 
-		        	if ($user->hasIdentity()){
+		        	if ($user->hasIdentity() && !isset($this->customer_data)){
 		        		echo $form->email->renderLabel() . $form->email->setValue($user->getIdentity()->email)->renderViewHelper();
+		        	}
+		        	else if (isset($this->customer_data)){
+		        		echo $form->email->renderLabel() . $form->email->setValue($this->customer_data["email"])->renderViewHelper();
 		        	}
 		        	else{
 		        		echo $form->email->renderLabel() . $form->email->renderViewHelper();
@@ -85,13 +98,23 @@ foreach ($form->getElements() as $element) {
 		        <i>Приклад: ivanov@gmail.com</i>
 		    </div>
 		    <div class="form-group">
-		        <?php echo $form->phone->renderLabel() . $form->phone->renderViewHelper() ?>
+		    	<?php
+			    	if (isset($this->customer_data)){
+			        	echo $form->phone->renderLabel() . $form->phone->setValue($this->customer_data["phone"])->renderViewHelper();
+			        }
+			        else{
+			        	echo $form->phone->renderLabel() . $form->phone->renderViewHelper();
+			        }
+			    ?>
 		        <i>Приклад: 380505050505</i>
 		    </div>
 		    <div class="form-group">
 		    	<?php 
-		        	if ($user->hasIdentity()){
+		        	if ($user->hasIdentity() && !isset($this->customer_data)){
 		        		echo $form->address->renderLabel() . $form->address->setValue($user->getIdentity()->city)->renderViewHelper();
+		        	}
+		        	else if (isset($this->customer_data)){
+		        		echo $form->address->renderLabel() . $form->address->setValue($this->customer_data["address"])->renderViewHelper();
 		        	}
 		        	else{
 		        		echo $form->address->renderLabel() . $form->address->renderViewHelper();
@@ -102,13 +125,27 @@ foreach ($form->getElements() as $element) {
 		    <div class="radio">
 		    	<strong><?= $form->pay_type->renderLabel() ?></strong><br>
 			    <label>
-			    	<?= $form->pay_type->renderViewHelper() ?>
+			    	<?php
+			    		if (isset($this->customer_data)){
+			        		echo $form->pay_type->setValue($this->customer_data["pay_type"])->renderViewHelper();
+			        	}
+			        	else{
+			        		echo $form->pay_type->renderViewHelper();
+			        	}
+			    	?>
 			    </label>
 			</div>
 		    <div class="form-group">
 		    	<?php echo $form->note->renderLabel() ?><br>
 		    	<i>Уточніть інформацію про заказ. Наприклад, зручний час для дзвінка нашого менеджера</i>
-	        	<?= $form->note->renderViewHelper() ?>
+		    	<?php
+			    	if (isset($this->customer_data)){
+			        	echo $form->note->setValue($this->customer_data["note"])->renderViewHelper();
+			        }
+			        else{
+			        	echo $form->note->renderViewHelper();
+			        }
+			    ?>
 		    </div>
 		    <?php echo $this->formSubmit('submit', 'Далі', array("class" => "btn btn-default")) ?>
 		</form>
