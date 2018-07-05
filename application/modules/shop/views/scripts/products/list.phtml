@@ -12,8 +12,10 @@
       <li>Сортувати по: </li>
       <li>
         <select id="sort" name="sort" class="btn btn-default">
-          <option selected  value ="title">Назві</option>
-          <option  value="price">Ціні</option>
+          <option value ="name">Назві</option>
+          <option value="price">Ціні</option>
+          <option value="type">Типом товару</option>
+          <option value="qty">Кількості на складі</option>
         </select>
       </li>
       <li>За: </li>
@@ -313,12 +315,27 @@ $(document).on("change", "input[type=checkbox]", function() { // По измен
     // берём значение из select и что-то с ним делаем
     return select.val();
   };
+  function get_cookie ( cookie_name )
+  {
+    var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
+   
+    if ( results )
+      return ( unescape ( results[2] ) );
+    else
+      return null;
+  }
+  if(document.cookie.match ( '(^|;) ?' + "sort" + '=([^;]*)(;|$)' )){
+    $("#sort").value = get_cookie("sort");
+    document.getElementById("sort").value = get_cookie("sort");
+  }
+  if(document.cookie.match ( '(^|;) ?' + "type_sort" + '=([^;]*)(;|$)' )){
+    document.getElementById("type_sort").value = get_cookie("type_sort");
+  }
   $("#sorting").click(function(){
     value_sort = cheked($("#sort"));
     type_sort = cheked($("#type_sort"));
     document.cookie = "sort=" + value_sort;
     document.cookie = "type_sort=" + type_sort; 
-    location = "?direction="+type_sort+"&page=1&sort="+value_sort;
   });
   $('body').on('click', 'a#product', function(e) {
     id = $(this).attr("product_id");

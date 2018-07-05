@@ -29,5 +29,17 @@ class Shop_Model_DbTable_Products extends Zend_Db_Table_Abstract
         }
         return false;
     }
-	
+	public function sortProducts($type, $sortby, $type_sort){
+        if($type == 1){
+            $selectProducts = $this->_db->select()->from("products")->where('1')->order('title');
+        }
+        else{
+            $selectProducts = $this->_db->select()->from("products")->where('type=?',$type)->order('title');
+        }
+        $result = $this->getAdapter()->fetchAll($selectProducts);
+        if($result){
+            return $selectProducts;
+        }
+        return $selectProducts;
+    }
 }

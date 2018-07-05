@@ -23,7 +23,13 @@ class Shop_ProductsController extends Zend_Controller_Action
         $productsTbl = new Shop_Model_ListProducts();
         $show = Zend_Controller_Request_Http::getCookie("show", 5);
         $page = $this->_getParam("page", 1);
-        $productsList = $productsTbl->listProducts($type);
+        
+        if(isset($_COOKIE["sort"]) && isset($_COOKIE["type_sort"])){
+            $productsList = $productsTbl->sortProducts($type, $_COOKIE["sort"], $_COOKIE["type_sort"]);
+        }
+        else{
+            $productsList = $productsTbl->listProducts($type);
+        }
 
         $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($productsList));
         $paginator->setItemCountPerPage($show)->setCurrentPageNumber($page);
