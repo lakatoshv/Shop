@@ -25,10 +25,22 @@ class Shop_ProductsController extends Zend_Controller_Action
         $page = $this->_getParam("page", 1);
         
         if(isset($_COOKIE["sort"]) && isset($_COOKIE["type_sort"])){
-            $productsList = $productsTbl->sortProducts($type, $_COOKIE["sort"], $_COOKIE["type_sort"]);
+            if($this->getRequest()->isPost()){
+                $search = $this->getRequest ()->getParam ( 'search', null );
+                $productsList = $productsTbl->sortProducts($type, $_COOKIE["sort"], $_COOKIE["type_sort"], $search);
+            }
+            else{
+                $productsList = $productsTbl->sortProducts($type, $_COOKIE["sort"], $_COOKIE["type_sort"], null);
+            }
         }
         else{
-            $productsList = $productsTbl->listProducts($type);
+            if($this->getRequest()->isPost()){
+                $search = $this->getRequest ()->getParam ( 'search', null );
+                $productsList = $productsTbl->listProducts($type, $search);
+            }
+            else{
+                $productsList = $productsTbl->listProducts($type, null);
+            }
         }
 
         $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($productsList));
@@ -47,11 +59,6 @@ class Shop_ProductsController extends Zend_Controller_Action
 
         $images = new Shop_Model_DbTable_UploadImages();
         $this->view->images = $images->fetchAll();
-
-        if($this->getRequest()->isPost()){
-            $search = $this->getRequest ()->getParam ( 'search', null );
-            var_dump($search);
-        }
 
         $categoriesTbl = new Shop_Model_DbTable_Type();
         //SELECT DISTINCT type FROM category
