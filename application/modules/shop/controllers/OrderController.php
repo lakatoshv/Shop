@@ -72,6 +72,7 @@ class Shop_OrderController extends Zend_Controller_Action
             $orders = new Shop_Model_DbTable_Orders();
             $data["confirmed"] = 1;
             $orders->insert($data);
+            //$cartsTbl->deleteCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
         }
 
         

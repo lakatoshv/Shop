@@ -30,6 +30,8 @@
           <label class="range-slider-label">Min</label>
           <input name="minSize" class="range-slider-input" type="range" min="0" max="10" value="0" list="sizeLegend"/>
         </div>
+      </li>
+      <li>
         <div class="range-slider">
           <label class="range-slider-label">Max</label>
           <input name="maxSize" class="range-slider-input" type="range" min="0" max="10" value="10" list="sizeLegend"/>
@@ -273,7 +275,15 @@ $(document).ready(function() {
       duration: 300 // don't foget to change the duration also in CSS
     }
   });
-
+  $('.container').each(function(){
+    var highestBox = 0;
+    $('.box-gray ', this).each(function(){
+      if($(this).height() > highestBox) {
+        highestBox = $(this).height();
+      }
+    });
+    $('.box-gray ',this).height(highestBox);
+  });
 });
 /* вибрати всі checkbox-и */
 $(document).on("change", "input[type=checkbox]", function() { // По изменению checkbox'а

@@ -30,3 +30,34 @@ $(document).ready(
         $("[data-toggle=tooltip]").tooltip();
     }
 );
+  function cheked(select) {
+    // берём значение из select и что-то с ним делаем
+    return select.val();
+  };
+  function get_cookie ( cookie_name )
+  {
+    var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
+   
+    if ( results )
+      return ( unescape ( results[2] ) );
+    else
+      return null;
+  }
+  /**
+  * Filters the mixer using a provided search string, which is matched against
+  * the contents of each target's "class" attribute. Any custom data-attribute(s)
+  * could also be used.
+  *
+  * @param  {string} searchValue
+  * @return {void}
+  */
+  function filterByString(searchValue) {
+    if (searchValue) {
+      // Use an attribute wildcard selector to check for matches
+      mixer.filter('[data-title="' + searchValue + '"]');
+    } 
+    else {
+      // If no searchValue, treat as filter('all')
+      mixer.filter('all');
+    }
+  }
