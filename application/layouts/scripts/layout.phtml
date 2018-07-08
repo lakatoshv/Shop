@@ -132,7 +132,7 @@
             <div class="panel-body">
               <ul class="nav navbar-nav">
                 <li><a href="#">Проглянути усі товари</a></li>
-                <li><a href="#">Додати новий товар</a></li>
+                <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'add')) ?>">Додати новий товар</a></li>
 
                 <!-- Dropdown level 2 -->
                 <li class="panel panel-default" id="dropdown">
@@ -161,7 +161,7 @@
             <div class="panel-body">
               <ul class="nav navbar-nav">
                 <li><a href="#">Проглянути усі новини</a></li>
-                <li><a href="#">Додати нову новину</a></li>
+                <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'add')) ?>">Додати нову новину</a></li>
 
                 <!-- Dropdown level 2 -->
                 <li class="panel panel-default" id="dropdown">
