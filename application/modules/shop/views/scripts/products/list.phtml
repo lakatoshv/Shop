@@ -223,6 +223,14 @@
                           <h4 class="list-group-item-heading" style="padding-top: 10px; color: orange;"><?= $value->date; ?></h4>
                           <h4 class="list-group-item-footer"><?= $value->title; ?></h4>
                           <h5 class="list-group-item-text"><?= $value->text; ?></h5>
+                          <?php
+                            $user = Zend_Auth::getInstance();
+                            if($user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
+                          ?>
+                          <a href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'news', 'action' => 'edit', 'news' => "".$value->id."")) ?>">Редагувати</a>
+                          <?php
+                            }
+                          ?>
                         </div>
                       </div>
                     <?php

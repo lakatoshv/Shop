@@ -32,29 +32,20 @@ class Admin_NewsController extends Zend_Controller_Action
     public function editAction()
     {
 
-        $productTbl = new Admin_Model_DbTable_Products();
-        $product_id = $this->_getParam("product", null);
-        $productsTable = new Shop_Model_DbTable_Products();
-        $this->view->product = $productsTable->showProduct($product_id);
+        $newsTbl = new Admin_Model_DbTable_News();
+        $news_id = $this->_getParam("news", null);
+        $newsTable = new Shop_Model_DbTable_News();
+        $this->view->news = $newsTable->showNews($news_id);
 
-        $images = new Shop_Model_DbTable_UploadImages();
-        $this->view->images = $images->getImages($product_id);
-
-        $form = new Admin_Form_EditProduct();
+        $form = new Admin_Form_EditNews();
 
         $this->view->form=$form;
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();
-
-                $img_name = $data['img_name'];
-                $img_url = $data['img_url'];
-                unset($data['gallery_img']);
-                unset($data['img_name']);
-                unset($data['img_url']);
-
-                $productTbl->updateProduct($data, $product_id);
-                $this->_redirect('shop/products/list');
+                $date = new Zend_Date();
+                $data["date"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
+                $newsTbl->updateNews($data, $news_id);
             }
         }
     }
