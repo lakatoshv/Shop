@@ -6,46 +6,50 @@
   </div>
   <br> 
 </div>
-<div class="back">
-  <div class="text-left">
-    <ul class="list-inline">
-      <li>Сортувати по: </li>
-      <li>
-        <select id="sort" name="sort" class="btn btn-default">
-          <option value ="name">Назві</option>
-          <option value="price">Ціні</option>
-          <option value="type">Типом товару</option>
-          <option value="qty">Кількості на складі</option>
-        </select>
-      </li>
-      <li>За: </li>
-      <li>
-        <select id="type_sort" name="type_sort" class="btn btn-default">
-          <option selected value="asc">Зростанням</option>
-          <option value="desc">Спаданням</option>
-        </select>
-      </li>
-      <li>
-        <div class="range-slider">
-          <label class="range-slider-label">Min</label>
-          <input name="minSize" class="range-slider-input" type="range" min="0" max="10" value="0" list="sizeLegend"/>
-        </div>
-      </li>
-      <li>
-        <div class="range-slider">
-          <label class="range-slider-label">Max</label>
-          <input name="maxSize" class="range-slider-input" type="range" min="0" max="10" value="10" list="sizeLegend"/>
-        </div>
-      </li>
-      <li><a id="sorting" class="btn btn-default button-background" href="">Сортувати</a></li>
-      <li>
-        <div>
-          <form method="POST" name="search-form"> 
+<div class="container">
+  <div class="row" data-ref="container">
+    <div class="col-lg-12">
+      <center>
+        <div class="text-left">
+          <ul class="list-inline">
+            <li>Сортувати по: </li>
+            <li>
+              <select id="sort" name="sort" class="btn btn-default">
+                <option value ="name">Назві</option>
+                <option value="price">Ціні</option>
+                <option value="type">Типом товару</option>
+                <option value="qty">Кількості на складі</option>
+              </select>
+            </li>
+            <li>За: </li>
+            <li>
+              <select id="type_sort" name="type_sort" class="btn btn-default">
+                <option selected value="asc">Зростанням</option>
+                <option value="desc">Спаданням</option>
+              </select>
+            </li>
+            <li>
+              <div class="range-slider">
+                <label class="range-slider-label">Min</label>
+                <input name="minSize" class="range-slider-input" type="range" min="0" max="10" value="0" list="sizeLegend"/>
+              </div>
+            </li>
+            <li>
+              <div class="range-slider">
+                <label class="range-slider-label">Max</label>
+                <input name="maxSize" class="range-slider-input" type="range" min="0" max="10" value="10" list="sizeLegend"/>
+              </div>
+            </li>
+            <li><a id="sorting" class="btn btn-default button-background" href="">Сортувати</a></li>
+            <li>
+            <form method="POST" name="search-form"> 
             <input type="text" name="search" class="search-txt" placeholder="Пошук" data-ref="input-search" data-list=".row" autocomplete="off"/>
           </form>
+            </li>
+          </ul>
         </div>
-      </li>
-    </ul>
+      </center>
+    </div>
   </div>
 </div>
 <div class="container">

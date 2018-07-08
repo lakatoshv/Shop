@@ -52,7 +52,7 @@ class Model_LibraryAcl extends Zend_Acl
 
 		$this->add(new Zend_Acl_Resource("shop"))->add(new Zend_Acl_Resource("shop:products"), "shop")->add(new Zend_Acl_Resource("shop:basket"), "shop")->add(new Zend_Acl_Resource("shop:order"), "shop");
 
-		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin");
+		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin")->add(new Zend_Acl_Resource("admin:news"), "admin");
 
 		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:index"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
 
@@ -69,5 +69,6 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("users", "default:customer", array("index", "home", "logout", "mydata", "update"));
 
 		$this->allow("admins", "admin:product", array("index", "add", "edit", "delete"));
+		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete"));
 	}
 }
