@@ -53,11 +53,9 @@ class Admin_NewsController extends Zend_Controller_Action
     public function deleteAction()
     {
         
-        $productTbl = new Admin_Model_DbTable_Products();
-        $product_id = $this->_getParam("product", null);
-        $productTbl->deleteProduct($product_id);
-        $imageTbl = new Admin_Model_DbTable_UploadImages();
-        $imageTbl->deleteUploadImage($product_id);
+        $newsTbl = new Admin_Model_DbTable_News();
+        $news_id = $this->_getParam("news", null);
+        $newsTbl->deleteNews($news_id);
         $this->_redirect('shop/products/list');
     }
 

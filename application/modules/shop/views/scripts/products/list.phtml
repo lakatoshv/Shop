@@ -228,6 +228,7 @@
                             if($user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
                           ?>
                           <a href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'news', 'action' => 'edit', 'news' => "".$value->id."")) ?>">Редагувати</a>
+                          <a href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'news', 'action' => 'delete', 'news' => "".$value->id."")) ?>">Видалити</a>
                           <?php
                             }
                           ?>
