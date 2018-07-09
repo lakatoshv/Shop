@@ -10,7 +10,15 @@ class Admin_NewsController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        $newsTbl = new Shop_Model_DbTable_News();
+        /*
+        $show = Zend_Controller_Request_Http::getCookie("show", 5);
+        $paginator = new Zend_Paginator(new Zend_Paginator_Adapter_DbSelect($newsTbl->fetchAll()));
+        $paginator->setItemCountPerPage($show)->setCurrentPageNumber($page);
+        $this->view->news = $paginator;
+        */
+        $this->view->news = $newsTbl->fetchAll();
+        //$this->view->show = $show;
     }
 
     public function addAction()
