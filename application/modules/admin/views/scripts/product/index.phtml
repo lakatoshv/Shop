@@ -1,4 +1,377 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Book</b> and script/action name <b>index</b></p>
+<script src="<?php echo $this->baseUrl(); ?>/js/mixitup.min.js"></script>
+<script src="<?php echo $this->baseUrl(); ?>/js/jquery.hideseek.min.js"></script>
+<div class="back">
+  <div class="text-center">
+    <h1 class="col-md-6 col-md-offset-3">Товари</h1>
+  </div>
+  <br> 
 </div>
+
+<div class="container">
+  <div class="row" data-ref="container">
+    <div class="col-lg-12">
+      <div class="alert right">
+        <?php
+          $user = Zend_Auth::getInstance();
+          if($user->hasIdentity() && $user->getIdentity()->role == "admins"){
+        ?>
+        <a href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'add')) ?>" class="">Додати новий товар</a>
+        <?php
+          }
+        ?>
+      </div>
+      <div class="clearfix"></div>
+      <?php
+        foreach ($this->products as $key => $value) {
+      ?>
+      <div class="col-lg-4" id="<?= $value["id"]; ?>" data-price="<?= $value["price"]; ?>" data-title="<?= $value["name"] ?>">
+        <div class="box product-<?= $value["id"]; ?>">
+          <div class="box-gray aligncenter">
+            <h3><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value["name"] ?></a></h3>
+            <div class="icon">
+              <i class="fa fa-desktop fa-3x"></i>
+            </div>
+            <div class="product-item">
+                <?php
+                  $url = $this->baseUrl();
+                  $imagesList = $this->images;
+                  $images = [];
+                  $img_path = $url."/";
+                  foreach ($imagesList as $image) {
+                    if ($image["product_id"] == $value["id"]) {
+                        
+                        if($image["upload"] == "local"){
+                          $images[] = $img_path.$image["image"];
+                        }
+                        else{
+                          $images[] = $image["image"];
+                        }
+                    }
+                  }
+                  $img = $images[0];
+                ?>
+              <img src="<?= $img ?>" class="img-thumbnail"/>
+              <div class="product-buttons">
+                <p>
+                  <br><?= $value["minidescription"] ?><br><br><br>
+                  <a class="image-popup-vertical-fit"  href="<?= $img ?>" title="<?= $value["name"] ?>">
+                    <img src="<?= $img ?>" class="img-thumbnail" style="display: none;"/>
+                    <span class="glyphicon glyphicon-zoom-in text-center"></span>
+                  </a>
+                </p>
+              </div>
+            </div>
+            <div class="buttons-bottom">
+              <h3><?= $value["price"]." грн." ?></h3>
+              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> В корзину</a><br/>
+              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-heart"></span> В список бажань</a><br/>
+            <?php
+              $user = Zend_Auth::getInstance();
+              if($user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
+            ?>
+              <a id="button" href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn  btn-info"><span class="glyphicon glyphicon-edit"> Редагувати</span></a>
+              <form method="POST" action="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'delete', 'product' => "".$value["id"]."")) ?>" accept-charset="UTF-8" style="display:inline">
+                <a id="button" href="" class="btn btn-default btn-block button-background btn delete-confirm red"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["name"] ?>" data-message="Ви дійсно хочете видалити цей товар?">
+                  <span class="glyphicon glyphicon-remove"> Видалити</span>
+                </a>
+              </form>
+            
+            <?php
+              }
+            ?>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php
+        }
+      ?>
+
+    </div>
+  </div>
+<script type="text/javascript">
+//збільшення картинки
+$(document).ready(function() {
+
+  $('.image-popup-vertical-fit').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    mainClass: 'mfp-img-mobile',
+    image: {
+      verticalFit: true
+    }
+    
+  });
+
+  $('.image-popup-fit-width').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    image: {
+      verticalFit: false
+    }
+  });
+
+  $('.image-popup-no-margins').magnificPopup({
+    type: 'image',
+    closeOnContentClick: true,
+    closeBtnInside: false,
+    fixedContentPos: true,
+    mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
+    image: {
+      verticalFit: true
+    },
+    zoom: {
+      enabled: true,
+      duration: 300 // don't foget to change the duration also in CSS
+    }
+  });
+  $('.container').each(function(){
+    var highestBox = 0;
+    $('.box-gray ', this).each(function(){
+      if($(this).height() > highestBox) {
+        highestBox = $(this).height();
+      }
+    });
+    $('.box-gray ',this).height(highestBox);
+  });
+});
+/* вибрати всі checkbox-и */
+$(document).on("change", "input[type=checkbox]", function() { // По изменению checkbox'а
+    if ($(this).attr('class')) {
+        var CBgroupID = $(this).attr('class');
+    }
+    if (($(this).attr('id')) && ($('input[type="checkbox"].' + $(this).attr('id')).length)) { 
+        var CBgroupID = $(this).attr('id');
+        if (this.checked) {
+            $('input[type="checkbox"].' + CBgroupID).attr('checked', 'checked');
+            $('input[type="button"][class*="' + CBgroupID + '"]').removeAttr('disabled');
+        } else {
+            $('input[type="checkbox"].' + CBgroupID).removeAttr('checked');
+            $('input[type="button"][class*="' + CBgroupID+'"]').attr('disabled', 'disabled');
+        }
+    }
+    if (!CBgroupID) {
+        return;
+    }
+    if ($('input[type="checkbox"].' + CBgroupID + ':not(:checked)').length) {
+        $('input[type="checkbox"]#' + CBgroupID).removeAttr('checked');
+    } else {
+        $('input[type="checkbox"]#' + CBgroupID).attr('checked', 'checked');
+    }
+    if ($('input[type="checkbox"].' + CBgroupID+':checked').length) {
+        $('input[type="button"][class*="' + CBgroupID + '"]').removeAttr('disabled');
+    } else {
+        $('input[type="button"][class*="' + CBgroupID + '"]').attr('disabled', 'disabled');
+    }
+    if ($('input[type="checkbox"].' + CBgroupID + ':checked').length === 1) {
+        $('.jToEdit').removeAttr('disabled');
+    } else {
+        $('.jToEdit').attr('disabled', 'disabled');
+    }
+    delete CBgroupID;
+});
+
+  function cheked(select) {
+    // берём значение из select и что-то с ним делаем
+    return select.val();
+  };
+  function get_cookie ( cookie_name )
+  {
+    var results = document.cookie.match ( '(^|;) ?' + cookie_name + '=([^;]*)(;|$)' );
+   
+    if ( results )
+      return ( unescape ( results[2] ) );
+    else
+      return null;
+  }
+  if(document.cookie.match ( '(^|;) ?' + "sort" + '=([^;]*)(;|$)' )){
+    $("#sort").value = get_cookie("sort");
+    document.getElementById("sort").value = get_cookie("sort");
+  }
+  if(document.cookie.match ( '(^|;) ?' + "type_sort" + '=([^;]*)(;|$)' )){
+    document.getElementById("type_sort").value = get_cookie("type_sort");
+  }
+  $("#sorting").click(function(){
+    value_sort = cheked($("#sort"));
+    type_sort = cheked($("#type_sort"));
+    document.cookie = "sort=" + value_sort;
+    document.cookie = "type_sort=" + type_sort; 
+  });
+  $('body').on('click', 'a#product', function(e) {
+    id = $(this).attr("product_id");
+    url = $(this).attr("href");
+    $.ajax({
+      type: "POST",
+      url: url,
+      data: id,
+      success: success,
+      dataType: dataType
+    });
+  });
+
+  var show = document.querySelector('#show_el');
+  show.addEventListener('change', function() {
+    document.cookie = "show=" + show.value;
+    location.reload();
+  });
+</script>
+<script type="text/javascript">
+
+  var divs = document.getElementsByClassName( 'col-lg-3' );
+  //alert(divs.length);
+  for( var i = 0; i < divs.length; i++ ) {
+      if (divs[i].className!= "") {
+          //alert(divs[i].innerHTML);
+
+      }
+  }
+
+
+</script>
+<script>
+  // In this example, we must bind 'change' event handlers to
+  // our <select> elements, then interact with the mixer via
+  // its .filter() and .sort() API methods.
+
+  var containerEl = document.querySelector('[data-ref~="container"]');
+  //var selectFilter = document.querySelector('.select-filter');
+  var sort = document.querySelector('#sort');
+  var typeSort = document.querySelector('#type_sort');
+  /*
+  selectFilter.addEventListener('change', function() {
+    var selector = selectFilter.value;
+    mixer.filter(selector);
+  });
+  */
+  /* сортування */
+  sort.addEventListener('change', function() {
+    var mixer = mixitup(containerEl, {
+      selectors: {
+        target: '[data-' + sort.value +']'
+      }
+    });
+    var order = sort.value + ":" + typeSort.value;
+    //mixer.selectors("title");
+    mixer.sort(order);
+  });
+  typeSort.addEventListener('change', function() {
+    var mixer = mixitup(containerEl, {
+      selectors: {
+        target: '[data-' + sort.value +']'
+      }
+    });
+    var order = sort.value + ":" + typeSort.value;
+    //mixer.selectors("title");
+    mixer.sort(order);
+  });
+
+  var inputSearch = document.querySelector('[data-ref="input-search"]');
+  var keyupTimeout;
+
+  // Set up a handler to listen for "keyup" events from the search input
+  inputSearch.addEventListener('keyup', function() {
+    var searchValue;
+    if (inputSearch.value.length < 3) {
+      // If the input value is less than 3 characters, don't send
+      searchValue = '';
+    } 
+    else {
+      searchValue = inputSearch.value./*toLowerCase().*/trim();
+      var mixer = mixitup(containerEl, {
+        animation: {
+          duration: 350
+        },
+        callbacks: {
+          onMixClick: function() {
+            // Reset the search if a filter is clicked
+            if (this.matches('[data-filter]')) {
+              inputSearch.value = '';
+            }
+          }
+        }
+      });
+    }
+
+    // Very basic throttling to prevent mixer thrashing. Only search
+    // once 350ms has passed since the last keyup event
+    clearTimeout(keyupTimeout);
+    keyupTimeout = setTimeout(function() {
+      filterByString(searchValue);
+    }, 350);
+  });
+
+  /**
+  * Filters the mixer using a provided search string, which is matched against
+  * the contents of each target's "class" attribute. Any custom data-attribute(s)
+  * could also be used.
+  *
+  * @param  {string} searchValue
+  * @return {void}
+  */
+  function filterByString(searchValue) {
+    if (searchValue) {
+      // Use an attribute wildcard selector to check for matches
+      mixer.filter('[data-title="' + searchValue + '"]');
+    } 
+    else {
+      // If no searchValue, treat as filter('all')
+      mixer.filter('all');
+    }
+  }
+</script>
+
+<script type="text/javascript">
+/* карусель */
+$('.carousel .vertical .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  for (var i=1;i<2;i++) {
+    next=next.next();
+    if (!next.length) {
+      next = $(this).siblings(':first');
+    }
+    
+    next.children(':first-child').clone().appendTo($(this));
+  }
+});
+</script>
+
+<div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Delete Parmanently</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure about this ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirm">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Dialog show event handler -->
+<script type="text/javascript">
+  $('#confirmDelete').on('show.bs.modal', function (e) {
+      $message = $(e.relatedTarget).attr('data-message');
+      $(this).find('.modal-body p').text($message);
+      $title = $(e.relatedTarget).attr('data-title');
+      $(this).find('.modal-title').text($title);
+ 
+      // Pass form reference to modal for submission on yes/ok
+      var form = $(e.relatedTarget).closest('form');
+      $(this).find('.modal-footer #confirm').data('form', form);
+  });
+ 
+  <!-- Form confirm (yes/ok) handler, submits form -->
+  $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+      $(this).data('form').submit();
+  });
+</script>

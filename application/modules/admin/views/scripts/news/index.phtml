@@ -30,8 +30,8 @@
 						</div>
 					</td>
 					<td class="actions" data-th="">
-						<button class="btn btn-info btn-sm"><i class="glyphicon glyphicon-refresh"></i></button>
-						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show', 'cart' => "{$cart[0]["cart_id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>							
+						<a class="btn btn-primary btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$value["id"]}"));?>"><i class="glyphicon glyphicon-edit"></i></a>
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'delete', 'news' => "{$value["id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>							
 					</td>
 				</tr>
 				<?php
