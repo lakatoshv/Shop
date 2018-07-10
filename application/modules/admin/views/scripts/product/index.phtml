@@ -21,74 +21,49 @@
         ?>
       </div>
       <div class="clearfix"></div>
+      <table id="cart" class="table table-hover table-condensed">
+      	<thead>
+      		<tr>
+      			<th style="width: 10%">ID</th>
+      			<th style="width: 60%">Товар</th>
+      			<th style="width: 10%">Тип товару</th>
+      			<th style="width: 20%">Категорія</th>
+      		</tr>
+      	</thead>
+      	
       <?php
         foreach ($this->products as $key => $value) {
       ?>
-      <div class="col-lg-4" id="<?= $value["id"]; ?>" data-price="<?= $value["price"]; ?>" data-title="<?= $value["name"] ?>">
-        <div class="box product-<?= $value["id"]; ?>">
-          <div class="box-gray aligncenter">
-            <h3><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value["name"] ?></a></h3>
-            <div class="icon">
-              <i class="fa fa-desktop fa-3x"></i>
-            </div>
-            <div class="product-item">
-                <?php
-                  $url = $this->baseUrl();
-                  $imagesList = $this->images;
-                  $images = [];
-                  $img_path = $url."/";
-                  foreach ($imagesList as $image) {
-                    if ($image["product_id"] == $value["id"]) {
-                        
-                        if($image["upload"] == "local"){
-                          $images[] = $img_path.$image["image"];
-                        }
-                        else{
-                          $images[] = $image["image"];
-                        }
-                    }
-                  }
-                  $img = $images[0];
-                ?>
-              <img src="<?= $img ?>" class="img-thumbnail"/>
-              <div class="product-buttons">
-                <p>
-                  <br><?= $value["minidescription"] ?><br><br><br>
-                  <a class="image-popup-vertical-fit"  href="<?= $img ?>" title="<?= $value["name"] ?>">
-                    <img src="<?= $img ?>" class="img-thumbnail" style="display: none;"/>
-                    <span class="glyphicon glyphicon-zoom-in text-center"></span>
-                  </a>
-                </p>
-              </div>
-            </div>
-            <div class="buttons-bottom">
-              <h3><?= $value["price"]." грн." ?></h3>
-              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-shopping-cart"></span> В корзину</a><br/>
-              <a id="button" href="<?php echo $this->url(array('controller' => 'basket', 'action' => 'add', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn-warning"><span class="glyphicon glyphicon-heart"></span> В список бажань</a><br/>
-            <?php
-              $user = Zend_Auth::getInstance();
-              if($user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
-            ?>
-              <a id="button" href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'product' => "".$value["id"]."")) ?>" class="btn btn-default btn-block button-background btn  btn-info"><span class="glyphicon glyphicon-edit"> Редагувати</span></a>
-              <form method="POST" action="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'delete', 'product' => "".$value["id"]."")) ?>" accept-charset="UTF-8" style="display:inline">
-                <a id="button" href="" class="btn btn-default btn-block button-background btn delete-confirm red"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["name"] ?>" data-message="Ви дійсно хочете видалити цей товар?">
-                  <span class="glyphicon glyphicon-remove"> Видалити</span>
-                </a>
-              </form>
-            
-            <?php
-              }
-            ?>
-            </div>
-          </div>
-        </div>
-      </div>
+      	<tr>
+			<td>
+				<?= $value["id"] ?>
+			</td>
+			<td data-th="Product">
+				<div class="row">
+					<div class="col-sm-10">
+		                <div class="media">
+		                    <div class="media-body">
+		                        <h4><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value["name"] ?></a></h4>
+
+		                    </div>
+						</div>
+					</div>
+				</div>
+			</td>
+			<td><?= $value["type"] ?></td>
+			<td><?= $value["category"] ?></td>
+			<td class="actions" data-th="">
+				<a class="btn btn-primary btn-sm" href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'product' => "".$value["id"]."")) ?>"><i class="glyphicon glyphicon-edit"></i></a>
+				<a id="button" href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["name"] ?>" data-message="Ви дійсно хочете видалити цей товар?"><i class="glyphicon glyphicon-trash"></i></a>							
+			</td>
+		</tr>
       <?php
         }
       ?>
-
+      </table>
     </div>
   </div>
+</div>
 <script type="text/javascript">
 //збільшення картинки
 $(document).ready(function() {

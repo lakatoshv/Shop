@@ -10,30 +10,8 @@ class Admin_ProductController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $type = $this->_getParam("type", 1);
-        $productsTbl = new Shop_Model_ListProducts();
-        $show = Zend_Controller_Request_Http::getCookie("show", 5);
-        $page = $this->_getParam("page", 1);
-        
-        $productsList = $productsTbl->listProducts($type, null);
-        $this->view->products = $productsList;
-        $this->view->page = $page;
-        $this->view->show = $show;
-
-        $categoriesTable = new Shop_Model_DbTable_Categories();
-        //$this->view->categories = 
-        //$categoriesTbl->fetchAll();
-        $this->view->categoriesList = $categoriesTable->selectAll();
-
-        $newsTbl = new Shop_Model_DbTable_News();
-        $this->view->news = $newsTbl->fetchAll();
-
-        $images = new Shop_Model_DbTable_UploadImages();
-        $this->view->images = $images->fetchAll();
-
-        $categoriesTbl = new Shop_Model_DbTable_Type();
-        //SELECT DISTINCT type FROM category
-        $this->view->categoriesDistinct = $categoriesTbl->fetchAll();
+        $productsTbl = new Shop_Model_DbTable_Products();
+        $this->view->products = $productsTbl->fetchAll();
     }
 
     public function addAction()
