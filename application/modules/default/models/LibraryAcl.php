@@ -69,6 +69,6 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("users", "default:customer", array("index", "home", "logout", "mydata", "update"));
 
 		$this->allow("admins", "admin:product", array("index", "add", "edit", "delete"));
-		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete"));
+		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete", "show"));
 	}
 }

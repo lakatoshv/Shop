@@ -66,6 +66,12 @@ class Admin_NewsController extends Zend_Controller_Action
         $newsTbl->deleteNews($news_id);
         $this->_redirect('shop/products/list');
     }
+    public function showAction(){
+        $newsTbl = new Admin_Model_DbTable_News();
+        $news_id = $this->_getParam("news", null);
+        $newsTable = new Shop_Model_DbTable_News();
+        $this->view->news = $newsTable->showNews($news_id);
+    }
 
 
 }
