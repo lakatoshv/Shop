@@ -1,0 +1,50 @@
+
+	<?php
+	if(isset($this->errorMessage)){
+
+	            echo $this->errorMessage;
+
+	}
+	$review = $this->review[0];
+	?>
+	<br><br>
+	<center><h4>Відгук #<?= $review["id"]." до товару #".$review["product_id"] ?></h4></center>
+	<div class="pull-right" style="padding-right: 100px;">
+		<a class="btn btn-primary btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$news["id"]}"));?>"><i class="glyphicon glyphicon-edit"></i></a>
+		<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'delete', 'news' => "{$news["id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>
+	</div>
+	<br>
+<div class="container">
+  	<div class="row" data-ref="container">
+    	<div class="col-lg-12">
+    		<div class="form-group">
+		        <label><b>Автор:</b></label> <?= $review["author"] ?>
+		    </div>
+		    <div class="form-group">
+		        <label><b>Дата написання:</b></label> <?= $review["date"] ?>
+		    </div>
+		    <div class="form-group">
+		        <label><b>Оцінка:</b></label> <?= $review["mark"] ?>
+		    </div>
+		   	<div class="form-group">
+		        <label>Хороший коментар:</label> <?= $review["good_review"] ?>
+		    </div>
+		    <div class="form-group">
+		        <label>Поганий коментар:</label> <?= $review["bad_review"] ?>
+		    </div>
+		    <div class="form-group">
+		        <label><b>Коментар:</b></label> <?= $review["comment"] ?>
+		    </div>
+		    <div class="form-group">
+		        <label>
+		        	<b>
+		        		<?php
+		        			if($review["moderal"] == 1) echo "Доступно для перегляду";
+		        			else echo "Недоступно для перегляду";
+		        		?>
+		        	</b>
+		        </label>
+		    </div>
+		</div>
+	</div>
+</div>

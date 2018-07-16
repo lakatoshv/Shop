@@ -56,4 +56,16 @@ $result = $this->getAdapter()->fetchAll($select);
         //DELETE FROM table_name WHERE condition;
         $this->_db->delete('reviews', "`$type` = '".$value."'");
     }
+    public function showReviw($id){
+        $select = $this->_db->select()
+                 ->from('reviews')
+                 ->where('id=?',$id);
+                 //->order('type');
+                 //->having('count(*)= 1');
+        $result = $this->getAdapter()->fetchAll($select);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
 }

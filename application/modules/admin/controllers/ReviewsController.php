@@ -82,10 +82,9 @@ class Admin_ReviewsController extends Zend_Controller_Action
         $this->_redirect('shop/products/list');
     }
     public function showAction(){
-        $newsTbl = new Admin_Model_DbTable_News();
-        $news_id = $this->_getParam("news", null);
-        $newsTable = new Shop_Model_DbTable_News();
-        $this->view->news = $newsTable->showNews($news_id);
+        $id = $this->_getParam("review", null);
+        $reviewsTbl = new Shop_Model_DbTable_Reviews();
+        $this->view->review = $reviewsTbl->showReviw($id);
     }
 
 
