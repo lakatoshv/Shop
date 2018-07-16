@@ -16,12 +16,14 @@ class Shop_Model_DbTable_Reviews extends Zend_Db_Table_Abstract
         }
         return false;
     }
-	function getReviews($type, $value)
+	function getReviews($type, $value, $moderal)
     {   
-        $select = $this->_db->select()
-                 ->from('reviews')
-                 ->where("`$type`=?",$value)
-                 ->where("`moderal`=1");
+        if($moderal == 1){
+            $select = $this->_db->select()->from('reviews')->where("`$type`=?",$value)->where("`moderal`=1");
+        }
+        else{
+            $select = $this->_db->select()->from('reviews')->where("`$type`=?",$value);
+        }
                  //->order('type');
                  //->having('count(*)= 1');
 $result = $this->getAdapter()->fetchAll($select);
