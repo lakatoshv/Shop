@@ -201,14 +201,14 @@
 
 
 <script type="text/javascript">
-	function ajaxQuery(product_id, value){
+	function ajaxQuery(id){
 		$.post(
-		  "change/product/" + product_id + "/value/" + value,
+		  "../../delete/review/" + id,
 		  onAjaxSuccess
 		);
 	}
 	function onAjaxSuccess(data)
 		{
-		  location.reload();
+		  //location.reload();
 		}
 </script>

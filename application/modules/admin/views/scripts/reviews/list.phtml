@@ -50,7 +50,7 @@
 						?>
 						<a class="btn btn-success btn-sm" title="Зробити доступним для усіх" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'makevisible', 'review' => "{$value["id"]}", "makevisible" => "true"));?>"><i class="glyphicon glyphicon-eye-open"></i></a>
 						<?php } ?>
-						<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'delete', 'review' => "{$value["id"]}"));?>"><i class="glyphicon glyphicon-trash"></i></a>
+						<a class="btn btn-danger btn-sm" id="<?= $value["id"] ?>" onclick="ajaxQuery(this.id)"><i class="glyphicon glyphicon-trash"></i></a>
 					</td>
 				</tr>
 				<?php
@@ -102,3 +102,15 @@
 <?php
 					}
 					?>
+<script type="text/javascript">
+	function ajaxQuery(id){
+		$.post(
+		  "../../delete/review/" + id,
+		  onAjaxSuccess
+		);
+	}
+	function onAjaxSuccess(data)
+		{
+		  //location.reload();
+		}
+</script>

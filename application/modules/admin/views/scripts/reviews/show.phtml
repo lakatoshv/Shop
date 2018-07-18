@@ -10,8 +10,17 @@
 	<br><br>
 	<center><h4>Відгук #<?= $review["id"]." до товару #".$review["product_id"] ?></h4></center>
 	<div class="pull-right" style="padding-right: 100px;">
-		<a class="btn btn-primary btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$news["id"]}"));?>"><i class="glyphicon glyphicon-edit"></i></a>
-		<a class="btn btn-danger btn-sm" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'delete', 'news' => "{$news["id"]}", 'delete' => 1));?>"><i class="glyphicon glyphicon-trash"></i></a>
+		<?php
+			if($review["moderal"] == 1){
+		?>
+			<a class="btn btn-default btn-sm" title="Приховати коментар" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'makevisible', 'review' => "{$review["id"]}", "makevisible" => "false"));?>"><i class="glyphicon glyphicon-eye-close"></i></a>
+		<?php
+			}
+			else{
+		?>
+			<a class="btn btn-success btn-sm" title="Зробити доступним для усіх" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'makevisible', 'review' => "{$review["id"]}", "makevisible" => "true"));?>"><i class="glyphicon glyphicon-eye-open"></i></a>
+		<?php } ?>
+		<a class="btn btn-danger btn-sm" id="<?= $review["id"] ?>" onclick="ajaxQuery(this.id)"><i class="glyphicon glyphicon-trash"></i></a>
 	</div>
 	<br>
 <div class="container">
@@ -27,10 +36,10 @@
 		        <label><b>Оцінка:</b></label> <?= $review["mark"] ?>
 		    </div>
 		   	<div class="form-group">
-		        <label>Хороший коментар:</label> <?= $review["good_review"] ?>
+		        <label>Хороший відгук:</label> <?= $review["good_review"] ?>
 		    </div>
 		    <div class="form-group">
-		        <label>Поганий коментар:</label> <?= $review["bad_review"] ?>
+		        <label>Поганий відгук:</label> <?= $review["bad_review"] ?>
 		    </div>
 		    <div class="form-group">
 		        <label><b>Коментар:</b></label> <?= $review["comment"] ?>

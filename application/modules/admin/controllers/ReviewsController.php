@@ -76,9 +76,9 @@ class Admin_ReviewsController extends Zend_Controller_Action
     public function deleteAction()
     {
         
-        $newsTbl = new Admin_Model_DbTable_News();
-        $news_id = $this->_getParam("news", null);
-        $newsTbl->deleteNews($news_id);
+        $reviewsTBL = new Admin_Model_DbTable_Reviews();
+        $review_id = $this->_getParam("review", null);
+        $reviewsTBL->deleteReview($review_id);
         $this->_redirect('shop/products/list');
     }
     public function showAction(){
