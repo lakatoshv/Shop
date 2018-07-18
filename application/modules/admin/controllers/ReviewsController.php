@@ -36,41 +36,15 @@ class Admin_ReviewsController extends Zend_Controller_Action
         //$this->view->show = $show;
     }
 
-    public function addAction()
-    {
-        $newsTbl = new Admin_Model_DbTable_News();
-        $form = new Admin_Form_AddNews();
-        $this->view->form=$form;
-        if($this->getRequest()->isPost()){
-            if($form->isValid($_POST)){
-                $data = $form->getValues();
-                $date = new Zend_Date();
-                $data["date"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
-                $newsTbl->insert($data);
-                
-            }
-        }
-    }
 
-    public function editAction()
+    public function makevisibleAction()
     {
 
-        $newsTbl = new Admin_Model_DbTable_News();
-        $news_id = $this->_getParam("news", null);
-        $newsTable = new Shop_Model_DbTable_News();
-        $this->view->news = $newsTable->showNews($news_id);
-
-        $form = new Admin_Form_EditNews();
-
-        $this->view->form=$form;
-        if($this->getRequest()->isPost()){
-            if($form->isValid($_POST)){
-                $data = $form->getValues();
-                $date = new Zend_Date();
-                $data["date"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
-                $newsTbl->updateNews($data, $news_id);
-            }
-        }
+        $reviewsTBL = new Admin_Model_DbTable_Reviews();
+        $review_id = $this->_getParam("review", null);
+        $moderal = $this->_getParam("moderal", null);
+        $data["moderal"] = $moderal;
+        $reviewsTBL->updateReview($data, $review_id);
     }
 
     public function deleteAction()
@@ -79,7 +53,6 @@ class Admin_ReviewsController extends Zend_Controller_Action
         $reviewsTBL = new Admin_Model_DbTable_Reviews();
         $review_id = $this->_getParam("review", null);
         $reviewsTBL->deleteReview($review_id);
-        $this->_redirect('shop/products/list');
     }
     public function showAction(){
         $id = $this->_getParam("review", null);

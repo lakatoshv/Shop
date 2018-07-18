@@ -13,14 +13,14 @@
 		<?php
 			if($review["moderal"] == 1){
 		?>
-			<a class="btn btn-default btn-sm" title="Приховати коментар" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'makevisible', 'review' => "{$review["id"]}", "makevisible" => "false"));?>"><i class="glyphicon glyphicon-eye-close"></i></a>
+			<a class="btn btn-default btn-sm" title="Приховати коментар" id="<?= $review["id"] ?>" onclick="ajaxQuery(this.id, '../../../makevisible/moderal/0/review/')"><i class="glyphicon glyphicon-eye-close"></i></a>
 		<?php
 			}
 			else{
 		?>
-			<a class="btn btn-success btn-sm" title="Зробити доступним для усіх" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'reviews','action'=>'makevisible', 'review' => "{$review["id"]}", "makevisible" => "true"));?>"><i class="glyphicon glyphicon-eye-open"></i></a>
+			<a class="btn btn-success btn-sm" id="<?= $review["id"] ?>" title="Зробити доступним для усіх" onclick="ajaxQuery(this.id, '../../../makevisible/moderal/1/review/')"><i class="glyphicon glyphicon-eye-open"></i></a>
 		<?php } ?>
-		<a class="btn btn-danger btn-sm" id="<?= $review["id"] ?>" onclick="ajaxQuery(this.id)"><i class="glyphicon glyphicon-trash"></i></a>
+		<a class="btn btn-danger btn-sm" id="<?= $review["id"] ?>" onclick="ajaxQuery(this.id, '../../../delete/review/')"><i class="glyphicon glyphicon-trash"></i></a>
 	</div>
 	<br>
 <div class="container">
@@ -57,3 +57,15 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	function ajaxQuery(id, url){
+		$.post(
+		  url + id,
+		  onAjaxSuccess
+		);
+	}
+	function onAjaxSuccess(data)
+		{
+		  location.reload();
+		}
+</script>
