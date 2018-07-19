@@ -5,7 +5,7 @@
 class Shop_Model_DbTable_Orders extends Zend_Db_Table_Abstract
 {
 	protected $_name = "orders";
-	function getCart($type, $value)
+	function getOrders($type, $value)
     {   
         $select = $this->_db->select()
                  ->from('orders')

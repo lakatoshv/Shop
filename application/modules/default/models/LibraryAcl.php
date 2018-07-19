@@ -54,7 +54,7 @@ class Model_LibraryAcl extends Zend_Acl
 
 		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin")->add(new Zend_Acl_Resource("admin:news"), "admin")->add(new Zend_Acl_Resource("admin:reviews"), "admin");
 
-		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:index"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
+		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:orders"), "default")->add(new Zend_Acl_Resource("default:index"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
 
 		$this->allow("guests", "default:customer", "login");
 		$this->allow("guests", "default:customer", "signup");
@@ -67,6 +67,7 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->deny("users", "default:error", "login");
 		$this->deny("users", "default:error", "signup");
 		$this->allow("users", "default:customer", array("index", "home", "logout", "mydata", "update"));
+		$this->allow("users", "default:orders", array("index", "show", "cancel"));
 
 		$this->allow("admins", "admin:product", array("index", "add", "edit", "delete"));
 		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete", "show"));

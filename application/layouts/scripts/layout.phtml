@@ -44,6 +44,23 @@
           <li>
             <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
           </li>
+          <?php
+            $user = Zend_Auth::getInstance();
+            if ( $user->hasIdentity()){
+              $email = $user->getIdentity()->email; ?>
+          ?>
+          <li>
+            <?php
+              $ordersTBL = new Shop_Model_DbTable_Orders();
+              $orders = $ordersTBL->getOrders("email", $email);
+              $count = count($orders);
+              $sum = 0;
+              ?>
+              <a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'index'));?>"><span class="glyphicon glyphicon-shopping-cart"></span> Мої замовлення [<b><?= $count; ?></b>]</a>
+          </li>
+          <?php
+            }
+          ?>
         </ul>
         <ul class="nav navbar-nav navbar-center">
           <li class="text-center center-block"><a style="color: white;" id="hide">Приховати меню</a></li>
@@ -124,7 +141,7 @@
         <!-- Dropdown-->
         <li class="panel panel-default" id="dropdown">
           <a data-toggle="collapse" href="#dropdown-lvl1">
-            <span class="glyphicon glyphicon-user"></span> Товари <span class="caret"></span>
+            Товари <span class="caret"></span>
           </a>
 
           <!-- Dropdown level 1 -->
@@ -153,7 +170,7 @@
             </div>
           </div>
           <a data-toggle="collapse" href="#dropdown-lvl2">
-            <span class="glyphicon glyphicon-user"></span> Новини <span class="caret"></span>
+            Новини <span class="caret"></span>
           </a>
 
           <!-- Dropdown level 1 -->
@@ -183,7 +200,7 @@
           </div>
         </li>
 
-        <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'reviews', 'action' => 'index')) ?>"><span class="glyphicon glyphicon-signal"></span>Відгуки</a></li>
+        <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'reviews', 'action' => 'index')) ?>">Відгуки</a></li>
 
       </ul>
     </div><!-- /.navbar-collapse -->
