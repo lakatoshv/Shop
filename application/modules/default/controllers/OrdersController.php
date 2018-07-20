@@ -10,6 +10,11 @@ class OrdersController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $user = Zend_Auth::getInstance();
+        $email = $user->getIdentity()->email;
+        $ordersTBL = new Shop_Model_DbTable_Orders();
+        $this->view->orders = $ordersTBL->getOrders("email", $email);
+
     }
 
     public function showAction()
