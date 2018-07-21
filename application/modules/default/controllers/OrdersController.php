@@ -24,7 +24,9 @@ class OrdersController extends Zend_Controller_Action
 
     public function cancelAction()
     {
-        
+        $order_id = $this->_getParam("order", null);
+        $ordersTbl = new Shop_Model_DbTable_Orders();
+        $ordersTbl->deleteOrder("id", $order_id);
     }
 
 

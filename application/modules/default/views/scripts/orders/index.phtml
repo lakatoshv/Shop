@@ -37,8 +37,8 @@
 						<?= $value["status"] ?>
 					</td>
 					<td class="actions" data-th="">
-						<a class="btn btn-primary btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$value["id"]}"));?>">Переглянути</a>
-						<a class="btn btn-danger btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'delete', 'news' => "{$value["id"]}", 'delete' => 1));?>">Скасувати замовлення</a>							
+						<a class="btn btn-primary btn-block" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>">Переглянути</a>
+						<a class="btn btn-danger btn-block" id="<?= $value["id"] ?>" onclick="ajaxQuery('<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'cancel', 'order' => "{$value["id"]}"));?>')">Скасувати замовлення</a>							
 					</td>
 				</tr>
 				<?php
@@ -90,7 +90,7 @@
 					</td>
 					<td class="actions" data-th="">
 						<a class="btn btn-primary btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$value["id"]}"));?>">Переглянути</a>
-						<a class="btn btn-danger btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'delete', 'news' => "{$value["id"]}", 'delete' => 1));?>">Скасувати замовлення</a>							
+						<a class="btn btn-danger btn-block" id="<?= $value["id"] ?>" onclick="ajaxQuery('<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'cancel', 'order' => "{$value["id"]}"));?>')">Скасувати замовлення</a>							
 					</td>
 				</tr>
 		</tbody>
@@ -101,3 +101,15 @@
 <?php
 					}
 					?>
+<script type="text/javascript">
+	function ajaxQuery(url){
+		$.post(
+		  url,
+		  onAjaxSuccess
+		);
+	}
+	function onAjaxSuccess(data)
+		{
+		  location.reload();
+		}
+</script>
