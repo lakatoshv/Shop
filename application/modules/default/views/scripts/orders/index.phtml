@@ -89,7 +89,7 @@
 						<?= $value["status"] ?>
 					</td>
 					<td class="actions" data-th="">
-						<a class="btn btn-primary btn-block" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'news','action'=>'edit', 'news' => "{$value["id"]}"));?>">Переглянути</a>
+						<a class="btn btn-primary btn-block" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>">Переглянути</a>
 						<a class="btn btn-danger btn-block" id="<?= $value["id"] ?>" onclick="ajaxQuery('<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'cancel', 'order' => "{$value["id"]}"));?>')">Скасувати замовлення</a>							
 					</td>
 				</tr>
