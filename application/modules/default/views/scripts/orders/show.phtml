@@ -1,31 +1,28 @@
 <br><br><br>
 <div class="container">
 	<div class="row">
-		<div id="block-step">
-            <div id="name-step">
-                <ul class="list-inline">
-                    <li><a href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show'));?>">1. Корзина товарів</a></li>
-                    <li><span class="glyphicon glyphicon-arrow-right"></span></li>
-                    <li><a href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'order','action'=>'contactinfo'));?>" >2. Контактна інформація</a></li>
-                    <li><span class="glyphicon glyphicon-arrow-right"></span></li>
-                    <li><a href="" class="active">3. Завершення</a></li>
-                </ul>
-            </div>
-            <p>Крок 3 із 3</p>
-        </div>
-        <br>
+        <!--
+            ["payed"]=> int(0)  ["status"]=> string(23) "На перевірці" } } 
+        -->
         <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">	
 			<div class="row">
 				<div class="receipt-header receipt-header-mid">
 					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
 						<div class="receipt-right">
-                            <p><b>ПІБ: </b><?= $this->customer_data["pib"] ?></p>
-							<p><b>Електронна пошта: </b><?= $this->customer_data["email"] ?></p>
-                            <p><b>Номер телефону: </b><?= $this->customer_data["phone"] ?></p>
-                            <p><b>Місто: </b><?= $this->customer_data["address"] ?></p>
-                            <p><b>Спосіб доставки: </b><?= $this->customer_data["delivery_type"] ?></p>
-                            <p><b>Тип оплати: </b><?= $this->customer_data["pay_type"] ?></p>
-                            <p><b>Примітка: </b><?= $this->customer_data["note"] ?></p>
+                            <p><b>ПІБ: </b><?= $this->orders[0]["pib"] ?></p>
+							<p><b>Електронна пошта: </b><?= $this->orders[0]["email"] ?></p>
+                            <p><b>Номер телефону: </b><?= $this->orders[0]["phone"] ?></p>
+                            <p><b>Місто: </b><?= $this->orders[0]["address"] ?></p>
+                            <br>
+                            <p><b>Статус: </b><?= $this->orders[0]["status"] ?></p>
+                            <p><b>Статус оплати: </b>
+                                <?php 
+                                    if($this->orders[0]["payed"] == 1) echo "Оплачено";
+                                    else echo "Не оплачено"; 
+                                ?></p>
+                            <p><b>Спосіб доставки: </b><?= $this->orders[0]["delivery_type"] ?></p>
+                            <p><b>Тип оплати: </b><?= $this->orders[0]["pay_type"] ?></p>
+                            <p><b>Примітка: </b><?= $this->orders[0]["note"] ?></p>
 						</div>
 					</div>
 				</div>
@@ -56,7 +53,7 @@
 				<div class="receipt-header receipt-header-mid receipt-footer">
 					<div class="col-xs-8 col-sm-8 col-md-8 text-left">
 						<div class="receipt-right">
-							<p><b>Дата замовлення: </b><?= date("d-m-o") ?></p>
+							<p><b>Дата замовлення: </b><?= $this->orders[0]["datetime"] ?></p>
 						</div>
 					</div>
 					<div class="col-xs-4 col-sm-4 col-md-4">
@@ -65,7 +62,19 @@
 					</div>
 				</div>
             </div>
-			
+			<a class="btn btn-danger btn-block" id="<?= $value["id"] ?>" onclick="ajaxQuery('<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'cancel', 'order' => "{$value["id"]}"));?>')">Скасувати замовлення</a>   
         </div>    
 	</div>
 </div>
+<script type="text/javascript">
+    function ajaxQuery(url){
+        $.post(
+          url,
+          onAjaxSuccess
+        );
+    }
+    function onAjaxSuccess(data)
+        {
+          location.reload();
+        }
+</script>

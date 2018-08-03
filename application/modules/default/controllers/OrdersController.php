@@ -43,18 +43,18 @@ class OrdersController extends Zend_Controller_Action
           $products[] = $productsTbl->showProduct($carts[0]["cart_id_products"]);
           $images[] = $imagesTbl->getImages($carts[0]["cart_id_products"]);
         }
+        $user = Zend_Auth::getInstance();
+        $email = $user->getIdentity()->email;
+        $ordersTbl = new Shop_Model_DbTable_Orders();
+        $orders = $ordersTbl->getOrders("email", "{$email}");
+        
         $this->view->carts = $carts;
+        $this->view->orders = $orders;
         $this->view->sum = $sum;
         $this->view->count = $count;
         $this->view->products = $products;
         $this->view->images = $images;
 
-        if(filter_input(INPUT_COOKIE, 'customer_data')){
-            $data = unserialize(filter_input(INPUT_COOKIE, 'customer_data'));
-            $this->view->customer_data = $data;
-            $date = new Zend_Date();
-            $data["datetime"] = "{$date->toString('YYYY-MM-dd HH:mm:ss')}";
-        }
     }
 
     public function cancelAction()
