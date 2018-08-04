@@ -52,7 +52,7 @@ class Model_LibraryAcl extends Zend_Acl
 
 		$this->add(new Zend_Acl_Resource("shop"))->add(new Zend_Acl_Resource("shop:products"), "shop")->add(new Zend_Acl_Resource("shop:basket"), "shop")->add(new Zend_Acl_Resource("shop:order"), "shop");
 
-		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin")->add(new Zend_Acl_Resource("admin:news"), "admin")->add(new Zend_Acl_Resource("admin:reviews"), "admin");
+		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin")->add(new Zend_Acl_Resource("admin:news"), "admin")->add(new Zend_Acl_Resource("admin:reviews"), "admin")->add(new Zend_Acl_Resource("admin:orders"), "admin");
 
 		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:orders"), "default")->add(new Zend_Acl_Resource("default:index"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
 
@@ -72,5 +72,6 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("admins", "admin:product", array("index", "add", "edit", "delete"));
 		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete", "show"));
 		$this->allow("admins", "admin:reviews", array("index", "list", "delete", "show", "makevisible"));
+		$this->allow("users", "admin:orders", array("index", "show", "cancel"));
 	}
 }
