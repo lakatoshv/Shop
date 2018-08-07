@@ -1,6 +1,6 @@
 <?php
 
-class OrdersController extends Zend_Controller_Action
+class Admin_OrdersController extends Zend_Controller_Action
 {
 
     public function init()
@@ -10,8 +10,9 @@ class OrdersController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        
         $ordersTBL = new Shop_Model_DbTable_Orders();
-        $this->view->orders = $ordersTBL->selectAll();
+        $this->view->orders = $ordersTBL->fetchAll();
     }
 
     public function showAction()
