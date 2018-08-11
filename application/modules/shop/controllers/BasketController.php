@@ -12,10 +12,10 @@ class Shop_BasketController extends Zend_Controller_Action
     {
         // action body
     }
-
     public function addAction()
     {
     	$product_id = $this->_getParam("product", null);
+        $count = $this->_getParam("count", null);
     	$this->view->product = $product_id;
         $productsTbl = new Shop_Model_DbTable_Products();
         $product = $productsTbl->showProduct($product_id);
@@ -28,17 +28,36 @@ class Shop_BasketController extends Zend_Controller_Action
             $ip = $_SERVER['REMOTE_ADDR'];
             if($ip == $cart[0]["cart_ip"]){
                 $date = new Zend_Date();
-                $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => ($cart[0]["cart_count"] + 1), "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
-                    $cartsTbl->updateCart($newcart, $cart[0]["cart_id"]);
-                    $this->_redirect('shop/products/list');
+                $elements = count($cartsTbl->selectAll()) + 1;
+                $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => $count, "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
+                $cartsTbl->updateCart($newcart, $cart[0]["cart_id"]);
+                $this->_redirect('shop/products/list');
+
             }
         }
         else {
             $ip = $_SERVER['REMOTE_ADDR'];
             $date = new Zend_Date();
             $newcart = array("cart_id_products" => $product_id, "cart_price" => $product[0]["price"], "cart_count" => "1", "cart_datetime" => $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip" => "$ip");
-                    $cartsTbl->insertCart($newcart);
-                    $this->_redirect('shop/products/list');
+            $cartsTbl->insertCart($newcart);
+            $cart = $cartsTbl->getCart("cart_datetime", $date->toString('YYYY-MM-dd HH:mm:ss'), "cart_ip", $ip);
+            if(isset($_SESSION["orders_cart"])){
+                    $orders_data = unserialize($_SESSION["orders_cart"]);
+                $orders_data[] = array(
+                    "id" => $cart[0]["cart_id"],
+                    "ip" => $ip
+                );
+                    $_SESSION["orders_cart"] = serialize($orders_data);
+                }
+                else{
+                    $orders_data = array();
+                $orders_data[] = array(
+                    "id" => $cart[0]["cart_id"],
+                    "ip" => $ip
+                );
+                $_SESSION["orders_cart"] = serialize($orders_data);
+                }
+            $this->_redirect('shop/products/list');
         }
 
     }
@@ -106,13 +125,18 @@ class Shop_BasketController extends Zend_Controller_Action
 
         switch ($delete) {
             case "1":
-                # code...
                 if($cart_id >= 0){
                     $cartsTbl->deleteCart("cart_id", "$cart_id");
                     //$this->_redirect('shop/basket/show');
                 }
+                $elements = unserialize($_SESSION["orders_cart"]);
+                for($i = 0; $i < count($elements); $i++){
+                    if($cart_id == $elements[$i]["id"]) unset($elements[$i]);
+                }
+                $_SESSION["orders_cart"] = serialize($elements);
                 break;
             case 'all':
+                unset($_SESSION["orders_cart"]);
                 $cartsTbl->deleteCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
                 $this->_redirect('shop/basket/show');
                 break;

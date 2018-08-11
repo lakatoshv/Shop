@@ -32,7 +32,14 @@ class Shop_OrderController extends Zend_Controller_Action
     public function confirmationAction()
     {
         $cartsTbl = new Shop_Model_DbTable_Cart();
-        $carts = $cartsTbl->getCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
+        $elements = unserialize($_SESSION["orders_cart"]);
+        $carts = array();
+        for($i = 0; $i < count($elements); $i++){
+            //$carts[] = $cartsTbl->getCart("cart_ip",$_SERVER['REMOTE_ADDR']);
+            $carts[] = $cartsTbl->getCart("cart_id", $elements[$i]["id"]);
+        }
+        
+
         $count = 0;
         $sum = 0;
         $products = array();
@@ -43,10 +50,10 @@ class Shop_OrderController extends Zend_Controller_Action
 
         if(count($carts) > 1){
           foreach ($carts as $cart) {
-            $sum += $cart["cart_price"] * $cart["cart_count"];
-            $count += $cart["cart_count"];
-            $products[] = $productsTbl->showProduct($cart["cart_id_products"]);
-            $images[] = $imagesTbl->getImages($cart["cart_id_products"]);
+            $sum += $cart["cart_price"] * $cart[0]["cart_count"];
+            $count += $cart[0]["cart_count"];
+            $products[] = $productsTbl->showProduct($cart[0]["cart_id_products"]);
+            $images[] = $imagesTbl->getImages($cart[0]["cart_id_products"]);
           }
         }
         else{
@@ -69,10 +76,18 @@ class Shop_OrderController extends Zend_Controller_Action
         }
 
         if($this->getRequest()->isPost()){
+            for($i = 0; $i < count($elements); $i++){
+                $myarr = $cartsTbl->getCart("cart_id", $elements[$i]["id"]);
+                unset($myarr[0]["cart_id"]);
+                $this->view->myarr = $myarr[0];
+                //$ordersCartsTbl = new Shop_Model_DbTable_OrdersCart();
+                //$ordersCartsTbl->insertCart($myarr[0]);
+                //$cartsTbl->deleteCart("cart_id", $elements[$i]["id"]);
+            }
             $orders = new Shop_Model_DbTable_Orders();
             $data["confirmed"] = 1;
-            $orders->insert($data);
-            //$cartsTbl->deleteCart("cart_ip", "{$_SERVER['REMOTE_ADDR']}");
+            $this->view->myarr = $data;
+            //$orders->insert($data);
         }
 
         

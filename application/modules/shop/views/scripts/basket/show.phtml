@@ -201,14 +201,21 @@
 
 
 <script type="text/javascript">
-	function ajaxQuery(id){
+	function ajaxAddCookie(url, data){
 		$.post(
 		  "../../delete/review/" + id,
 		  onAjaxSuccess
 		);
 	}
+	function ajaxQuery(id, value){
+		$.post(
+
+		  "../basket/add/product/" + id + "/count/" + value,
+		  onAjaxSuccess
+		);
+	}
 	function onAjaxSuccess(data)
 		{
-		  //location.reload();
+		  location.reload();
 		}
 </script>

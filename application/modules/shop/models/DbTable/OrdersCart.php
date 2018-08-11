@@ -2,14 +2,14 @@
 /**
 * 
 */
-class Shop_Model_DbTable_Cart extends Zend_Db_Table_Abstract
+class Shop_Model_DbTable_OrdersCart extends Zend_Db_Table_Abstract
 {
-	protected $_name = "cart";
+	protected $_name = "orders_cart";
 	function getCart($type, $value, $type2 = null, $value2 = null)
     {   
         if($type2 !== null && $value2 !== null){
             $select = $this->_db->select()
-                 ->from('cart')
+                 ->from('orders_cart')
                  ->where("$type=?",$value)->where("$type2=?",$value2);
         }
         else{
@@ -28,7 +28,7 @@ $result = $this->getAdapter()->fetchAll($select);
     function selectAll()
     {   
         $select = $this->_db->select()
-                 ->from('cart');
+                 ->from('orders_cart');
                  //->order('type');
                  //->having('count(*)= 1');
         $result = $this->getAdapter()->fetchAll($select);
@@ -39,14 +39,14 @@ $result = $this->getAdapter()->fetchAll($select);
     }
     public function insertCart($data){
         //INSERT INTO table_name(*) VALUES (*);
-        $this->_db->insert('cart', $data);
+        $this->_db->insert('orders_cart', $data);
     }
     public function updateCart($data, $id){
         //UPDATE table_name SET condition WHERE condition
-        $this->_db->update('cart', $data, 'cart_id = '.$id);
+        $this->_db->update('orders_cart', $data, 'cart_id = '.$id);
     }
     public function deleteCart($type, $value){
         //DELETE FROM table_name WHERE condition;
-        $this->_db->delete('cart', "`$type` = '".$value."'");
+        $this->_db->delete('orders_cart', "`$type` = '".$value."'");
     }
 }

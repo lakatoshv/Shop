@@ -16,9 +16,16 @@ foreach ($form->getElements() as $element) {
     $element->getDecorator('label')->setOption('tag', null);
     $form->setAttrib('enctype', 'multipart/form-data');
 }
+
 ?>
 <div class="container">
   <div class="row" data-ref="container">
+  	<?php
+  		if(filter_input(INPUT_COOKIE, 'customer_data')){
+            $set_cookie = filter_input(INPUT_COOKIE, 'set_cookie');
+            echo $set_cookie;
+        }
+  	?>
   	<div id="block-step">
 		<div id="name-step">
             <ul class="list-inline">
