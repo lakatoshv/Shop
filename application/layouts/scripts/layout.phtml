@@ -44,6 +44,17 @@
           <li>
             <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
           </li>
+          <!--
+          <li>
+            <a style="color: white;" href="№">Про нас</a>
+          </li>
+          <li>
+            <a style="color: white;" href="№">Контакти</a>
+          </li>
+          <li>
+            <a style="color: white;" href="№">Надіслати нам повідомлення</a>
+          </li>
+          -->
           <?php
             $user = Zend_Auth::getInstance();
             if ( $user->hasIdentity()){
@@ -184,6 +195,7 @@
             </div>
           </li>
           <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'reviews', 'action' => 'index')) ?>">Відгуки</a></li>
+          <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'users', 'action' => 'index')) ?>">Користувачі</a></li>
 
           <li class="panel panel-default" id="dropdown">
             <a data-toggle="collapse" href="#dropdown-lvl3">

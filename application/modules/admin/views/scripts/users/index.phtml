@@ -1,0 +1,86 @@
+<br><br>
+<div class="container">
+<table id="cart" class="table table-hover table-condensed">
+    	<thead>
+			<tr>
+				<th style="width:30%">ПІБ</th>
+				<th style="width:30%">Електронна пошта</th>
+				<th style="width:30%">Місто</th>
+				<th style="width:10%">Роль</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+
+				if(count($this->users) > 1){
+
+	        		foreach ($this->users as $key => $value) {
+	      		?>
+				<tr>
+					<td>
+						<?= $value["product_id"] ?>
+					</td>
+					<td data-th="Product">
+							<div class="col-sm-10">
+		                        <div class="media">
+		                            <div class="media-body">
+		                                <h4 class="media-heading">
+		                                	<a class="product"  product_id="<?= $value["product_id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
+		                                </h4>
+		                            </div>
+								</div>
+							</div>
+					</td>
+					<td>
+						<b><?= $value["count"] ?></b><a style="padding-left: 20px" class="product"  product_id="<?= $value["product_id"]; ?>" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'users','action'=>'list', 'product' => "{$value["product_id"]}"));?>">Проглянути відгуки</a>
+					</td>
+				</tr>
+				<?php
+					}
+					?>
+		</tbody>
+	</table>
+	<!--
+	<ul class="pager">
+	        <li>Показати товарів: 
+	          <select id="show_el" name="show" style="color: black;">
+	            <option < ?php if($this->show == 5) echo "selected"; ?> value ="5">5</option>
+	            <option < ?php if($this->show == 10) echo "selected"; ?> value ="10">10</option>
+	            <option < ?php if($this->show == 25) echo "selected"; ?> value="25">25</option>
+	            <option < ?php if($this->show == 50) echo "selected"; ?> value="50">50</option>
+	            <option < ?php if($this->show == 100) echo "selected"; ?> value="100">100</option>
+	          </select>
+	        </li>
+	        
+	        < php
+	          echo $this->paginationControl($this->news, "sliding", "pagination.phtml");
+	        ?>
+	      </ul>
+	     -->
+</div>
+					<?php
+				}
+				else if(count($this->news) == 1){
+						$news = $this->news[0];
+	      		?>
+				<tr>
+					<td data-th="Product">
+						<div class="row">
+							<div class="col-sm-10">
+		                        <div class="media">
+		                            <div class="media-body">
+		                                <h4 class="media-heading"><a href="#"><a class="news"  product_id="<?= $news["id"]; ?>" href="<?php echo $this->url(array('controller' => 'news', 'action' => 'show', 'news' => "".$value["id"]."")) ?>"><?= $news[0]["title"] ?></a></a></h4>
+		                            </div>
+								</div>
+							</div>
+						</div>
+					</td>
+				</tr>
+		</tbody>
+		<tfoot>
+		</tfoot>
+	</table>
+</div>
+<?php
+					}
+					?>
