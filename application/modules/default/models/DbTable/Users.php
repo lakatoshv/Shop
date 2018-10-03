@@ -40,15 +40,7 @@ $result = $this->getAdapter()->fetchAll($select);
         }
         return false;
     }
-    public function insertOrder($data){
-        //INSERT INTO table_name(*) VALUES (*);
-        $this->_db->insert('customers', $data);
-    }
-    public function updateOrder($data, $id){
-        //UPDATE table_name SET condition WHERE condition
-        $this->_db->update('customers', $data, 'id = '.$id);
-    }
-    public function deleteOrder($type, $value){
+    public function deleteUser($type, $value){
         //DELETE FROM table_name WHERE condition;
         $this->_db->delete('customers', "`$type` = '".$value."'");
     }

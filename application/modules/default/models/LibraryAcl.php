@@ -72,7 +72,7 @@ class Model_LibraryAcl extends Zend_Acl
 		$this->allow("admins", "admin:product", array("index", "add", "edit", "delete"));
 		$this->allow("admins", "admin:news", array("index", "add", "edit", "delete", "show"));
 		$this->allow("admins", "admin:reviews", array("index", "list", "delete", "show", "makevisible"));
-		$this->allow("admins", "admin:users", array("index", "show"));
+		$this->allow("admins", "admin:users", array("index", "show", "delete"));
 		$this->allow("users", "admin:orders", array("index", "show", "cancel"));
 	}
 }
