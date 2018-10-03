@@ -54,7 +54,7 @@
 			<td><?= $value["category"] ?></td>
 			<td class="actions" data-th="">
 				<a class="btn btn-primary btn-sm" href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'edit', 'product' => "".$value["id"]."")) ?>"><i class="glyphicon glyphicon-edit"></i></a>
-				<a id="button" href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["name"] ?>" data-message="Ви дійсно хочете видалити цей товар?"><i class="glyphicon glyphicon-trash"></i></a>							
+				<a id="button" href="<?php echo $this->url(array( 'module' => 'admin', 'controller' => 'product', 'action' => 'delete', 'product' => "".$value["id"]."")) ?>" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["name"] ?>" data-message="Ви дійсно хочете видалити цей товар?"><i class="glyphicon glyphicon-trash"></i></a>							
 			</td>
 		</tr>
       <?php

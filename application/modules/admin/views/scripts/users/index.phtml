@@ -17,27 +17,28 @@
 	        		foreach ($this->users as $key => $value) {
 	      		?>
 				<tr>
-					<td>
-						<?= $value["product_id"] ?>
-					</td>
 					<td data-th="Product">
 							<div class="col-sm-10">
 		                        <div class="media">
 		                            <div class="media-body">
 		                                <h4 class="media-heading">
-		                                	<a class="product"  product_id="<?= $value["product_id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
+		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
 		                                </h4>
 		                            </div>
 								</div>
 							</div>
 					</td>
-					<td>
-						<b><?= $value["count"] ?></b><a style="padding-left: 20px" class="product"  product_id="<?= $value["product_id"]; ?>" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'users','action'=>'list', 'product' => "{$value["product_id"]}"));?>">Проглянути відгуки</a>
+					<td><?= $value["email"] ?></td>
+					<td><?= $value["city"] ?></td>
+					<td><?= $value["role"] ?></td>
+					<td class="actions" data-th="">
+						<a href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["firstname"]." ".$value["lastname"] ?>" id="<?= $value["id"] ?>" action="ajaxQuery(this.value, 'users/delete/user/')" data-message="Ви дійсно хочете видалити цього користувача?"><i class="glyphicon glyphicon-trash"></i></a>						
 					</td>
 				</tr>
 				<?php
 					}
 					?>
+
 		</tbody>
 	</table>
 	<!--
@@ -60,20 +61,26 @@
 </div>
 					<?php
 				}
-				else if(count($this->news) == 1){
-						$news = $this->news[0];
+				else if(count($this->users) == 1){
+						$value = $this->users[0];
 	      		?>
 				<tr>
 					<td data-th="Product">
-						<div class="row">
 							<div class="col-sm-10">
 		                        <div class="media">
 		                            <div class="media-body">
-		                                <h4 class="media-heading"><a href="#"><a class="news"  product_id="<?= $news["id"]; ?>" href="<?php echo $this->url(array('controller' => 'news', 'action' => 'show', 'news' => "".$value["id"]."")) ?>"><?= $news[0]["title"] ?></a></a></h4>
+		                                <h4 class="media-heading">
+		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
+		                                </h4>
 		                            </div>
 								</div>
 							</div>
-						</div>
+					</td>
+					<td><?= $value["email"] ?></td>
+					<td><?= $value["city"] ?></td>
+					<td><?= $value["role"] ?></td>
+					<td class="actions" data-th="">
+						<a id="button" href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["firstname"]." ".$value["lastname"] ?>" data-message="Ви дійсно хочете видалити цього користувача?"><i class="glyphicon glyphicon-trash"></i></a>							
 					</td>
 				</tr>
 		</tbody>
@@ -82,5 +89,60 @@
 	</table>
 </div>
 <?php
-					}
-					?>
+	}
+?>
+<div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Delete Parmanently</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure about this ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirm" value="" onclick="">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Dialog show event handler -->
+<script type="text/javascript">
+  $('#confirmDelete').on('show.bs.modal', function (e) {
+      $message = $(e.relatedTarget).attr('data-message');
+      $(this).find('.modal-body p').text($message);
+
+      $title = $(e.relatedTarget).attr('data-title');
+      $(this).find('.modal-title').text($title);
+
+      $id = $(e.relatedTarget).attr('id');
+      $(this).find('.modal-footer #confirm').attr("value", $id);
+
+      $onclick = $(e.relatedTarget).attr('action');
+      $(this).find('.modal-footer #confirm').attr("onclick", $onclick);
+      // Pass form reference to modal for submission on yes/ok
+      var form = $(e.relatedTarget).closest('form');
+      $(this).find('.modal-footer #confirm').data('form', form);
+  });
+ 
+  <!-- Form confirm (yes/ok) handler, submits form -->
+  $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+      $(this).data('form').submit();
+  });
+</script>
+<script type="text/javascript">
+
+	function ajaxQuery(id, url){
+		$.post(
+		  url + id,
+		  onAjaxSuccess
+		);
+
+	}
+	function onAjaxSuccess(data)
+		{
+		  location.reload();
+		}
+</script>
