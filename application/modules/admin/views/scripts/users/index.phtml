@@ -3,9 +3,10 @@
 <table id="cart" class="table table-hover table-condensed">
     	<thead>
 			<tr>
-				<th style="width:30%">ПІБ</th>
+				<th style="width:25%">ПІБ</th>
 				<th style="width:30%">Електронна пошта</th>
-				<th style="width:30%">Місто</th>
+				<th style="width:30%">Адреса</th>
+				<th style="width: 5%">Статус</th>
 				<th style="width:10%">Роль</th>
 			</tr>
 		</thead>
@@ -22,7 +23,7 @@
 		                        <div class="media">
 		                            <div class="media-body">
 		                                <h4 class="media-heading">
-		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
+		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'uderd','action'=>'show', 'user' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
 		                                </h4>
 		                            </div>
 								</div>
@@ -30,6 +31,7 @@
 					</td>
 					<td><?= $value["email"] ?></td>
 					<td><?= $value["city"] ?></td>
+					<td><?= $value["status"] == 1 ? "Онлайн" : "Офлайн" ?></td>
 					<td><?= $value["role"] ?></td>
 					<td class="actions" data-th="">
 						<a href="" class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#confirmDelete" data-title="<?= $value["firstname"]." ".$value["lastname"] ?>" id="<?= $value["id"] ?>" action="ajaxQuery(this.value, 'users/delete/user/')" data-message="Ви дійсно хочете видалити цього користувача?"><i class="glyphicon glyphicon-trash"></i></a>						
