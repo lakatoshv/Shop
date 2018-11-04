@@ -1,0 +1,175 @@
+<br><br>
+<div class="container">
+	<?php
+		$user = $this->user[0];
+	?>
+	<div class="panel panel-info">
+     	<div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="row">
+            	<div class="col-md-3 col-lg-3 " align="center">
+            		<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" class="img-circle img-responsive"><br>
+					<h3><?= $user["firstname"]." ".$user["lastname"] ?></h3>
+            	</div>
+            	<div class=" col-md-9 col-lg-9"> 
+            		<ul class="nav nav-tabs">
+                		<li class="active"><a data-toggle="tab" href="#main-info">Осовна інформація</a></li>
+                		<li><a data-toggle="tab" href="#orders">Замовлення</a></li>
+              		</ul>
+					<div class="tab-content">
+            			<div class="tab-pane active" id="main-info">
+            				<table class="table table-user-information">
+		                    	<tbody>
+		                      		<tr>
+		                        		<td>Ім'я:</td>
+		                        		<td><b><?= $user["firstname"] ?></b></td>
+		                      		</tr>
+		                      		<tr>
+		                        		<td>Фамілія:</td>
+		                        		<td><b><?= $user["lastname"] ?></b></td>
+		                      		</tr>
+		                      		<tr>
+		                        		<td>Електронна пошта:</td>
+		                        		<td><b><a href="mailto:<?= $user['email'] ?>"><?= $user["email"] ?></a></b></td>
+		                      		</tr>
+                             		<tr>
+                        				<td>Адреса:</td>
+                        				<td><b><?= $user["city"] ?></b></td>
+                      				</tr>
+                       				<tr>
+                       					<td>Дата реєстрації:</td>
+                       					<td><b><?= $user["registered"] ?></b></td>
+                  					</tr>
+                      				<tr>
+                        				<td>Статус:</td>
+                        				<td><b><?= $user["status"] ?></b></td>
+                      				</tr>
+                      				<tr>
+                        				<td>Роль:</td>
+                        				<td><b><?= $user["role"] ?></b></td>
+                      				</tr>
+                    			</tbody>
+                  			</table>
+                  			<a href="#" class="btn btn-primary">My Sales Performance</a>
+                  			<a href="#" class="btn btn-primary">Team Sales Performance</a>
+            			</div>
+            			<div class="tab-pane" id="orders">
+            				<p><b>Статистика</b></p>
+            				<table class="table table-user-information">
+		                    	<tbody>
+		                      		<tr>
+		                        		<td>Усі замовлення:</td>
+		                        		<td><b>20</b></td>
+		                      		</tr>
+		                      		<tr>
+		                        		<td>Оплачені замовлення:</td>
+		                        		<td><b>5</b></td>
+		                      		</tr>
+		                      		<tr>
+		                        		<td>Неоплачені замовлення:</td>
+		                        		<td><b>15</b></td>
+		                      		</tr>
+                             		<tr>
+                        				<td>Підтверджені замовлення:</td>
+                        				<td><b>19</b></td>
+                      				</tr>
+                       				<tr>
+                       					<td>Непідтверджені замовлення:</td>
+                       					<td><b>1</b></td>
+                  					</tr>
+                    			</tbody>
+                  			</table>
+            				<ul class="nav nav-tabs">
+		                		<li class="active"><a data-toggle="tab" href="#all">Усі замовлення</a></li>
+		                		<li><a data-toggle="tab" href="#paid">Оплачені замовлення</a></li>
+		                		<li><a data-toggle="tab" href="#unpaid">Неоплачені замовлення</a></li>
+		                		<li><a data-toggle="tab" href="#confirmed">Підтверджені замовлення</a></li>
+		                		<li><a data-toggle="tab" href="#unconfirmed">Непідтверджені замовлення</a></li>-
+		              		</ul>
+							<div class="tab-content">
+		            			<div class="tab-pane active" id="all">
+		            				Усі замовлення
+		            			</div>
+		            			<div class="tab-pane" id="paid">
+		            				Оплачені замовлення
+		            			</div>
+		            			<div class="tab-pane" id="unpaid">
+		            				Неоплачені замовлення
+		            			</div>
+		            			<div class="tab-pane" id="confirmed">
+		            				Підтверджені замовлення
+		            			</div>
+		            			<div class="tab-pane" id="unconfirmed">
+		            				Непідтверджені замовлення
+		            			</div>
+            				</div>
+            			</div>
+          			</div>
+          		</div>
+            </div>
+        </div>
+        <div class="panel-footer">
+        	<a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+        	<span class="pull-right">
+        		<a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+        		<a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+        	</span>
+    	</div>
+    </div>
+</div>
+<div class="modal fade" id="confirmDelete" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Delete Parmanently</h4>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure about this ?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-danger" id="confirm" value="" onclick="">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Dialog show event handler -->
+<script type="text/javascript">
+  $('#confirmDelete').on('show.bs.modal', function (e) {
+      $message = $(e.relatedTarget).attr('data-message');
+      $(this).find('.modal-body p').text($message);
+
+      $title = $(e.relatedTarget).attr('data-title');
+      $(this).find('.modal-title').text($title);
+
+      $id = $(e.relatedTarget).attr('id');
+      $(this).find('.modal-footer #confirm').attr("value", $id);
+
+      $onclick = $(e.relatedTarget).attr('action');
+      $(this).find('.modal-footer #confirm').attr("onclick", $onclick);
+      // Pass form reference to modal for submission on yes/ok
+      var form = $(e.relatedTarget).closest('form');
+      $(this).find('.modal-footer #confirm').data('form', form);
+  });
+ 
+  <!-- Form confirm (yes/ok) handler, submits form -->
+  $('#confirmDelete').find('.modal-footer #confirm').on('click', function(){
+      $(this).data('form').submit();
+  });
+</script>
+<script type="text/javascript">
+
+	function ajaxQuery(id, url){
+		$.post(
+		  url + id,
+		  onAjaxSuccess
+		);
+
+	}
+	function onAjaxSuccess(data)
+		{
+		  location.reload();
+		}
+</script>

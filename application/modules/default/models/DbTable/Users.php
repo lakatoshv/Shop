@@ -15,7 +15,7 @@ class Model_DbTable_Users extends Zend_Db_Table_Abstract
         }
         return false;
     }
-    function getcustomers($type, $value)
+    function getCustomer($type, $value)
     {   
         $select = $this->_db->select()
                  ->from('customers')
