@@ -89,19 +89,19 @@
 		              		</ul>
 							<div class="tab-content">
 		            			<div class="tab-pane active" id="all">
-		            				Усі замовлення
+		            				<?= var_dump($this->allOrders) ?>
 		            			</div>
 		            			<div class="tab-pane" id="paid">
-		            				Оплачені замовлення
+		            				<?= var_dump($this->payedOrders) ?>
 		            			</div>
 		            			<div class="tab-pane" id="unpaid">
-		            				Неоплачені замовлення
+		            				<?= var_dump($this->unpayedOrders) ?>
 		            			</div>
 		            			<div class="tab-pane" id="confirmed">
-		            				Підтверджені замовлення
+		            				<?= var_dump($this->confirmedOrders) ?>
 		            			</div>
 		            			<div class="tab-pane" id="unconfirmed">
-		            				Непідтверджені замовлення
+		            				<?= var_dump($this->unconfirmedOrders) ?>
 		            			</div>
             				</div>
             			</div>

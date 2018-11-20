@@ -30,6 +30,22 @@ $result = $this->getAdapter()->fetchAll($select);
         }
         return false;
     }
+    public function getOrdersForUser($email, $data = []){
+        if(!empty($data)){
+            $select = $this->_db->select()
+                 ->from('orders')
+                 ->where("email=?",$email)->where("".$data[0]."=?", $data[1]);
+        }
+        else
+            $select = $this->_db->select()
+                 ->from('orders')
+                 ->where("email=?",$email);
+        $result = $this->getAdapter()->fetchAll($select);
+        if($result){
+            return $result;
+        }
+        return false;
+    }
     public function insertOrder($data){
         //INSERT INTO table_name(*) VALUES (*);
         $this->_db->insert('orders', $data);

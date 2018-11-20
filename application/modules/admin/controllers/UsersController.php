@@ -25,8 +25,16 @@ class Admin_UsersController extends Zend_Controller_Action
                 $paginator->setItemCountPerPage($show)->setCurrentPageNumber($page);
                 $this->view->news = $paginator;
                 */
-                $this->view->user = $usersTBl->getCustomer("id", $user_id);
+                $user = $usersTBl->getCustomer("id", $user_id);
+                $this->view->user = $user;
                 //$this->view->show = $show;
+
+                $ordersTBL = new Shop_Model_DbTable_Orders();
+                $this->view->allOrders = $ordersTBL->getOrdersForUser($user[0]["email"]);
+                $this->view->confirmedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["confirmed", "1"]);
+                $this->view->unconfirmedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["confirmed", "0"]);
+                $this->view->payedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "1"]);
+                $this->view->unpayedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "0"]);
         }
         public function deleteAction(){
                 $usersTBl = new Model_DbTable_Users();
