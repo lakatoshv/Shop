@@ -5,92 +5,159 @@
 	?>
 	<div class="panel panel-info">
      	<div class="panel-heading">
-        </div>
-        <div class="panel-body">
-            <div class="row">
-            	<div class="col-md-3 col-lg-3 " align="center">
-            		<img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" class="img-circle img-responsive"><br>
-					<h3><?= $user["firstname"]." ".$user["lastname"] ?></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-3 col-lg-3 " align="center">
+            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="avatar" class="img-circle img-responsive"><br>
+					  <h3><?= $user["firstname"]." ".$user["lastname"] ?></h3>
+          </div>
+          <div class=" col-md-9 col-lg-9"> 
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#main-info">Осовна інформація</a></li>
+              <li><a data-toggle="tab" href="#orders">Замовлення</a></li>
+            </ul>
+					  <div class="tab-content">
+            	<div class="tab-pane active" id="main-info">
+            		<table class="table table-user-information">
+		              <tbody>
+		                <tr>
+		                  <td>Ім'я:</td>
+		                  <td><b><?= $user["firstname"] ?></b></td>
+		                </tr>
+		                <tr>
+		                  <td>Фамілія:</td>
+		                  <td><b><?= $user["lastname"] ?></b></td>
+		                </tr>
+		                <tr>
+		                  <td>Електронна пошта:</td>
+		                  <td><b><a href="mailto:<?= $user['email'] ?>"><?= $user["email"] ?></a></b></td>
+		                </tr>
+                    <tr>
+                      <td>Адреса:</td>
+                      <td><b><?= $user["city"] ?></b></td>
+                    </tr>
+                    <tr>
+                      <td>Дата реєстрації:</td>
+                      <td><b><?= $user["registered"] ?></b></td>
+                  	</tr>
+                    <tr>
+                      <td>Статус:</td>
+                      <td><b><?= $user["status"] ?></b></td>
+                    </tr>
+                    <tr>
+                      <td>Роль:</td>
+                      <td><b><?= $user["role"] ?></b></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <a href="#" class="btn btn-primary">My Sales Performance</a>
+                <a href="#" class="btn btn-primary">Team Sales Performance</a>
             	</div>
-            	<div class=" col-md-9 col-lg-9"> 
-            		<ul class="nav nav-tabs">
-                		<li class="active"><a data-toggle="tab" href="#main-info">Осовна інформація</a></li>
-                		<li><a data-toggle="tab" href="#orders">Замовлення</a></li>
-              		</ul>
-					<div class="tab-content">
-            			<div class="tab-pane active" id="main-info">
-            				<table class="table table-user-information">
-		                    	<tbody>
-		                      		<tr>
-		                        		<td>Ім'я:</td>
-		                        		<td><b><?= $user["firstname"] ?></b></td>
-		                      		</tr>
-		                      		<tr>
-		                        		<td>Фамілія:</td>
-		                        		<td><b><?= $user["lastname"] ?></b></td>
-		                      		</tr>
-		                      		<tr>
-		                        		<td>Електронна пошта:</td>
-		                        		<td><b><a href="mailto:<?= $user['email'] ?>"><?= $user["email"] ?></a></b></td>
-		                      		</tr>
-                             		<tr>
-                        				<td>Адреса:</td>
-                        				<td><b><?= $user["city"] ?></b></td>
-                      				</tr>
-                       				<tr>
-                       					<td>Дата реєстрації:</td>
-                       					<td><b><?= $user["registered"] ?></b></td>
-                  					</tr>
-                      				<tr>
-                        				<td>Статус:</td>
-                        				<td><b><?= $user["status"] ?></b></td>
-                      				</tr>
-                      				<tr>
-                        				<td>Роль:</td>
-                        				<td><b><?= $user["role"] ?></b></td>
-                      				</tr>
-                    			</tbody>
-                  			</table>
-                  			<a href="#" class="btn btn-primary">My Sales Performance</a>
-                  			<a href="#" class="btn btn-primary">Team Sales Performance</a>
-            			</div>
-            			<div class="tab-pane" id="orders">
-            				<p><b>Статистика</b></p>
-            				<table class="table table-user-information">
-		                    	<tbody>
-		                      		<tr>
-		                        		<td>Усі замовлення:</td>
-		                        		<td><b>20</b></td>
-		                      		</tr>
-		                      		<tr>
-		                        		<td>Оплачені замовлення:</td>
-		                        		<td><b>5</b></td>
-		                      		</tr>
-		                      		<tr>
-		                        		<td>Неоплачені замовлення:</td>
-		                        		<td><b>15</b></td>
-		                      		</tr>
-                             		<tr>
-                        				<td>Підтверджені замовлення:</td>
-                        				<td><b>19</b></td>
-                      				</tr>
-                       				<tr>
-                       					<td>Непідтверджені замовлення:</td>
-                       					<td><b>1</b></td>
-                  					</tr>
-                    			</tbody>
-                  			</table>
-            				<ul class="nav nav-tabs">
-		                		<li class="active"><a data-toggle="tab" href="#all">Усі замовлення</a></li>
-		                		<li><a data-toggle="tab" href="#paid">Оплачені замовлення</a></li>
-		                		<li><a data-toggle="tab" href="#unpaid">Неоплачені замовлення</a></li>
-		                		<li><a data-toggle="tab" href="#confirmed">Підтверджені замовлення</a></li>
-		                		<li><a data-toggle="tab" href="#unconfirmed">Непідтверджені замовлення</a></li>-
-		              		</ul>
-							<div class="tab-content">
-		            			<div class="tab-pane active" id="all">
-		            				<?= var_dump($this->allOrders) ?>
-		            			</div>
+            	<div class="tab-pane" id="orders">
+            		<p><b>Статистика</b></p>
+            		<table class="table table-user-information">
+		              <tbody>
+		                <tr>
+		                  <td>Усі замовлення:</td>
+		                  <td><b>20</b></td>
+		                </tr>
+		                <tr>
+		                  <td>Оплачені замовлення:</td>
+		                  <td><b>5</b></td>
+		                </tr>
+		                <tr>
+		                  <td>Неоплачені замовлення:</td>
+		                  <td><b>15</b></td>
+		                </tr>
+                    <tr>
+                      <td>Підтверджені замовлення:</td>
+                      <td><b>19</b></td>
+                    </tr>
+                    <tr>
+                      <td>Непідтверджені замовлення:</td>
+                      <td><b>1</b></td>
+                  	</tr>
+                  </tbody>
+                </table>
+            	  <ul class="nav nav-tabs">
+		              <li class="active"><a data-toggle="tab" href="#all">Усі замовлення</a></li>
+		              <li><a data-toggle="tab" href="#paid">Оплачені замовлення</a></li>
+		              <li><a data-toggle="tab" href="#unpaid">Неоплачені замовлення</a></li>
+		              <li><a data-toggle="tab" href="#confirmed">Підтверджені замовлення</a></li>
+		              <li><a data-toggle="tab" href="#unconfirmed">Непідтверджені замовлення</a></li>-
+		            </ul>
+							  <div class="tab-content">
+		            	<div class="tab-pane active" id="all">
+                    <?php
+                      if(count($this->allOrders) > 1){
+                        ?>
+                        <table class="table table-user-information">
+                          <thead>
+                            <tr>
+                              <th style="width: 5%">Код замовлення</th>
+                              <th style="width:10%">Дата</th>
+                              <th style="width: 5%">Cпосіб доставки</th>
+                              <th style="width:25%">Адреса доставки</th>
+                              <th style="width: 5%">Статус оплати</th>
+                              <th style="width: 5%">Тип оплати</th>
+                              <th style="width:30%">Примітка</th>
+                              <th style="width: 5%">Підтверджено</th>
+                              <th style="width:10%">Статус</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        <?php
+                        foreach ($this->allOrders as $key => $value) {
+                        ?>
+                            <tr>
+                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><?= $value["datetime"] ?></td>
+                              <td><?= $value["delivery_type"] ?></td>
+                              <td><?= $value["address"] ?></td>
+                              <td><?= $value["payed"] ?></td>
+                              <td><?= $value["pay_type"] ?></td>
+                              <td><?= $value["note"] ?></td>
+                              <td><?= $value["confirmed"] ?></td>
+                              <td><?= $value["status"] ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                          </tbody>
+                        </table>
+                        <?php
+                      }
+                      else{
+                        ?>
+                          <table class="table table-user-information">
+                            <tbody>
+                              <tr>
+                                <td>Усі замовлення:</td>
+                                <td><b>20</b></td>
+                              </tr>
+                              <tr>
+                                <td>Оплачені замовлення:</td>
+                                <td><b>5</b></td>
+                              </tr>
+                              <tr>
+                                <td>Неоплачені замовлення:</td>
+                                <td><b>15</b></td>
+                              </tr>
+                              <tr>
+                                <td>Підтверджені замовлення:</td>
+                                <td><b>19</b></td>
+                              </tr>
+                              <tr>
+                                <td>Непідтверджені замовлення:</td>
+                                <td><b>1</b></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        <?php
+                      }
+                    ?>
+		            		</div>
 		            			<div class="tab-pane" id="paid">
 		            				<?= var_dump($this->payedOrders) ?>
 		            			</div>
