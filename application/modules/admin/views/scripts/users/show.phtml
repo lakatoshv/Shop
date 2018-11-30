@@ -72,7 +72,7 @@
 		                </tr>
                     <tr>
                       <td>Підтверджені замовлення:</td>
-                      <td><b>19</b></td>
+                      <td><b><?= count($this->confirmedOrders) ?></b></td>
                     </tr>
                     <tr>
                       <td>Непідтверджені замовлення:</td>
@@ -314,7 +314,79 @@
                     ?>
 		            			</div>
 		            			<div class="tab-pane" id="confirmed">
-		            				<?= var_dump($this->confirmedOrders) ?>
+		            				<?php
+                      if(count($this->confirmedOrders) > 1){
+                        ?>
+                        <table class="table table-user-information">
+                          <thead>
+                            <tr>
+                              <th style="width: 5%">Код замовлення</th>
+                              <th style="width:10%">Дата</th>
+                              <th style="width: 5%">Cпосіб доставки</th>
+                              <th style="width:25%">Адреса доставки</th>
+                              <th style="width: 5%">Статус оплати</th>
+                              <th style="width: 5%">Тип оплати</th>
+                              <th style="width:30%">Примітка</th>
+                              <th style="width: 5%">Підтверджено</th>
+                              <th style="width:10%">Статус</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        <?php
+                        foreach ($this->confirmedOrders as $key => $value) {
+                        ?>
+                            <tr>
+                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><?= $value["datetime"] ?></td>
+                              <td><?= $value["delivery_type"] ?></td>
+                              <td><?= $value["address"] ?></td>
+                              <td><?= $value["payed"] ?></td>
+                              <td><?= $value["pay_type"] ?></td>
+                              <td><?= $value["note"] ?></td>
+                              <td><?= $value["confirmed"] ?></td>
+                              <td><?= $value["status"] ?></td>
+                            </tr>
+                        <?php
+                        }
+                        ?>
+                          </tbody>
+                        </table>
+                        <?php
+                      }
+                      else{
+                        $value = $this->confirmedOrders[0];
+                        ?>
+                          <table class="table table-user-information">
+                            <thead>
+                            <tr>
+                              <th style="width: 5%">Код замовлення</th>
+                              <th style="width:10%">Дата</th>
+                              <th style="width: 5%">Cпосіб доставки</th>
+                              <th style="width:25%">Адреса доставки</th>
+                              <th style="width: 5%">Статус оплати</th>
+                              <th style="width: 5%">Тип оплати</th>
+                              <th style="width:30%">Примітка</th>
+                              <th style="width: 5%">Підтверджено</th>
+                              <th style="width:10%">Статус</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><?= $value["datetime"] ?></td>
+                              <td><?= $value["delivery_type"] ?></td>
+                              <td><?= $value["address"] ?></td>
+                              <td><?= $value["payed"] ?></td>
+                              <td><?= $value["pay_type"] ?></td>
+                              <td><?= $value["note"] ?></td>
+                              <td><?= $value["confirmed"] ?></td>
+                              <td><?= $value["status"] ?></td>
+                            </tr>
+                          </tbody>
+                          </table>
+                        <?php
+                      }
+                    ?>
 		            			</div>
 		            			<div class="tab-pane" id="unconfirmed">
 		            				<?= var_dump($this->unconfirmedOrders) ?>
