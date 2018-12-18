@@ -44,34 +44,15 @@
           <li>
             <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
           </li>
-          <!--
           <li>
-            <a style="color: white;" href="№">Про нас</a>
+            <a href="#" style="color: white;">Про нас</a>
           </li>
           <li>
-            <a style="color: white;" href="№">Контакти</a>
+            <a href="#" style="color: white;">Контакти</a>
           </li>
           <li>
-            <a style="color: white;" href="№">Надіслати нам повідомлення</a>
+            <a href="#" style="color: white;">Надіслати нам повідомлення</a>
           </li>
-          -->
-          <?php
-            $user = Zend_Auth::getInstance();
-            if ( $user->hasIdentity()){
-              $email = $user->getIdentity()->email; ?>
-          ?>
-          <li>
-            <?php
-              $ordersTBL = new Shop_Model_DbTable_Orders();
-              $orders = $ordersTBL->getOrders("email", $email);
-              $count = count($orders);
-              $sum = 0;
-              ?>
-              <a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'index'));?>"><span class="glyphicon glyphicon-shopping-cart"></span> Мої замовлення [<b><?= $count; ?></b>]</a>
-          </li>
-          <?php
-            }
-          ?>
         </ul>
         <ul class="nav navbar-nav navbar-center">
           <li class="text-center center-block"><a style="color: white;" id="hide">Приховати меню</a></li>
@@ -110,6 +91,15 @@
                   </li>
                   <li>
                     <a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'mydata'));?>">Особисті дані</a>
+                  </li>
+                  <li>
+                    <?php
+                      $ordersTBL = new Shop_Model_DbTable_Orders();
+                      $orders = $ordersTBL->getOrders("email", $user->getIdentity()->email);
+                      $count = count($orders);
+                      $sum = 0;
+                      ?>
+                      <a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'index'));?>"><span class="glyphicon glyphicon-shopping-cart"></span> Мої замовлення [<b><?= $count; ?></b>]</a>
                   </li>
                 </ul>
               </a>
@@ -221,11 +211,267 @@
 <?php 
   }
   echo $this->layout()->content; ?>
-<footer class="text-center navbar navbar-bottom">
-  <p class="pull-right"><a class="vidstupi" href="#" id="up"><span class="glyphicon glyphicon-arrow-up vidstupi"></span>Наверх</a></p>
-  <p>&copy; 2018 Lakatosh Vitaliy. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style type="text/css">
+footer{
+  background: #0C0D14;
+}
+.full {
+    width: 100%;  
+}
+.gap {
+  height: 30px;
+  width: 100%;
+  clear: both;
+  display: block;
+}
+.footer {
+  height: auto;
+  padding-bottom: 30px;
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #DDDDDD;
+}
+.footer p {
+  margin: 0;
+}
+.footer img {
+  max-width: 100%;
+}
+.footer h3 {
+  border-bottom: 1px solid #BAC1C8;
+  color: #54697E;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  padding: 40px 0 10px;
+  text-transform: uppercase;
+}
+.footer ul {
+  font-size: 13px;
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 0;
+  margin-top: 15px;
+  color: #7F8C8D;
+}
+.footer ul li a {
+  padding: 0 0 5px 0;
+  display: block;
+}
+.footer a {
+  color: #78828D
+}
+.supportLi h4 {
+  font-size: 20px;
+  font-weight: lighter;
+  line-height: normal;
+  margin-bottom: 0 !important;
+  padding-bottom: 0;
+}
+.newsletter-box input#appendedInputButton {
+  background: #FFFFFF;
+  display: inline-block;
+  float: left;
+  height: 30px;
+  clear: both;
+  width: 100%;
+}
+.newsletter-box .btn {
+  border: medium none;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  height: 40px;
+  padding: 0;
+  width: 100%;
+  color: #fff;
+}
+.newsletter-box {
+  overflow: hidden;
+}
+.bg-gray {
+  background-image: -moz-linear-gradient(center bottom, #BBBBBB 0%, #F0F0F0 100%);
+  box-shadow: 0 1px 0 #B4B3B3;
+}
+.social li {
+  background: none repeat scroll 0 0 #B5B5B5;
+  border: 2px solid #B5B5B5;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -o-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%;
+  float: left;
+  height: 36px;
+  line-height: 36px;
+  margin: 0 8px 0 0;
+  padding: 0;
+  text-align: center;
+  width: 36px;
+  transition: all 0.5s ease 0s;
+  -moz-transition: all 0.5s ease 0s;
+  -webkit-transition: all 0.5s ease 0s;
+  -ms-transition: all 0.5s ease 0s;
+  -o-transition: all 0.5s ease 0s;
+}
+.social li:hover {
+  transform: scale(1.15) rotate(360deg);
+  -webkit-transform: scale(1.1) rotate(360deg);
+  -moz-transform: scale(1.1) rotate(360deg);
+  -ms-transform: scale(1.1) rotate(360deg);
+  -o-transform: scale(1.1) rotate(360deg);
+}
+.social li a {
+  color: #EDEFF1;
+}
+.social li:hover {
+  border: 2px solid #2c3e50;
+  background: #2c3e50;
+}
+.social li a i {
+  font-size: 16px;
+  margin: 0 0 0 5px;
+  color: #EDEFF1 !important;
+}
+.footer-bottom {
+  border-top: 1px solid #DDDDDD;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.footer-bottom p.pull-left {
+  padding-top: 6px;
+}
+.payments {
+  font-size: 1.5em; 
+}
+
+#footer ul.quick-links li{
+  padding: 3px 0;
+  -webkit-transition: .5s all ease;
+  -moz-transition: .5s all ease;
+  transition: .5s all ease;
+}
+#footer ul.quick-links li:hover{
+  padding: 3px 0;
+  margin-left:5px;
+  font-weight:700;
+}
+#footer ul.quick-links li a i{
+  margin-right: 5px;
+}
+#footer ul.quick-links li:hover a{
+  color: #fff;
+}
+#footer ul.quick-links li:hover a i {
+    font-weight: 700;
+}
+</style>
+</div>
+
+
+<footer>
+  <div class="footer" id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Графік праці</h3>
+          <ul class="list-unstyled quick-links">
+            <li>Будні дні: з 9:00 до 18:00</li>
+            <li>Субота, Неділя - вихідні</li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Навігація</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Головна</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Про нас</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Контакти</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Надіслати нам повідомлення</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Партнерам</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Корисна інформація</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Акції</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Подарункові сертефікати</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Перевід грошей з картки на картку</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Сервіс і Допомога</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Служба підтримки</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Як зробити замовлення</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Спосіб оплати</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Публічна оферта</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Питання і відповіді</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Умови використання сайту</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4  col-md-4 col-sm-6 col-xs-12 ">
+          <h3>Підписка</h3>
+          <ul>
+            <li>
+              <div class="form-group">
+                <p>Підпишіться і отримуйте новини про акції і спеціальних пропозиціях</p><br>
+                <div class="input-group">
+                  <input class="form-control" placeholder="Електронна пошта" type="email">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Підписатись</button>
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="social">
+            <p>Ми в соціальних мережах:</p><br>
+            <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+          </ul>
+        </div>
+      </div>
+      <!--/.row--> 
+    </div>
+    <!--/.container--> 
+  </div>
+  <!--/.footer-->
+    
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="center">
+        <ul class="nav nav-pills payments">
+          <li><i class="fa fa-cc-visa"></i></li>
+          <li><i class="fa fa-cc-mastercard"></i></li>
+          <li><i class="fa fa-cc-amex"></i></li>
+          <li><i class="fa fa-cc-paypal"></i></li>
+        </ul> 
+      </div>
+      <p class="pull-right">
+          <a class="vidstupi" href="#" id="up">
+            <span class="glyphicon glyphicon-arrow-up vidstupi"></span>Наверх
+          </a>
+        </p>
+        <p>
+          &copy; 2018 Lakatosh Vitaliy. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+        </p>
+    </div>
+  </div>
+  <!--/.footer-bottom--> 
 </footer>
-</footer>
+
 <script type="text/javascript">
 jQuery(function(f){
     var element1 = f('#top-menu');
