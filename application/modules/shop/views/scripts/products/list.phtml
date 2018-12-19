@@ -6,9 +6,49 @@
   </div>
   <br> 
 </div>
+<style type="text/css">
+  .vertical-align {
+    display: flex;
+    align-items: center;
+  }
+  .products-menu li{
+  }
+</style>
 <div class="container">
   <div class="row" data-ref="container">
     <div class="col-lg-12">
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <ul class="nav navbar-nav text-center vertical-align products-menu">
+            <li><a href="#"><b>Усі товари</b></a></li>
+            <li>
+              <a href="#">
+                <img src="<?= $this->baseUrl() ?>/images/new.png"/> <b>Новинки</b>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="<?= $this->baseUrl() ?>/images/best.png"/> <b>Лідери продаж</b>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="<?= $this->baseUrl() ?>/images/sale.png"/> <b>Розпродаж</b>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="<?= $this->baseUrl() ?>/images/promotions.png"/> <b>Акції</b></a>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <img src="<?= $this->baseUrl() ?>/images/gift.png"/> <b>Подарункові сертефікати</b>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
       <center>
         <div class="text-left">
           <ul class="list-inline">
@@ -131,9 +171,6 @@
         <div class="box product-<?= $value["id"]; ?>">
           <div class="box-gray aligncenter">
             <h3><a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('controller' => 'products', 'action' => 'show', 'product' => "".$value["id"]."")) ?>"><?= $value["name"] ?></a></h3>
-            <div class="icon">
-              <i class="fa fa-desktop fa-3x"></i>
-            </div>
             <div class="product-item">
                 <?php
                   $url = $this->baseUrl();
