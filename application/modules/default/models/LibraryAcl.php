@@ -54,11 +54,11 @@ class Model_LibraryAcl extends Zend_Acl
 
 		$this->add(new Zend_Acl_Resource("admin"))->add(new Zend_Acl_Resource("admin:product"), "admin")->add(new Zend_Acl_Resource("admin:news"), "admin")->add(new Zend_Acl_Resource("admin:reviews"), "admin")->add(new Zend_Acl_Resource("admin:orders"), "admin")->add(new Zend_Acl_Resource("admin:users"), "admin");
 
-		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:orders"), "default")->add(new Zend_Acl_Resource("default:index"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
+		$this->add(new Zend_Acl_Resource("default"))->add(new Zend_Acl_Resource("default:customer"), "default")->add(new Zend_Acl_Resource("default:orders"), "default")->add(new Zend_Acl_Resource("default:site"), "default")->add(new Zend_Acl_Resource("default:error"), "default");
 
 		$this->allow("guests", "default:customer", "login");
 		$this->allow("guests", "default:customer", "signup");
-		$this->allow("guests", "default:index", "index");
+		$this->allow("guests", "default:site", array("index", "about"));
 		$this->allow("guests", "shop:products", array("index", "list", "show"));
 		$this->allow("guests", "shop:basket", array("add", "show", "delete", "change"));
 		$this->allow("guests", "shop:order", array("index", "contactinfo", "confirmation"));
