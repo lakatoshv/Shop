@@ -17,6 +17,10 @@ class SiteController extends Zend_Controller_Action
 
     }
 
+    public function contactsAction(){
+
+    }
+
 
 }
 
