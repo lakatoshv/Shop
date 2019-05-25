@@ -25,39 +25,40 @@
     ?>
     <?php //$this->dojo()->enable(); ?>
   </head>
-<div class="navbar-fixed-top text-center navbar-inverse" >
-  <span id="show">Показати меню</span>
-</div>
-  <nav class="navbar navbar-inverse navbar-fixed-top" id="top-menu" role="navigation" >
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle Navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li><img src="<?php echo $this->baseUrl(); ?>/images/logo.png"/></li>
-          <li>
-            <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
-          </li>
-          <li>
-            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'site', 'action' => 'about')) ?>" style="color: white;">Про нас</a>
-          </li>
-          <li>
-            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'site', 'action' => 'contacts')) ?>" style="color: white;">Контакти</a>
-          </li>
-          <li>
-            <a href="#" style="color: white;">Надіслати нам повідомлення</a>
-          </li>
-        </ul>
-        <ul class="nav navbar-nav navbar-center">
-          <li class="text-center center-block"><a style="color: white;" id="hide">Приховати меню</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+  <body>
+    <div class="navbar-fixed-top text-center navbar-inverse" >
+      <span id="show">Показати меню</span>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" id="top-menu" role="navigation" >
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle Navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li><img src="<?php echo $this->baseUrl(); ?>/images/logo.png"/></li>
+            <li>
+              <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller' => 'products', 'action' => 'list')) ?>">Головна</a>
+            </li>
+            <li>
+              <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'site', 'action' => 'about')) ?>" style="color: white;">Про нас</a>
+            </li>
+            <li>
+              <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'site', 'action' => 'contacts')) ?>" style="color: white;">Контакти</a>
+            </li>
+            <li>
+              <a href="#" style="color: white;">Надіслати нам повідомлення</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-center">
+            <li class="text-center center-block"><a style="color: white;" id="hide">Приховати меню</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
             <li>
               <?php
               $cartsTbl = new Shop_Model_DbTable_Cart();
@@ -77,11 +78,15 @@
               //echo substr($sum, 0, 1); // 2
               //echo substr($sum, -1); // 8
               ?>
-              <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show'));?>"><span class="glyphicon glyphicon-shopping-cart"></span> Корзина [<b><?= $count; ?> товари</b> на суму <b><?= number_format($sum, 2, ',', ' ');; ?> грн.</b>]</a>
+              <a style="color: white;" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'basket','action'=>'show'));?>">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Корзина [<b><?= $count; ?> товари</b> на суму <b><?= number_format($sum, 2, ',', ' ');; ?> грн.</b>]
+              </a>
             </li>
-          <?php
-            $user = Zend_Auth::getInstance();
-            if ( $user->hasIdentity()) : $customer = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname; ?>
+            <?php
+              $user = Zend_Auth::getInstance();
+              if ( $user->hasIdentity()) : $customer = $user->getIdentity()->firstname." ".$user->getIdentity()->lastname; 
+            ?>
+
             <li class="dropdown">
               <a style="color: white;" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
                 <span class="glyphicon glyphicon-user vidstupi"></span><?php echo $customer ?> <span class="caret"></span>
@@ -104,116 +109,234 @@
                 </ul>
               </a>
             </li>
+
             <li>
               <a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'logout'));?>"><span class="glyphicon glyphicon-log-out vidstupi"></span>Вийти</a>
             </li>
-                <?php else: ?> 
+            <?php else: ?> 
             <li><a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'signup')) ?>"><span class="glyphicon glyphicon-user vidstupi"></span>Зареєструватись</a></li>
             <li><a style="color: white;" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'login')) ?>"><span class="glyphicon glyphicon-log-in vidstupi"></span>Ввійти</a></li>
               <?php endif;?>
-          </ul> 
-        </ul>                  
+          </ul>                
+        </div>
       </div>
-    </div>
-  </nav>
-<br><br><br>
-<?php
-  $user = Zend_Auth::getInstance();
-  if ( $user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
-?>
-<div class="side-menu">
-  <nav class="navbar navbar-default" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <div class="brand-wrapper">
-        <!-- Hamburger -->
-        <button type="button" class="navbar-toggle">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-    </div>
-    <!-- Main Menu -->
-    <div class="side-menu-container">
-      <ul class="nav navbar-nav">
-
-        <!-- Dropdown-->
-        <li class="panel panel-default" id="dropdown">
-          <a data-toggle="collapse" href="#dropdown-lvl1">
-            Товари <span class="caret"></span>
-          </a>
-          <!-- Dropdown level 1 -->
-          <div id="dropdown-lvl1" class="panel-collapse collapse">
-            <div class="panel-body">
-              <ul class="nav navbar-nav">
-                <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'index')) ?>">Проглянути усі товари</a></li>
-                <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'add')) ?>">Додати новий товар</a></li>
-
-                <!-- Dropdown level 2 -->
-                <li class="panel panel-default" id="dropdown">
-                  <a data-toggle="collapse" href="#dropdown-sublvl1">
-                    <span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span>
-                  </a>
-                  <div id="dropdown-sublvl1" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <ul class="nav navbar-nav">
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+    </nav>
+    <br><br><br>
+    <?php
+      $user = Zend_Auth::getInstance();
+      if ( $user->hasIdentity() && $user->getIdentity()->role == "admins"){ 
+    ?>
+    <div class="side-menu">
+      <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <div class="brand-wrapper">
+            <!-- Hamburger -->
+            <button type="button" class="navbar-toggle">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
           </div>
-        </li>
-          <li class="panel panel-default" id="dropdown">
-            <a data-toggle="collapse" href="#dropdown-lvl2">
-              Новини <span class="caret"></span>
-            </a>
-            <!-- Dropdown level 1 -->
-            <div id="dropdown-lvl2" class="panel-collapse collapse">
-              <div class="panel-body">
-                <ul class="nav navbar-nav">
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Проглянути усі новини</a></li>
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'add')) ?>">Додати нову новину</a></li>
-                </ul>
+        </div>
+        <!-- Main Menu -->
+        <div class="side-menu-container">
+          <ul class="nav navbar-nav">
+
+            <!-- Dropdown-->
+            <li class="panel panel-default" id="dropdown">
+              <a data-toggle="collapse" href="#dropdown-lvl1">
+                Товари <span class="caret"></span>
+              </a>
+              <!-- Dropdown level 1 -->
+              <div id="dropdown-lvl1" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <ul class="nav navbar-nav">
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'index')) ?>">Проглянути усі товари</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'product', 'action' => 'add')) ?>">Додати новий товар</a></li>
+
+                    <!-- Dropdown level 2 -->
+                    <li class="panel panel-default" id="dropdown">
+                      <a data-toggle="collapse" href="#dropdown-sublvl1">
+                        <span class="glyphicon glyphicon-off"></span> Sub Level <span class="caret"></span>
+                      </a>
+                      <div id="dropdown-sublvl1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <ul class="nav navbar-nav">
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                            <li><a href="#">Link</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </li>
-          <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'reviews', 'action' => 'index')) ?>">Відгуки</a></li>
-          <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'users', 'action' => 'index')) ?>">Користувачі</a></li>
-
-          <li class="panel panel-default" id="dropdown">
-            <a data-toggle="collapse" href="#dropdown-lvl3">
-              Замовлення <span class="caret"></span>
-            </a>
-            <!-- Dropdown level 1 -->
-            <div id="dropdown-lvl3" class="panel-collapse collapse">
-              <div class="panel-body">
-                <ul class="nav navbar-nav">
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'orders', 'action' => 'index')) ?>">Усі замовлення</a></li>
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'orders', 'action' => 'index')) ?>">Оплачені замовлення</a></li>
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Неоплачені замовлення</a></li>
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Прідтверджені замовлення</a></li>
-                  <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Непідтверджені замовлення</a></li>
-                </ul>
+            </li>
+            <li class="panel panel-default" id="dropdown">
+              <a data-toggle="collapse" href="#dropdown-lvl2">
+                Новини <span class="caret"></span>
+              </a>
+              <!-- Dropdown level 1 -->
+              <div id="dropdown-lvl2" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <ul class="nav navbar-nav">
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Проглянути усі новини</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'add')) ?>">Додати нову новину</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </nav>
-</div>
-<?php 
-  }
-  echo $this->layout()->content; ?>
+            </li>
+            <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'reviews', 'action' => 'index')) ?>">Відгуки</a></li>
+            <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'users', 'action' => 'index')) ?>">Користувачі</a></li>
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+            <li class="panel panel-default" id="dropdown">
+              <a data-toggle="collapse" href="#dropdown-lvl3">
+                Замовлення <span class="caret"></span>
+              </a>
+              <!-- Dropdown level 1 -->
+              <div id="dropdown-lvl3" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <ul class="nav navbar-nav">
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'orders', 'action' => 'index')) ?>">Усі замовлення</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'orders', 'action' => 'index')) ?>">Оплачені замовлення</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Неоплачені замовлення</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Прідтверджені замовлення</a></li>
+                    <li><a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'news', 'action' => 'index')) ?>">Непідтверджені замовлення</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </nav>
+    </div>
+    <?php 
+    }
+    echo $this->layout()->content; ?>
 
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+<footer>
+  <div class="footer" id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Графік праці</h3>
+          <ul class="list-unstyled quick-links">
+            <li>Будні дні: з 9:00 до 18:00</li>
+            <li>Субота, Неділя - вихідні</li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Навігація</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Головна</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Про нас</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Контакти</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Надіслати нам повідомлення</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Партнерам</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Корисна інформація</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Акції</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Подарункові сертефікати</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Перевід грошей з картки на картку</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
+          <h3>Сервіс і Допомога</h3>
+          <ul class="list-unstyled quick-links">
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Служба підтримки</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Як зробити замовлення</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Спосіб оплати</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Публічна оферта</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Питання і відповіді</a></li>
+            <li><a href="#"><i class="fa fa-angle-double-right"></i>Умови використання сайту</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-4  col-md-4 col-sm-6 col-xs-12 ">
+          <h3>Підписка</h3>
+          <ul>
+            <li>
+              <div class="form-group">
+                <p>Підпишіться і отримуйте новини про акції і спеціальних пропозиціях</p><br>
+                <div class="input-group">
+                  <input class="form-control" placeholder="Електронна пошта" type="email">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button">Підписатись</button>
+                  </span>
+                </div>
+              </div>
+            </li>
+          </ul>
+          <ul class="social">
+            <p>Ми в соціальних мережах:</p><br>
+            <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
+            <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
+          </ul>
+        </div>
+      </div>
+      <!--/.row--> 
+    </div>
+    <!--/.container--> 
+  </div>
+  <!--/.footer-->
+    
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="center">
+        <ul class="nav nav-pills payments">
+          <li><i class="fa fa-cc-visa"></i></li>
+          <li><i class="fa fa-cc-mastercard"></i></li>
+          <li><i class="fa fa-cc-amex"></i></li>
+          <li><i class="fa fa-cc-paypal"></i></li>
+        </ul> 
+      </div>
+      <p class="pull-right">
+          <a class="vidstupi" href="#" id="up">
+            <span class="glyphicon glyphicon-arrow-up vidstupi"></span>Наверх
+          </a>
+        </p>
+        <p>
+          &copy; 2018 Lakatosh Vitaliy. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+        </p>
+    </div>
+  </div>
+  <!--/.footer-bottom--> 
+</footer>
+</body>
+
+<script type="text/javascript">
+jQuery(function(f){
+    var element1 = f('#top-menu');
+    var element2 = f('#show');
+    var element3 = f('#up');
+    f(window).scroll(function(){
+        document.getElementById("top-menu").style.display = "none";
+        element1['fade'+ (f(this).scrollTop() < 100 ? 'In': 'Out')](100);
+        element2['fade'+ (f(this).scrollTop() > 100 ? 'In': 'Out')](100);
+        element3['fade'+ (f(this).scrollTop() > 100 ? 'In': 'Out')](100);         
+    });
+});   
+
+  $( "#show" ).on( "click", function() {
+    document.getElementById("top-menu").style.display = "block";
+    document.getElementById("#show").style.display = "none";
+  });
+  $( "#hide" ).on( "click", function() {
+    document.getElementById("show").style.display = "block";
+    document.getElementById("top-menu").style.display = "none";
+  });
+</script>
 <style type="text/css">
 footer{
   background: #0C0D14;
@@ -373,125 +496,4 @@ footer{
     font-weight: 700;
 }
 </style>
-</div>
-
-
-<footer>
-  <div class="footer" id="footer">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-          <h3>Графік праці</h3>
-          <ul class="list-unstyled quick-links">
-            <li>Будні дні: з 9:00 до 18:00</li>
-            <li>Субота, Неділя - вихідні</li>
-          </ul>
-        </div>
-        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-          <h3>Навігація</h3>
-          <ul class="list-unstyled quick-links">
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Головна</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Про нас</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Контакти</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Надіслати нам повідомлення</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Партнерам</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-          <h3>Корисна інформація</h3>
-          <ul class="list-unstyled quick-links">
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Акції</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Подарункові сертефікати</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Перевід грошей з картки на картку</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-2  col-md-2 col-sm-4 col-xs-6">
-          <h3>Сервіс і Допомога</h3>
-          <ul class="list-unstyled quick-links">
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Служба підтримки</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Як зробити замовлення</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Спосіб оплати</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Повернення товару</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Публічна оферта</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Питання і відповіді</a></li>
-            <li><a href="#"><i class="fa fa-angle-double-right"></i>Умови використання сайту</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-4  col-md-4 col-sm-6 col-xs-12 ">
-          <h3>Підписка</h3>
-          <ul>
-            <li>
-              <div class="form-group">
-                <p>Підпишіться і отримуйте новини про акції і спеціальних пропозиціях</p><br>
-                <div class="input-group">
-                  <input class="form-control" placeholder="Електронна пошта" type="email">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button">Підписатись</button>
-                  </span>
-                </div>
-              </div>
-            </li>
-          </ul>
-          <ul class="social">
-            <p>Ми в соціальних мережах:</p><br>
-            <li> <a href="#"> <i class=" fa fa-facebook">   </i> </a> </li>
-            <li> <a href="#"> <i class="fa fa-twitter">   </i> </a> </li>
-            <li> <a href="#"> <i class="fa fa-google-plus">   </i> </a> </li>
-            <li> <a href="#"> <i class="fa fa-pinterest">   </i> </a> </li>
-            <li> <a href="#"> <i class="fa fa-youtube">   </i> </a> </li>
-          </ul>
-        </div>
-      </div>
-      <!--/.row--> 
-    </div>
-    <!--/.container--> 
-  </div>
-  <!--/.footer-->
-    
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="center">
-        <ul class="nav nav-pills payments">
-          <li><i class="fa fa-cc-visa"></i></li>
-          <li><i class="fa fa-cc-mastercard"></i></li>
-          <li><i class="fa fa-cc-amex"></i></li>
-          <li><i class="fa fa-cc-paypal"></i></li>
-        </ul> 
-      </div>
-      <p class="pull-right">
-          <a class="vidstupi" href="#" id="up">
-            <span class="glyphicon glyphicon-arrow-up vidstupi"></span>Наверх
-          </a>
-        </p>
-        <p>
-          &copy; 2018 Lakatosh Vitaliy. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
-        </p>
-    </div>
-  </div>
-  <!--/.footer-bottom--> 
-</footer>
-
-<script type="text/javascript">
-jQuery(function(f){
-    var element1 = f('#top-menu');
-    var element2 = f('#show');
-    var element3 = f('#up');
-    f(window).scroll(function(){
-        document.getElementById("top-menu").style.display = "none";
-        element1['fade'+ (f(this).scrollTop() < 100 ? 'In': 'Out')](100);
-        element2['fade'+ (f(this).scrollTop() > 100 ? 'In': 'Out')](100);
-        element3['fade'+ (f(this).scrollTop() > 100 ? 'In': 'Out')](100);         
-    });
-});   
-
-  $( "#show" ).on( "click", function() {
-    document.getElementById("top-menu").style.display = "block";
-    document.getElementById("#show").style.display = "none";
-  });
-  $( "#hide" ).on( "click", function() {
-    document.getElementById("show").style.display = "block";
-    document.getElementById("top-menu").style.display = "none";
-  });
-</script>
 </html>
