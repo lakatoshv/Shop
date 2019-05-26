@@ -12,7 +12,18 @@ class CustomerController extends Zend_Controller_Action
     {
         $storage = new Zend_Auth_Storage_Session();
         $data = $storage->read();
-        $this->view->name = $data->firstname." ".$data->lastname; 
+        $this->view->current_user = $data; 
+        $users = new Model_DbTable_Users();
+        $user = $users->getCustomer("`id`", $data->id); 
+        $this->view->user = $user[0];
+        $this->view->profile_img = "";
+
+        $ordersTBL = new Shop_Model_DbTable_Orders();
+        $this->view->allOrders = $ordersTBL->getOrdersForUser($user[0]["email"]);
+        $this->view->confirmedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["confirmed", "1"]);
+        $this->view->unconfirmedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["confirmed", "0"]);
+        $this->view->payedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "1"]);
+        $this->view->unpayedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "0"]);
     }
 
     public function loginAction()
@@ -114,13 +125,6 @@ class CustomerController extends Zend_Controller_Action
                 //$this->_redirect('customer/mydata');
             }
         }
-    }
-
-    public function mydataAction()
-    {
-        $storage = new Zend_Auth_Storage_Session();
-        $user = $storage->read();
-        $this->view->user = $user;
     }
 
 
