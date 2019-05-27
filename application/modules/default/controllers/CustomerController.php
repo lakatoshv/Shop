@@ -95,7 +95,12 @@ class CustomerController extends Zend_Controller_Action
         $storage = new Zend_Auth_Storage_Session();
         $session = new Zend_Session_Namespace('Customer');
 
+        $users = new Model_DbTable_Users();
+
         $user = $storage->read();
+
+        $current_user = $users->getCustomer("`id`", $user->id); 
+        $this->view->user = $current_user[0];
         if(!$user){
             $this->_redirect('customer/login');
         }
@@ -103,26 +108,15 @@ class CustomerController extends Zend_Controller_Action
         $session->lastname = $user->lastname;
         $session->email = $user->email;
         $session->city = $user->city;
-
-        $users = new Model_DbTable_Users();
         $form = new Form_UpdateCustomerData();
         $this->view->form=$form;
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();
-                if(!$data["password"] || !$data["email"] || !$data['confirmPassword']){
-                     return;
-                }
-                else if($data['password'] != $data['confirmPassword']){
-                    $this->view->errorMessage = "Пароль і Підтвердження паролю не співпадають.";
-                    return;
-                }
-                unset($data['confirmPassword']);
+                $data["password"] = $current_user[0]["password"];
                 $where = $users->getAdapter()->quoteInto('id = ?', $user->id);
                 $users->update($data, $where);
-                $this->view->form="";
-                $this->view->datatrue = true;
-                //$this->_redirect('customer/mydata');
+                $this->_redirect('customer');
             }
         }
     }
