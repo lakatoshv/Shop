@@ -95,9 +95,6 @@
                     <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'index')) ?>">Панель користувача</a>
                   </li>
                   <li>
-                    <a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'customer','action'=>'mydata'));?>">Особисті дані</a>
-                  </li>
-                  <li>
                     <?php
                       $ordersTBL = new Shop_Model_DbTable_Orders();
                       $orders = $ordersTBL->getOrders("email", $user->getIdentity()->email);

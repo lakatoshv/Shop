@@ -1,50 +1,23 @@
-<?php
+````<?php
 
 class Form_UpdateCustomerData extends Zend_Form
 {
     public function init()
     {
-        Zend_Session::start();
-        $session = new Zend_Session_Namespace('Customer');
-
-        $firstname = $this->createElement('text','firstname');
-        $firstname->setLabel('Імʼя:')->setValue($session->firstname)
-                    ->setRequired(true);
-                    
-        $lastname = $this->createElement('text','lastname');
-        $lastname->setLabel('Прізвище:')->setValue($session->lastname)
-                    ->setRequired(true);
-
-        $password = $this->createElement('password','password');
-        $password->setLabel('Пароль: *')
-                ->setRequired(true);
-
-                
-        $confirmPassword = $this->createElement('password','confirmPassword');
-        $confirmPassword->setLabel('Підтвердіть пароль: *')
-                ->setRequired(true);
-
-        $email = $this->createElement('text','email');
-        $email->setLabel('Емайл: *')->setValue($session->email)
-                ->setRequired(true);
-
-        $city = $this->createElement('text','city');
-        $city->setLabel('Місце проживання: *')->setValue($session->city)
-                ->setRequired(true);
-
-
-        $register = $this->createElement('submit','register');
-        $register->setLabel('Змінити дані')
-                ->setIgnore(true);
-                
-        $this->addElements(array(
-                        $firstname,
-                        $lastname,
-                        $password,
-                        $confirmPassword,
-                        $email,
-                        $city,
-                        $register
+        $this->addElement('text', 'firstname', array(
+            'class' => "form-control", 'id' => 'first-name', 'placeholder' => "Ім'я"
+        ));
+        $this->addElement('text', 'lastname', array(
+            'class' => "form-control", 'id' => 'last-name', 'placeholder' => "Фамілія"
+        ));
+        $this->addElement('text', 'email', array(
+            'class' => "form-control", 'id' => 'email', 'placeholder' => "Електронна пошта"
+        ));
+        $this->addElement('text', 'phoneNumber', array(
+            'class' => "form-control", 'id' => 'phone-number', 'placeholder' => "Номер телефону"
+        ));
+        $this->addElement('text', 'profileImg', array(
+            'class' => "form-control", 'id' => 'profile-img', 'placeholder' => "Аватар"
         ));
     }
 }

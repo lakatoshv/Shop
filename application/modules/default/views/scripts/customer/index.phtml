@@ -1,5 +1,548 @@
-<div id="menu">
-Welcome, <?= $this->name ?><br>
+<?php
+	$name = $this->user["firstname"]." ".$this->user["lastname"];
+?>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+<style>
+    ul.nav li {
+        padding: 10px;
+    }
+    ul.nav li a {
+        z-index: 1000;
+        display: block;
+    }
+</style>
+<!-- Main Content -->
+<div class="container">
+    <div class="panel panel-info">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3 col-lg-3 " align="center">
+                    <?php
+                    if ($this->user["profileImg"] != ""){
+                    ?>
+                        <img 
+                        	src="<?= $this->user["profileImg"] ?>" 
+                        	alt="avatar" 
+                        	class="img-circle img-responsive">
+                        <br>
+                    <?php
+                	}
+                    else
+                    {
+                    ?>
+                        <img 
+                        	src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" 
+                        	alt="avatar" 
+                        	class="img-circle img-responsive">
+                        <br>
+                    <?php
+                	}
+                	?>
 
-    This is your home page<br>
+                    <h3><?= $name ?></h3>
+                </div>
+                <div class=" col-md-9 col-lg-9">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                        	<a data-toggle="tab" href="#main-info">Осовна інформація</a>
+                        </li>
+                        <li>
+                        	<a data-toggle="tab" href="#orders">Мої замовлення</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="main-info">
+                            <table class="table table-user-information">
+                                <tbody>
+	                                <?php
+	                                if ($this->user["id"] == $this->current_user->id){
+	                                ?>
+	                                <tr>
+	                                    <td></td>
+	                                    <td class="pull-right">
+	                                        <a class="" href="<?php echo $this->url(array('module' => 'default', 'controller' => 'customer', 'action' => 'update')) ?>"><i class="fa fa-edit"> Редагувати</i></a>
+	                                    </td>
+	                                </tr>
+	                                <?php
+	                                }
+	                                ?>
+	                                <tr>
+	                                    <td>Ім'я:</td>
+	                                    <td><b><?= $this->user["firstname"] ?></b></td>
+	                                </tr>
+	                                <tr>
+	                                    <td>Фамілія:</td>
+	                                    <td><b><?= $this->user["lastname"] ?></b></td>
+	                                </tr>
+	                                <tr>
+	                                    <td>Електронна пошта:</td>
+	                                    <td><b>
+	                                    	<a href="mailto:<?= $this->user["email"] ?>"><?= $this->user["email"] ?></a>
+	                                    </b></td>
+	                                </tr>
+	                                <tr>
+	                                    <td>Адреса:</td>
+	                                    <td><b><?= $this->user["city"] ?></b></td>
+	                                </tr>
+	                                <?php
+	                                if ($this->user["phoneNumber"] != null)
+	                                {
+	                                ?>
+	                                <tr>
+	                                    <td>Номер телефону:</td>
+	                                    <td><b><?= $this->user["phoneNumber"] ?></b></td>
+	                                </tr>
+	                                <?php
+	                            	}
+	                                else
+	                                {
+	                                ?>
+	                                    <tr>
+	                                        <td>Номер телефону:</td>
+	                                        <td><b>-</b></td>
+	                                    </tr>
+	                                <?php
+	                            	}
+	                            	?>
+	                                <tr>
+	                                    <td>Статус:</td>
+	                                    <td><b>active</b></td>
+	                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane" id="orders">
+            				<p><b>Статистика</b></p>
+            				<table class="table table-user-information">
+		              			<tbody>
+		                			<tr>
+		                  				<td>Усі замовлення:</td>
+		                  				<td><b><?= count($this->allOrders) ?></b></td>
+		                			</tr>
+		                			<tr>
+		                  				<td>Оплачені замовлення:</td>
+		                  				<td><b><?= count($this->payedOrders) ?></b></td>
+		                			</tr>
+		                			<tr>
+		                  				<td>Неоплачені замовлення:</td>
+		                  				<td><b><?= count($this->unpayedOrders) ?></b></td>
+		                			</tr>
+                    				<tr>
+                      					<td>Підтверджені замовлення:</td>
+                      					<td><b><?= count($this->confirmedOrders) ?></b></td>
+                    				</tr>
+                    				<tr>
+                      					<td>Непідтверджені замовлення:</td>
+                      					<td><b>1</b></td>
+                  					</tr>
+                  				</tbody>
+                			</table>
+            	  			<ul class="nav nav-tabs">
+		              			<li class="active">
+		              				<a data-toggle="tab" href="#all">Усі замовлення</a>
+		              			</li>
+		              			<li>
+		              				<a data-toggle="tab" href="#paid">Оплачені замовлення</a>
+		              			</li>
+		              			<li>
+		              				<a data-toggle="tab" href="#unpaid">Неоплачені замовлення</a>
+		              			</li>
+		              			<li>
+		              				<a data-toggle="tab" href="#confirmed">Підтверджені замовлення</a>
+		              			</li>
+		              			<li>
+		              				<a data-toggle="tab" href="#unconfirmed">Непідтверджені замовлення</a>
+		              			</li>-
+		            		</ul>
+							<div class="tab-content">
+		            			<div class="tab-pane active" id="all">
+                    				<?php
+                      				if(count($this->allOrders) > 1){
+                        			?>
+                        			<table class="table table-user-information">
+                          				<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+					                        <?php
+					                        foreach ($this->allOrders as $key => $value) {
+					                        ?>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+					                        <?php
+					                        }
+					                        ?>
+                          				</tbody>
+                        			</table>
+                        			<?php
+                      				}
+                      				else{
+                        				$value = $this->allOrders[0];
+                        			?>
+                          			<table class="table table-user-information">
+                            			<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+                          				</tbody>
+                          			</table>
+                        			<?php
+                      				}
+                    				?>
+		            			</div>
+		            			<div class="tab-pane" id="paid">
+                    				<?php
+                      				if(count($this->allOrders) > 1){
+                        			?>
+                        			<table class="table table-user-information">
+                          				<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                        					<?php
+                        					foreach ($this->payedOrders as $key => $value) {
+                        					?>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+					                        <?php
+					                        }
+					                        ?>
+                          				</tbody>
+                        			</table>
+                        			<?php
+				                    }
+				                    else{
+                        				$value = $this->payedOrders[0];
+                        			?>
+                          			<table class="table table-user-information">
+                            			<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+                          				</tbody>
+                          			</table>
+                        			<?php
+                      				}
+                    				?>
+		            			</div>
+		            			<div class="tab-pane" id="unpaid">
+		            				<?php
+                      				if(count($this->unpayedOrders) > 1){
+                        			?>
+                        			<table class="table table-user-information">
+                          				<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+					                        <?php
+					                        foreach ($this->unpayedOrders as $key => $value) {
+					                        ?>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+					                        <?php
+					                        }
+					                        ?>
+                          				</tbody>
+                        			</table>
+                        			<?php
+                      				}
+                      				else{
+                        				$value = $this->unpayedOrders[0];
+                        			?>
+                          			<table class="table table-user-information">
+                            			<thead>
+                            				<tr>
+				                              	<th style="width: 5%">Код замовлення</th>
+				                              	<th style="width:10%">Дата</th>
+				                              	<th style="width: 5%">Cпосіб доставки</th>
+				                              	<th style="width:25%">Адреса доставки</th>
+				                              	<th style="width: 5%">Статус оплати</th>
+				                              	<th style="width: 5%">Тип оплати</th>
+				                              	<th style="width:30%">Примітка</th>
+				                              	<th style="width: 5%">Підтверджено</th>
+				                              	<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                            				<tr>
+				                              	<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+				                              	<td><?= $value["datetime"] ?></td>
+				                              	<td><?= $value["delivery_type"] ?></td>
+				                              	<td><?= $value["address"] ?></td>
+				                              	<td><?= $value["payed"] ?></td>
+				                              	<td><?= $value["pay_type"] ?></td>
+				                              	<td><?= $value["note"] ?></td>
+				                              	<td><?= $value["confirmed"] ?></td>
+				                              	<td><?= $value["status"] ?></td>
+                            				</tr>
+                          				</tbody>
+                          			</table>
+                        			<?php
+                      				}
+                    				?>
+		            			</div>
+		            			<div class="tab-pane" id="confirmed">
+		            				<?php
+			                      	if(count($this->confirmedOrders) > 1){
+			                        ?>
+                        			<table class="table table-user-information">
+                          				<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+					                        <?php
+					                        foreach ($this->confirmedOrders as $key => $value) {
+					                        ?>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+					                        <?php
+					                        }
+					                        ?>
+                          				</tbody>
+                        			</table>
+                        			<?php
+				                    }
+				                    else{
+                        				$value = $this->confirmedOrders[0];
+                        			?>
+                          			<table class="table table-user-information">
+                            			<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+                          				</tbody>
+                          			</table>
+                        			<?php
+                      				}
+                    				?>
+		            			</div>
+		            			<div class="tab-pane" id="unconfirmed">
+		            				<?php
+                      				if(count($this->unconfirmedOrders) > 1){
+                        			?>
+                        			<table class="table table-user-information">
+                          				<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+					                        <?php
+					                        foreach ($this->unconfirmedOrders as $key => $value) {
+					                        ?>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+					                        <?php
+					                        }
+					                        ?>
+                          				</tbody>
+                        			</table>
+                        			<?php
+                      				}
+                      				else{
+                        				$value = $this->unconfirmedOrders[0];
+                        			?>
+                          			<table class="table table-user-information">
+                            			<thead>
+                            				<tr>
+                              					<th style="width: 5%">Код замовлення</th>
+                              					<th style="width:10%">Дата</th>
+                              					<th style="width: 5%">Cпосіб доставки</th>
+                              					<th style="width:25%">Адреса доставки</th>
+                              					<th style="width: 5%">Статус оплати</th>
+                              					<th style="width: 5%">Тип оплати</th>
+                              					<th style="width:30%">Примітка</th>
+                              					<th style="width: 5%">Підтверджено</th>
+                              					<th style="width:10%">Статус</th>
+                            				</tr>
+                          				</thead>
+                          				<tbody>
+                            				<tr>
+                              					<td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              					<td><?= $value["datetime"] ?></td>
+                              					<td><?= $value["delivery_type"] ?></td>
+                              					<td><?= $value["address"] ?></td>
+                              					<td><?= $value["payed"] ?></td>
+                              					<td><?= $value["pay_type"] ?></td>
+                              					<td><?= $value["note"] ?></td>
+                              					<td><?= $value["confirmed"] ?></td>
+                              					<td><?= $value["status"] ?></td>
+                            				</tr>
+                          				</tbody>
+                          			</table>
+                        			<?php
+                      				}
+                    				?>
+		            			</div>
+            				</div>
+            			</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>
+            <span class="pull-right">
+                <a href="edit.html" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+            </span>
+        </div>
+    </div>
 </div>
