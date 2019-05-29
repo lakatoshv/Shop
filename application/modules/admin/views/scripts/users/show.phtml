@@ -115,7 +115,7 @@
                         foreach ($this->allOrders as $key => $value) {
                         ?>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -151,7 +151,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -190,7 +190,7 @@
                         foreach ($this->payedOrders as $key => $value) {
                         ?>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -226,7 +226,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -265,7 +265,7 @@
                         foreach ($this->unpayedOrders as $key => $value) {
                         ?>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -301,7 +301,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -340,7 +340,7 @@
                         foreach ($this->confirmedOrders as $key => $value) {
                         ?>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -376,7 +376,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -415,7 +415,7 @@
                         foreach ($this->unconfirmedOrders as $key => $value) {
                         ?>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
@@ -451,7 +451,7 @@
                           </thead>
                           <tbody>
                             <tr>
-                              <td><a href="<?= $value["cart_id"] ?>"><?= $value["cart_id"] ?></td>
+                              <td><a href="<?php echo $this->url(array('module' => 'default', 'controller'=>'orders','action'=>'show', 'order' => "{$value["id"]}"));?>"><?= $value["cart_id"] ?></td>
                               <td><?= $value["datetime"] ?></td>
                               <td><?= $value["delivery_type"] ?></td>
                               <td><?= $value["address"] ?></td>
