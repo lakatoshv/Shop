@@ -72,7 +72,7 @@
 		                        <div class="media">
 		                            <div class="media-body">
 		                                <h4 class="media-heading">
-		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'shop', 'controller'=>'products','action'=>'show', 'product' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
+		                                	<a class="product"  product_id="<?= $value["id"]; ?>" href="<?php echo $this->url(array('module' => 'admin', 'controller'=>'users','action'=>'show', 'user' => "{$value["id"]}"));?>"><?= $value["firstname"]." ".$value["lastname"] ?></a>
 		                                </h4>
 		                            </div>
 								</div>
