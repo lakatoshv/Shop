@@ -35,6 +35,7 @@ class Admin_UsersController extends Zend_Controller_Action
                 $this->view->unconfirmedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["confirmed", "0"]);
                 $this->view->payedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "1"]);
                 $this->view->unpayedOrders = $ordersTBL->getOrdersForUser($user[0]["email"], ["payed", "0"]);
+                $this->view->user_id = $user_id;
         }
         public function deleteAction(){
                 $usersTBl = new Model_DbTable_Users();
